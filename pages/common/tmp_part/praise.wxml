@@ -1,0 +1,7 @@
+<view style="{{item.style}}" >
+    <view style="float: left;padding: 20rpx;background: #0CD400;color: #fff;border-radius: 5rpx;">报名活动</view>
+    <view style="float: left;padding: 20rpx;margin-left: 20rpx;background: #0CD400;color: #fff;border-radius: 5rpx;">喊人点赞</view>
+    <view style="float: left;padding: 20rpx;margin-left: 20rpx;background: #0CD400;color: #fff;border-radius: 5rpx;">点赞</view>
+    <view style="clear: both"></view>
+</view>
+

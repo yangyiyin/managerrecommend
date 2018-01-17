@@ -1,0 +1,1 @@
+<text bindtap="change_text" data-text="{{item.text}}" data-index="{{index}}" class="edit-box{{page_status}} {{item.is_active}}" id="{{index}}" style="{{item.style}}" >{{item.text}}</text>

@@ -1,0 +1,249 @@
+/**index.wxss**/
+.userinfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.userinfo-avatar {
+    width: 128rpx;
+    height: 128rpx;
+    margin: 20rpx;
+    border-radius: 50%;
+}
+
+.userinfo-nickname {
+    color: #aaa;
+}
+
+.usermotto {
+    margin-top: 200px;
+}
+.content{
+    height: 100%;
+}
+.content0{
+    height: 100%;
+
+
+}
+.content1{
+    height: 100%;
+    display: none;
+}
+.main{
+    padding: 30rpx;
+    margin-top: 30rpx;
+    padding-top: 0rpx;
+}
+.main .title{
+    font-size:40rpx;
+}
+.main .title .in-title{
+    margin: 0 34rpx;
+}
+.main .title .line{
+    height: 1px;
+    background: #ddd;
+    width: 230rpx;
+    margin-top: 20rpx;
+}
+.list{
+    padding: 20rpx;
+    font-size: 34rpx;
+    padding-top: 0rpx;
+    margin-top: 50rpx;
+}
+.list .text-title{
+    font-size: 54rpx;
+    margin-right: 40rpx;
+}
+.list .text-content{
+    line-height: 54rpx;
+    margin-top: 22rpx;
+}
+.avatar, .btn{
+    width: 44rpx;
+    height:44rpx;
+
+
+}
+.avatar{
+    width: 44rpx;
+    height:44rpx;
+    border-radius: 44rpx;
+}
+
+.action{
+    position: absolute;
+    right: 0;
+}
+.btn{
+    margin-right: 48rpx;
+}
+.extra{
+    margin-top: 50rpx;
+}
+.extra .user_name{
+    font-size: 28rpx;
+    color: #aeadad;
+    margin-left: 10rpx;
+}
+
+.index{
+    display: none;
+}
+.indexactive{
+    display: '';
+}
+.mine-top{
+    width: 750rpx;
+    height: 250rpx;
+    position: fixed;
+    left: 0;
+    top:0;
+    overflow: hidden;
+}
+.mine-top-avatar{
+    width: 140rpx;
+    height:140rpx;
+    border-radius: 140rpx;
+    margin: 0 auto;
+    display: block;
+}
+.mine-top-bg{
+    width: 750rpx;
+    height:250rpx;
+    position: absolute;
+    top:0;
+    left: 0;
+    background: #f9f4eb;
+    z-index: -1;
+}
+.mine-top-bg-img{
+    width: 750rpx;
+    height:340rpx;
+}
+.mine-name{
+    font-size: 34rpx;
+    text-align: center;
+    width: 100%;
+    color: #666;
+    position: absolute;
+    bottom: 40rpx;
+    height:34rpx;
+
+
+}
+.mine-dianzan{
+    position: absolute;
+    bottom: 35rpx;
+    right: 70rpx;
+    width: 34rpx;
+    height:34rpx
+}
+.mine-dianzan-text{
+    position: absolute;
+    bottom: 40rpx;
+    right: 30rpx;
+    width: 34rpx;
+    height:34rpx;
+    font-size: 34rpx;
+    color: #fe3e3e;
+
+}
+.mine-items {
+    width: 750rpx;
+    overflow: hidden;
+    margin-top: 250rpx;
+    position: relative;
+
+
+}
+.mine-item{
+    width: 375rpx;
+    height:240rpx;
+    position: relative;
+    font-size: 30rpx;
+
+}
+.mine-middle-line1{
+    width: 750rpx;
+    height: 1px;
+    background: #e7e7e7;
+    top:240rpx;
+    left: 0;
+    position: absolute;
+    z-index: 10;
+}
+.mine-middle-line2{
+    width: 1px;
+    height: 480rpx;
+    background: #e7e7e7;
+    top:0rpx;
+    left: 375rpx;
+    position: absolute;
+    z-index: 10;
+}
+.mine-middle-line3{
+    width: 750rpx;
+    height: 1px;
+    background: #e7e7e7;
+    bottom: 0px;
+    left: 0rpx;
+    position: absolute;
+    z-index: 10;
+}
+.mine-item-2{
+    width: 750rpx;
+    height:100rpx;
+    font-size: 34rpx;
+
+}
+.mine-item-line1{
+    width: 750rpx;
+    height: 1px;
+    background: #e7e7e7;
+    top:100rpx;
+    left: 0rpx;
+    position: absolute;
+    z-index: 10;
+}
+
+.mine-item-line2{
+    width: 750rpx;
+    height: 1px;
+    background: #e7e7e7;
+    bottom:0rpx;
+    left: 0rpx;
+    position: absolute;
+    z-index: 10;
+}
+.mine-item-top{
+    font-size: 50rpx;
+    color: #f5800d;
+    width: 78rpx;
+    height:78rpx;
+    line-height: 58rpx;
+
+}
+.mine-item-top,.mine-item-bottom{
+    width: 375rpx;
+    text-align: center;
+    margin: 40rpx 0;
+}
+.mine-item-img{
+
+    width: 78rpx;
+    height:78rpx
+}
+.mine-item-2 {
+    line-height: 100rpx;
+    margin-left: 30rpx;
+}
+.mine-line{
+    width: 750rpx;
+    height: 20rpx;
+    background: #eee;
+    z-index: 10;
+}

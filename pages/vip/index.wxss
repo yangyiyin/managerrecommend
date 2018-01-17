@@ -1,0 +1,37 @@
+
+.container {
+  background: #eee;
+  display:block
+}
+
+.section{
+  margin-top: 100rpx;
+  margin-bottom: 50rpx;
+}
+
+.top{
+  width: 670rpx;
+  margin: 20rpx;
+  background: #fff;
+  border-radius: 10rpx;
+  padding: 20rpx;
+}
+.top .date{
+  color: #0CD400;
+  font-size: 24rpx;
+}
+
+.price{
+  margin: 20rpx;
+  border-radius: 10rpx;
+  padding: 20rpx;
+  text-align: center;
+  font-size: 36rpx;
+  color: #0CD400;
+  font-weight: bold;
+}
+.button{
+  width: 150rpx;
+  margin: 0rpx auto;
+  padding: 15rpx;
+}

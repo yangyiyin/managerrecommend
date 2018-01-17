@@ -1,0 +1,31 @@
+<!--index.wxml-->
+<view class="container">
+    <view wx:if="{{userInfo.is_vip}}" class="top">
+        <view class="info">当前会员信息:</view>
+        <view class="date">
+            {{userInfo.vip.start_time}}至{{userInfo.vip.end_time}}
+        </view>
+    </view>
+    <view wx:if="{{!userInfo.is_vip}}" class="top">
+        <view class="info">您还不是会员</view>
+
+    </view>
+
+    <view class="top" style="background: #eee;border-top: 1px solid #ddd">
+        <view class="info" style="font-size: 24rpx">选择时长购买会员:</view>
+        <view class="section section_gap" style="position: relative">
+            <view class="body-view">
+                <slider bindchange="change_value" min="1" max="14" backgroundColor="#ddd" value="{{value}}"/>
+            </view>
+            <view class="min_date" style="font-size: 18rpx;color: red;position: absolute;left: 250rpx;top:-40rpx">半年</view>
+            <view class="min_date" style="font-size: 18rpx;color: red;position: absolute;left: 520rpx;top:-40rpx">一年</view>
+            <view class="min_date" style="font-size: 18rpx;color: red;position: absolute;left: 570rpx;top:-40rpx">两年</view>
+            <view class="min_date" style="font-size: 18rpx;color: red;position: absolute;left: 620rpx;top:-40rpx">三年</view>
+        </view>
+
+        <view class="price">{{price}}元/{{value_desc}}</view>
+        <view class="button">购买</view>
+    </view>
+
+
+</view>

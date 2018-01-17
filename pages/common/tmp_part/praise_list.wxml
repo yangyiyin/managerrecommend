@@ -1,0 +1,23 @@
+<view  class=""  style="position:relative;width: 690rpx;padding: 20rpx;border: 1rpx solid #0CD400;margin-top: 10rpx" >
+    <!--<view bindtap="del_activity_block" data-block="praise_list" wx:if="{{page_status == '2'}}" style="position: absolute;top: 0;right: 0;background: red;color: #fff;padding: 20rpx;">删除</view>-->
+
+    <view style="background: #0CD400;color: #fff;padding: 10rpx">点赞活动情况</view>
+
+    <view wx:if="{{praise_list.length}}" wx:for="{{praise_list}}" wx:key="{{index}}" style="margin-top: 10rpx">
+        <view style="float: left">微信名:{{item.user.user_name}}</view>
+        <view style="float: left;margin-left: 30rpx">点赞数:{{item.sum}}</view>
+        <view style="float: right;">{{item.create_time}}</view>
+        <view style="clear: both"></view>
+    </view>
+
+
+
+    <view wx:if="{{!praise_list.length}}" style="margin-top: 10rpx">
+        <view style="float: left">暂无信息</view>
+        <view style="float: right;"></view>
+        <view style="clear: both"></view>
+    </view>
+
+
+
+</view>

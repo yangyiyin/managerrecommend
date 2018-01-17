@@ -1,0 +1,16 @@
+<!--index.wxml-->
+
+
+<view class="container">
+
+
+
+
+
+   <view class="main">
+
+      欢迎使用-店长的推荐!
+
+   </view>
+
+</view>

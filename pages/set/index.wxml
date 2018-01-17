@@ -1,0 +1,21 @@
+
+<view class="container">
+   <view class="main2">
+
+
+      <view class="mine-items" style="margin-top: 1px">
+         <view class="mine-item-2" bindtap="change_avatar">
+            头像
+            <image  style="width: 50rpx;height:50rpx;margin-top:25rpx;float: right;border-radius: 50rpx;margin-right: 60rpx;" mode="aspectFit" src="{{globalData.userInfo.avatar}}"></image>
+         </view>
+         <view class="mine-item-2" style="position: absolute">
+            笔名
+         </view>
+         <input bindinput="change_user_name" style="text-align: right;padding-right: 30rpx;margin-top: 30rpx;margin-bottom: 30rpx" value="{{globalData.userInfo.user_name}}" maxlength="10" placeholder="最多输入10个字" />
+
+         <view class="mine-item-line1"></view>
+         <view class="mine-item-line2"></view>
+      </view>
+
+   </view>
+</view>

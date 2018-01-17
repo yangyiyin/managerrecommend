@@ -1,0 +1,18 @@
+<!--index.wxml-->
+
+
+<view class="container">
+
+
+
+
+
+   <view class="main">
+
+      店名: <input bindinput="bindinputtitle" style="border: 1px solid #999;color: #0CD400" placeholder="" auto-focus cursor-spacing="10"/>
+      手机号: <input bindinput="bindinputtel" type="number" maxlength="11" style="border: 1px solid #999;color: #0CD400" placeholder="" auto-focus cursor-spacing="10"/>
+
+      <view bindtap="submit" style="margin-top: 20rpx;width: 200rpx;text-align: center;padding: 10rpx;color: #999;background: #666;box-shadow:#000 0 0 5rpx;border-radius: 3rpx">开始使用</view>
+   </view>
+
+</view>

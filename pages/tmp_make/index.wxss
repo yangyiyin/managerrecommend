@@ -1,0 +1,107 @@
+.container {
+    min-height: 100%;
+    height: auto;
+    overflow-x:hidden;
+}
+.swiper-item{
+    display: block;
+    height: 100%;
+    width: 100%;
+}
+swiper{
+    width: 750rpx;
+    height: 250rpx;
+}
+.edit-box2 {
+    border: 3px dashed #0CD400;
+}
+.edit-box2.active{
+    border-color: red;
+}
+.pop{
+    position: fixed;
+    width: 750rpx;
+    top:0;
+    min-height: 100rpx;
+    background: #fff;
+    z-index: 99;
+    border-bottom: 1px solid #000;
+}
+.pop input, .pop textarea{
+    border: 1px solid #999;
+}
+.pop .title {
+    width: 276rpx;
+    height:100rpx;
+    line-height: 100rpx;
+    margin-left: 20rpx;
+    float: left;
+    font-size: 24rpx;
+    color: #999;
+}
+.pop_change_text textarea{
+    position: fixed;
+    top: 100rpx;
+    background: #fff;
+    width: 710rpx;
+    padding: 20rpx;
+    max-height: 500rpx;
+}
+
+.pop_change_time_limit_left {
+    height: 200rpx;
+}
+.pop_change_time_limit_left input{
+    width: 100rpx;
+    float: left;
+    background: #fff;
+    text-align: center;
+}
+.pop_change_time_limit_left .input{
+    width: 400rpx;
+    height: 80rpx;
+    margin: auto auto;
+}
+
+.pop_change_img {
+    height: 200rpx;
+}
+.pop_change_img .choose-img {
+    width: 200rpx;
+    padding: 10rpx 20rpx;
+    font-size: 30rpx;
+    color: #fff;
+    background: #666;
+    border-radius: 5rpx;
+    text-align: center;
+    margin-left: 30rpx;
+    margin-top: 20rpx;
+    float: left;
+}
+.pop_change_img image{
+    float: left;
+    width: 100rpx;
+    height: 100rpx;
+    margin-left: 20rpx;
+}
+
+.action_btn {
+    position: fixed;
+    bottom: 10rpx;
+    right: 10rpx;
+    padding: 20rpx 30rpx;
+    background: #0CD400;
+    color: #fff;
+    font-size: 30rpx;
+
+}
+.line-add-btn{
+    width: 744rpx;
+    border: 3rpx dashed #0CD400;
+    height: 100rpx;
+    line-height: 100rpx;
+    text-align: center;
+    color: #0CD400;
+    margin:1rpx 0;
+
+}

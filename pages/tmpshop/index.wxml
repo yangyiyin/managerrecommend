@@ -1,0 +1,31 @@
+<!--index.wxml-->
+<view class="container">
+    <view class="page-body">
+        <view class="page-section">
+            <view class="page-section-spacing">
+                <scroll-view scroll-left="{{scroll_x}}"class="scroll-view_H" scroll-x="true" bindscroll="scroll" style="width: 100%">
+                    <view bindtap="switch_type" data-type="1" class="scroll-view-item_H {{active[0]}}" style="background: #F82E1A">限时抢购类</view>
+                    <view bindtap="switch_type" data-type="2" class="scroll-view-item_H {{active[1]}}" style="background: #1296DB">砍价类</view>
+                    <view bindtap="switch_type" data-type="3" class="scroll-view-item_H {{active[2]}}" style="background: #D4237A">集赞类</view>
+                    <view bindtap="switch_type" data-type="4" class="scroll-view-item_H {{active[3]}}" style="background: #F8850F">投票类</view>
+                    <view bindtap="switch_type" data-type="5" class="scroll-view-item_H {{active[4]}}" style="background: #38E8D0">图文类</view>
+                </scroll-view>
+            </view>
+        </view>
+    </view>
+    <view class="top"></view>
+
+    <view class="main">
+
+        <view wx:key="index" wx:for="{{tmp_list}}" class="tmp_item" bindtap="active" data-index="{{index}}">
+            <image  mode="scaleToFill" src="{{item.img}}"></image>
+            <view class="desc">{{item.title}}</view>
+            <view wx:if="{{item.active && !item.is_add}}" catchtap="add_tmp" data-id="{{item.id}}"  data-index="{{index}}" class="btn add">添加</view>
+            <view wx:if="{{item.active && item.is_add}}" class="btn added">已添加</view>
+            <view wx:if="{{item.active}}" catchtap="goto_tmp_preview" data-id="{{item.id}}"  class="btn preview">预览</view>
+        </view>
+
+        <view wx:if="{{!tmp_list.length}}" class="empty_info">网络错误,请稍后再试~</view>
+    </view>
+
+</view>

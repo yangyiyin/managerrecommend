@@ -1,0 +1,31 @@
+<!--index.wxml-->
+
+
+<view class="container">
+
+
+   <image  mode="aspectFit"  src="../../resource/images/img_04.png" style="width: 310rpx;height:66rpx;margin: 100rpx auto"></image>
+
+
+   <view  style="padding: 0 50rpx;color:#666666;font-size: 28rpx">
+      <text>
+         人类历史上，自从有了语言，就有了笑话。笑话来源于生活，我们不生产笑话，我们只是优质笑话的搬运工。
+      </text>
+
+      <text>
+      纯笑笑给你的无聊时间加点料，每天十条精致笑话，不见不散。
+      </text>
+      <text>
+      笑话来自于互联网及个人投稿，如有笑话涉及到版权问题，请与我们联系删除。
+      </text>
+      <text>
+      纯笑笑邮箱：
+      </text>
+      <text>
+      178340042@qq.com
+      </text>
+   </view>
+
+
+
+</view>

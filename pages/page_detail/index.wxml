@@ -1,0 +1,7 @@
+<!--index.wxml-->
+<view class="container">
+    <include  wx:if="{{detail.show_sign_list}}" src="../common/tmp_part/sign_list.wxml"/>
+    <include  wx:if="{{detail.show_cutprice_list}}" src="../common/tmp_part/cutprice_list.wxml"/>
+    <include  wx:if="{{detail.show_praise_list}}" src="../common/tmp_part/praise_list.wxml"/>
+    <include  wx:if="{{detail.show_vote_list}}" src="../common/tmp_part/vote_list.wxml"/>
+</view>

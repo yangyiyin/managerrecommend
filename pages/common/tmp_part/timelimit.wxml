@@ -1,0 +1,1 @@
+<view bindtap="change_time_limit_left" data-index="{{index}}" class="edit-box{{page_status}} {{item.is_active}}" id="{{index}}" style="{{item.style}}">{{time_limit_left_desc}}</view>

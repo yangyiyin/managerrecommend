@@ -1,0 +1,173 @@
+
+.container {
+  background: #eee;
+  display:block
+}
+.cat_item{
+  width: 750rpx;
+  height: 200rpx;
+  margin: 0 auto;
+  border-bottom: 1rpx solid #ddd;
+  border-top: 1rpx solid #ddd;
+  position: relative;
+  margin-top: 10rpx;
+
+  background: #fff;
+}
+.cat_item .icon {
+  width: 150rpx;
+  height: 150rpx;
+  padding: 25rpx;
+  padding-left: 75rpx;
+  float: left;
+}
+.cat_item .icon image{
+  width: 150rpx;
+  height: 150rpx;
+}
+.cat_item .info {
+  width: 400rpx;
+  height: 130rpx;
+  padding: 20rpx;
+  padding-left: 50rpx;
+  padding-top: 50rpx;
+  float: left;
+}
+.cat_item .info .title{
+  font-size: 36rpx;
+}
+.cat_item .info .desc{
+  font-size: 24rpx;
+}
+.btn1,.btn2{
+  position: absolute;
+  background: #0CD400;
+  color: #fff;
+  border-radius: 5rpx;
+  padding: 10rpx 20rpx;
+  font-size: 24rpx;
+}
+.btn1{
+  bottom: 30rpx;
+  right: 30rpx;
+}
+.btn2{
+  bottom: 120rpx;
+  right: 30rpx;
+}
+.swiper-item{
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+swiper{
+  width: 750rpx;
+  height: 250rpx;
+}
+.back{
+  text-align: center;
+  line-height: 80rpx;
+  font-size: 30rpx;
+  height: 80rpx;
+
+  background: #fff;
+  width: 730rpx;
+  border-radius: 10rpx;
+  line-height: 80rpx;
+  margin-top: 10rpx;
+  margin-left: 10rpx;
+}
+
+.tmp_item{
+  width: 358rpx;
+  height: 358rpx;
+  border: 1rpx solid #ddd;
+  background: #fff;
+  margin: 10rpx;
+  margin-right: 0;
+  float: left;
+  text-align: center;
+  line-height: 356rpx;
+  position: relative;
+
+
+}
+.tmp_item image{
+  width: 100%;
+  height: 100%;
+}
+
+.tmp_item .desc{
+  position: absolute;
+  left: 50%;
+  top:50%;
+  width: 200rpx;
+  margin-left: -100rpx;
+  margin-top: -20rpx;
+  text-align: center;
+  background: #000;
+  color: #fff;
+  opacity: 0.5;
+  height: 40rpx;
+  line-height: 40rpx;
+
+}
+
+.tmp_item .btn{
+  position: absolute;
+  top:260rpx;
+  width: 80rpx;
+  text-align: center;
+  background: #0CD400;
+  color: #fff;
+  height: 60rpx;
+  line-height: 60rpx;
+  border-radius: 5rpx;
+
+}
+
+.tmp_item .add{
+  right: 30rpx;
+
+
+}
+
+.tmp_item .added{
+  right: 30rpx;
+  background: rgba(0,0,0,0.3);
+
+  font-size: 20rpx;
+  color: #fff;
+
+}
+
+.tmp_item .preview{
+  left: 30rpx;
+  background: #f5800d;
+
+}
+
+.scroll-view_H{
+  white-space: nowrap;
+  height: 120rpx;
+  background: #333;
+  position: fixed;
+  z-index: 9;
+}
+.top{
+  height: 120rpx;
+}
+
+.scroll-view-item_H{
+  display: inline-block;
+  padding: 0 30rpx;
+  height:100rpx;
+  line-height: 100rpx;
+  text-align: center;
+  margin: 10rpx;
+  color: #fff;
+}
+.active{
+  border: 1px solid #fff;
+}
+

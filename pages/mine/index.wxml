@@ -1,0 +1,52 @@
+<!--index.wxml-->
+<view class="container">
+    <view class="main">
+        <image class="mine-top-bg" mode="scaleToFill" src="../../resource/images/bg.png"></image>
+        <view class="mine-top">
+
+            <image  bindtap="goto_set" class="avatar" mode="scaleToFill" src="{{userInfo.avatar}}"></image>
+            <view class="label_area">
+                <view wx:if="{{userInfo.is_vip && !userInfo.is_past}}" class="label ">
+                    会员
+                </view>
+                <view wx:if="{{userInfo.is_vip && userInfo.is_past}}" class="label past">
+                    会员
+                </view>
+            </view>
+            <view class="info">
+                {{userInfo.day_left}}
+            </view>
+            <view  bindtap="goto_set" class="username">
+                {{userInfo.user_name}}
+            </view>
+
+        </view>
+
+        <view bindtap="goto_vip" class="mine-item">
+            <image class="ico" mode="aspectFit" src="../../resource/images/huiyuan.png"></image>
+            <text>会员中心</text>
+        </view>
+
+        <view bindtap="goto_mypages" class="mine-item">
+            <image class="ico" mode="aspectFit" src="../../resource/images/page.png"></image>
+            <text>我制作的页面</text>
+        </view>
+
+        <view bindtap="goto_tmpshop" class="mine-item">
+            <image class="ico" mode="aspectFit" src="../../resource/images/moban.png"></image>
+            <text>选模板</text>
+        </view>
+
+        <view bindtap="goto_contact" class="mine-item">
+            <image class="ico" mode="aspectFit" src="../../resource/images/kefu.png"></image>
+            <text>客服热线</text>
+        </view>
+
+        <view bindtap="goto_suggest" class="mine-item">
+            <image class="ico" mode="aspectFit" src="../../resource/images/liuyan.png"></image>
+            <text>问题反馈</text>
+        </view>
+
+    </view>
+
+</view>

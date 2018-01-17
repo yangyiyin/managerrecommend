@@ -1,0 +1,12 @@
+<view wx:if="{{pop_change_img}}" class="pop pop_change_img">
+    <view class="title">修改图片</view>
+
+    <view wx-if="{{can_del_block}}"  bindtap="del_block" style="float:right;font-size: 30rpx;width: 150rpx;height:100rpx;line-height: 100rpx;text-align: center;background: red;color: #fff">删除</view>
+    <view bindtap="close_pop_change_img" style="float:right;font-size: 30rpx;width: 150rpx;height:100rpx;line-height: 100rpx;text-align: center;background: #000;color: #fff">取消</view>
+    <view bindtap="ok_change_img" style="float:right;font-size: 30rpx;width: 150rpx;height:100rpx;line-height: 100rpx;text-align: center;background: #0CD400;color: #fff">确定</view>
+
+    <view style="clear: both"></view>
+    <view bindtap="choose_img" class="choose-img">选择图片</view>
+    <image wx-if="{{img_path}}" mode="aspectFit" src="{{img_path}}"></image>
+
+</view>

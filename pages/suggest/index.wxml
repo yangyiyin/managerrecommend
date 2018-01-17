@@ -1,0 +1,20 @@
+<!--index.wxml-->
+<view class="container">
+    <view class="main">
+
+        <view  wx:key="index" wx:for="{{list}}" bindtap="active" data-id="{{item.id}}" data-index="{{index}}" class="mine-item">
+
+            <view wx:if="{{!item.active}}" class="content"  style="margin-bottom: 30rpx">{{item.content_short}}</view>
+            <view wx:if="{{item.active}}" class="content">{{item.content}}</view>
+            <view wx:if="{{item.active}}" class="content" style="color: #0CD400;margin-bottom: 30rpx">{{item.reply}}</view>
+            <view style="font-size: 18rpx;position:absolute;right: 10rpx;bottom: 10rpx;color: #999;line-height: 18rpx">{{item.create_time}}</view>
+        </view>
+        <view wx:if="{{!list.length}}" class="empty_info">暂无信息~</view>
+
+        <view wx:if="{{!hide_submit}}" style="position: fixed;bottom: 10rpx;width: 750rpx;left: 0">
+            <textarea fixed="true" style="padding:10rpx;float: left;width: 580rpx;height:80rpx;margin-left: 10rpx;border: 1px solid #999;border-radius: 5rpx;" bindinput="bindinputtext" placeholder="最多250字" maxlength="250"/>
+            <view bindtap="submit" style="float: left;width: 70rpx;height:85rpx;line-height:85rpx;margin-left: 10rpx;" class="button">提交</view>
+        </view>
+    </view>
+
+</view>

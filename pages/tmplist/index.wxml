@@ -1,0 +1,79 @@
+<!--index.wxml-->
+<view class="container">
+
+    <view class="cat_item" bindtap="goto_timelimit" wx:if="{{show_list.b}}">
+        <view class="icon">
+            <image  mode="aspectFit" src="../../resource/images/timelimit.png"></image>
+        </view>
+        <view class="info">
+            <view class="title">限时抢购类</view>
+            <view class="desc">活动在一定时间内抢购报名</view>
+            <!--<view class="btn1">示例</view>-->
+            <!--<view class="btn2">制作</view>-->
+        </view>
+    </view>
+
+    <view class="cat_item" bindtap="goto_cutprice" wx:if="{{show_list.c}}">
+        <view class="icon">
+            <image  mode="aspectFit" src="../../resource/images/cutprice.png"></image>
+
+        </view>
+        <view class="info">
+            <view class="title">砍价类</view>
+            <view class="desc">活动设置最低价,报名之后可喊人砍价</view>
+            <!--<view class="btn1">示例</view>-->
+            <!--<view class="btn2">制作</view>-->
+        </view>
+    </view>
+
+    <view class="cat_item" bindtap="goto_praise" wx:if="{{show_list.d}}">
+        <view class="icon">
+            <image  mode="aspectFit" src="../../resource/images/prise.png"></image>
+
+        </view>
+        <view class="info">
+            <view class="title">集赞类</view>
+            <view class="desc">活动设置集赞功能,集赞排名奖励</view>
+            <!--<view class="btn1">示例</view>-->
+            <!--<view class="btn2">制作</view>-->
+        </view>
+    </view>
+
+    <view class="cat_item" bindtap="goto_sort" wx:if="{{show_list.e}}">
+        <view class="icon">
+            <image  mode="aspectFit" src="../../resource/images/sort.png"></image>
+
+        </view>
+        <view class="info">
+            <view class="title">投票类</view>
+            <view class="desc">活动设置投票功能,投票排行</view>
+            <!--<view class="btn1">示例</view>-->
+            <!--<view class="btn2">制作</view>-->
+        </view>
+    </view>
+
+    <view class="cat_item" bindtap="goto_word" wx:if="{{show_list.f}}">
+        <view class="icon">
+            <image  mode="aspectFit" src="../../resource/images/tuwen.png"></image>
+
+        </view>
+        <view class="info">
+            <view class="title">图文类</view>
+            <view class="desc">用于图片和文字的信息展示,排版自如</view>
+            <!--<view class="btn1">示例</view>-->
+            <!--<view class="btn2">制作</view>-->
+        </view>
+    </view>
+    <view class="main">
+
+        <view wx:key="index" wx:for="{{tmp_list}}" bindtap="goto_tmp_preview" bindlongpress="del_tmp" data-id="{{item.id}}" data-index="{{index}}"  class="tmp_item">
+            <image  mode="scaleToFill" src="{{item.img}}"></image>
+            <view class="desc">{{item.title}}</view>
+        </view>
+
+        <view class="tmp_item" bindtap="goto_tmpshop">
+            添加模板
+        </view>
+    </view>
+
+</view>
