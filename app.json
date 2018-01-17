@@ -1,0 +1,41 @@
+{
+  "pages":[
+    "pages/login/index",
+    "pages/index/index",
+    "pages/set/index",
+    "pages/about/index",
+    "pages/tmp_make/index",
+    "pages/tmplist/index",
+    "pages/mine/index",
+    "pages/tmpshop/index",
+    "pages/vip/index",
+    "pages/mypages/index",
+    "pages/contact/index",
+    "pages/useredit/index",
+    "pages/suggest/index",
+    "pages/page_detail/index"
+  ],
+  "window":{
+    "navigationBarBackgroundColor": "#3A3A3A"
+  },
+  "tabBar": {
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "我要制作",
+        "iconPath":"resource/images/work1.png",
+        "selectedIconPath":"resource/images/work2.png"
+      },
+      {
+        "pagePath": "pages/mine/index",
+        "text": "个人中心",
+        "iconPath":"resource/images/mine1.png",
+        "selectedIconPath":"resource/images/mine2.png"
+      }
+    ],
+    "color":"#999999",
+    "selectedColor":"#999999",
+    "backgroundColor":"#ffffff"
+
+  }
+}
