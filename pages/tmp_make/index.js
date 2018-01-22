@@ -35,57 +35,157 @@ Page({
     vote_num:0,
     preview:false,
     pageview:false,
+    customerview:false,
     page_id:0,
     page_title:'',
     sign_list:[],
     cutprice_list:[],
     praise_list:[],
-    vote_list:[]
+    vote_list:[],
+    extra_uid:0,
+    rule_show:1
   },
   onLoad: function (option) {
     //获取tmp_data信息
     var data = {
       id:option.id
     }
-    if (option.preview) {
-      this.setData({
-        preview:option.preview,
-      })
+    if (option.scene) {
+      var scene = decodeURIComponent(option.scene);
+      var scene_arr = scene.split(',');
+      data = {
+        id:scene_arr[0]
+      }
+      option.customerview = 1;
+      if (scene_arr[1]) {
+        option.extra_uid = scene_arr[1];
+      }
     }
 
-    if (option.pageview) {
+    this.setData({
+      preview:Boolean(option.preview),
+      customerview:Boolean(option.customerview),
+      pageview:Boolean(option.pageview),
+      extra_uid:option.extra_uid ? option.extra_uid : 0
+    })
 
-      common.request('get','page_info',data,function (res) {
-        var tmp_data = res.data.data.content;
-        this.setData({
-          page_status:3,
-          page_url:res.data.data.page_url,
-          pageview:true,
-          sign_list:res.data.data.sign_list,
-          cutprice_list:res.data.data.cutprice_list,
-          praise_list:res.data.data.praise_list,
-          vote_list:res.data.data.vote_list,
-          page_id:option.id
-        });
+    data.extra_uid = this.data.extra_uid;
 
-        wx.setNavigationBarTitle({
-          title: res.data.data.title
-        })
-        if (tmp_data.time_limit_end) {
-          tmp_data.time_limit_left = (Date.parse(tmp_data.time_limit_end) - Date.parse(new Date())) / 1000;
-          this.timelimit(tmp_data.time_limit_left);
-        }
+    if (option.pageview || option.customerview) {
+      if (option.customerview) {
+       // console.log(1);
+        common.check_session(app, function(){
+          //授权
+          wx.getSetting({
+            success: function(res) {
+              if (!res.authSetting['scope.userInfo']) {
+                wx.authorize({
+                  scope: 'scope.userInfo',
+                  success:function() {
+                    wx.getUserInfo({
+                      success: function(res) {
+                        var userInfo = res.userInfo;
+                        var nickName = userInfo.nickName;
+                        var avatarUrl = userInfo.avatarUrl;
+                        var gender = userInfo.gender; //性别 0：未知、1：男、2：女
+                        var province = userInfo.province;
+                        var city = userInfo.city;
+                        var country = userInfo.country;
 
-        this.setData({
-          tmp_data:tmp_data
-        });
-      }.bind(this));
+                        var data = {
+                          user_name:nickName,
+                          avatarUrl:avatarUrl,
+                          gender:gender,
+                          province:province,
+                          city:city
+                        };
+
+                        common.request('post','info_modify',data, function (res) {
+                          app.get_userinfo(1);
+                        })
+                      }
+                    });
+                  }
+                })
+              } else {
+
+              }
+            }
+          })
+          common.request('get','page_info',data,function (res) {
+            var tmp_data = res.data.data.content;
+            this.setData({
+              page_status:3,
+              page_url:res.data.data.page_url,
+              sign_list:res.data.data.sign_list,
+              cutprice_list:res.data.data.cutprice_list,
+              praise_list:res.data.data.praise_list,
+              vote_list:res.data.data.vote_list,
+              is_sign_cutprice:res.data.data.is_sign_cutprice,
+              is_help_cutprice:res.data.data.is_help_cutprice,
+              extra_uid:parseInt(res.data.data.extra_uid),
+              is_sign_praise:res.data.data.is_sign_praise,
+              is_help_praise:res.data.data.is_help_praise,
+              page_id:option.id
+            });
+
+            wx.setNavigationBarTitle({
+              title: res.data.data.title
+            })
+            if (tmp_data.time_limit_end) {
+              tmp_data.time_limit_left = (Date.parse(tmp_data.time_limit_end) - Date.parse(new Date())) / 1000;
+              this.timelimit(tmp_data.time_limit_left);
+            }
+
+            this.setData({
+              tmp_data:tmp_data
+            });
+          }.bind(this));
+        }.bind(this));
+      } else {
+        common.request('get','page_info',data,function (res) {
+          var tmp_data = res.data.data.content;
+          this.setData({
+            page_status:3,
+            page_url:res.data.data.page_url,
+            sign_list:res.data.data.sign_list,
+            cutprice_list:res.data.data.cutprice_list,
+            praise_list:res.data.data.praise_list,
+            vote_list:res.data.data.vote_list,
+            is_sign_cutprice:res.data.data.is_sign_cutprice,
+            is_help_cutprice:res.data.data.is_help_cutprice,
+            extra_uid:parseInt(res.data.data.extra_uid),
+            is_sign_praise:res.data.data.is_sign_praise,
+            is_help_praise:res.data.data.is_help_praise,
+            page_id:option.id
+          });
+
+          wx.setNavigationBarTitle({
+            title: res.data.data.title
+          })
+          if (tmp_data.time_limit_end) {
+            tmp_data.time_limit_left = (Date.parse(tmp_data.time_limit_end) - Date.parse(new Date())) / 1000;
+            this.timelimit(tmp_data.time_limit_left);
+          }
+
+          this.setData({
+            tmp_data:tmp_data
+          });
+        }.bind(this));
+      }
+
       return;
-
-
+    } else {
+      common.check_session(app);
     }
     common.request('get','tmp_info',data,function (res) {
       common.check_login(res);
+      if (!res.data.success) {
+        this.setData({
+          page_status:4
+        })
+        return;
+      }
       var tmp_data = res.data.data.content;
       for(var i in tmp_data.page) {
         if (tmp_data.page[i].type == 'vote') {
@@ -148,14 +248,45 @@ Page({
         can_add_extra_img:tmp_data.can_add_extra_img,
         can_add_extra_text:tmp_data.can_add_extra_text
       });
-      console.log(tmp_data);
+     // console.log(tmp_data);
     }.bind(this));
 
 
 
   },
+  get_page_info:function(){
+    var data = {
+      id:this.data.page_id,
+      extra_uid:this.data.extra_uid
+    }
+    common.request('get','page_info',data,function (res) {
+      var tmp_data = res.data.data.content;
+      this.setData({
+
+        sign_list:res.data.data.sign_list,
+        cutprice_list:res.data.data.cutprice_list,
+        praise_list:res.data.data.praise_list,
+        vote_list:res.data.data.vote_list,
+        is_sign_cutprice:res.data.data.is_sign_cutprice,
+        is_help_cutprice:res.data.data.is_help_cutprice,
+        extra_uid:parseInt(res.data.data.extra_uid),
+        is_sign_praise:res.data.data.is_sign_praise,
+        is_help_praise:res.data.data.is_help_praise,
+
+      });
+
+      if (tmp_data.time_limit_end) {
+        tmp_data.time_limit_left = (Date.parse(tmp_data.time_limit_end) - Date.parse(new Date())) / 1000;
+        this.timelimit(tmp_data.time_limit_left);
+      }
+
+      this.setData({
+        tmp_data:tmp_data
+      });
+    }.bind(this));
+  },
   onShow: function() {
-    common.check_session(app);
+   // common.check_session(app, 1);
   },
   timelimit: function(left) {
     var time_limit_left = parseInt(left);
@@ -216,13 +347,14 @@ Page({
     common.request('post','page_submit',data, function (res) {
       common.request_callback(res);
       this.setData({
-        page_url:res.data.data
+        page_url:res.data.data.url,
+        page_id:res.data.data.page_id
       })
 
     }.bind(this))
 
   },
-  share_make: function(){
+  share_make: function(extra_uid){
     if (this.data.qrcode_link) {
       this.setData({
         show_qrcode:true
@@ -230,7 +362,19 @@ Page({
       return;
     }
 
-    var data = {};
+    var data = {
+      id:this.data.page_id
+    };
+    if (this.data.extra_uid) {
+      data.extra_uid = this.data.extra_uid;
+    }
+
+    if (extra_uid) {
+      data.extra_uid = extra_uid;
+      this.setData({
+        extra_uid:extra_uid
+      });
+    }
     data.url = this.data.page_url;
     common.request('post','make_qrcode',data, function (res) {
       common.check_login(res);
@@ -284,6 +428,10 @@ Page({
         this.close_pop_change_img();
       } else if(this.data.tmp_data.page[this.data.current_index].type == 'timelimit') {
         this.close_pop_change_time_limit_left();
+      } else if(this.data.tmp_data.page[this.data.current_index].type == 'cutprice_price') {
+        this.close_pop_change_cutprice_price();
+      } else if(this.data.tmp_data.page[this.data.current_index].type == 'vote') {
+        this.close_pop_change_vote();
       }
 
       //是否是额外添加的
@@ -387,6 +535,13 @@ Page({
       url: '/pages/page_detail/index?id='+this.data.page_id
     })
   },
+  goto_action:function () {
+
+    wx.navigateTo({
+      url: '/pages/tmp_make/index?customerview=1&id='+this.data.page_id
+    })
+  },
+
   close_all_pop:function() {
     this.close_pop_change_text();
     this.close_pop_change_time_limit_left();
@@ -804,10 +959,108 @@ Page({
     this.setData({
       page_title: e.detail.value
     });
+  },
+
+  //用户活动页面操作
+  custom_sign:function(){
+    var data = {
+      id:this.data.page_id
+    };
+    common.request('post','sign',data,function (res) {
+      common.request_callback(res);
+      if (res.data.success) {
+        this.get_page_info();
+      }
+    }.bind(this));
+  },
+  custom_cutprice_sign:function(){
+    var data = {
+      id:this.data.page_id
+    };
+    common.request('post','cutprice_sign',data,function (res) {
+      common.request_callback(res);
+      if (res.data.success) {
+        this.get_page_info();
+      }
+    }.bind(this));
+  },
+  custom_cutprice_help:function(){
+
+    this.share_make(app.globalData.userInfo.id);
+  },
+  custom_cutprice_cut:function(){
+    var data = {
+      id:this.data.page_id,
+      extra_uid:this.data.extra_uid
+    };
+    common.request('post','cutprice_cut',data,function (res) {
+      common.request_callback(res);
+      if (res.data.success) {
+        this.get_page_info();
+      }
+    }.bind(this));
+  },
+  custom_praise_sign:function(){
+    var data = {
+      id:this.data.page_id
+    };
+    common.request('post','praise_sign',data,function (res) {
+      common.request_callback(res);
+      if (res.data.success) {
+        this.get_page_info();
+      }
+    }.bind(this));
+  },
+  custom_praise_help:function(){
+
+    this.share_make(app.globalData.userInfo.id);
+  },
+  custom_praise_praise:function(){
+    var data = {
+      id:this.data.page_id,
+      extra_uid:this.data.extra_uid
+    };
+    common.request('post','praise_praise',data,function (res) {
+      common.request_callback(res);
+      if (res.data.success) {
+        this.get_page_info();
+      }
+    }.bind(this));
+  },
+  custom_vote:function(event){
+    var data = {
+      id:this.data.page_id,
+      vote_id: event.currentTarget.dataset.vote_id
+    };
+    common.request('post','vote',data,function (res) {
+      common.request_callback(res);
+      if (res.data.success) {
+        this.get_page_info();
+      }
+    }.bind(this));
+  },
+  onShareAppMessage:function() {
+    var title = '店长的推荐';
+    return {
+      title:title,
+      path:'pages/tmp_make/index?customerview=1&id='+this.data.page_id+'&extra_uid='+this.data.extra_uid,
+      imageUrl:'',
+      success:function(){
+      }
+    }
+  },
+  onPullDownRefresh(){
+    if (this.data.customerview) {
+      this.get_page_info();
+    } else {
+
+    }
+    wx.stopPullDownRefresh();
+  },
+  close_rule() {
+    this.setData({
+      rule_show:2
+    })
   }
-
-
-
-
 
 })

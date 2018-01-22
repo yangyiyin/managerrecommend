@@ -37,14 +37,19 @@
             <text>选模板</text>
         </view>
 
-        <view bindtap="goto_contact" class="mine-item">
+        <button class="mine-item" open-type="contact" style="font-size: 28rpx;text-align: left;padding-left: 0">
             <image class="ico" mode="aspectFit" src="../../resource/images/kefu.png"></image>
-            <text>客服热线</text>
-        </view>
+            <text>联系客服</text>
+        </button>
 
         <view bindtap="goto_suggest" class="mine-item">
             <image class="ico" mode="aspectFit" src="../../resource/images/liuyan.png"></image>
             <text>问题反馈</text>
+        </view>
+
+        <view bindtap="goto_user_page" class="mine-item">
+            <image class="ico" mode="aspectFit" src="../../resource/images/user_page.png"></image>
+            <text>我参与的活动</text>
         </view>
 
     </view>

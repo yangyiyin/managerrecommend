@@ -17,7 +17,7 @@ App({
       user_session:this.globalData.user_session
     }
   },
-  get_userinfo(){
+  get_userinfo(is_not_direct){
     var data = this.get_common_request_data();
     wx.request({
       url: 'https://www.88plus.net/public/index.php/Apimanagerrecommend/User/info.html',
@@ -27,16 +27,20 @@ App({
         common.request_callback(res,this);
         if (res.data.success) {
           this.globalData.userInfo = res.data.data;
-          if (!res.data.data.entity_title) {
-            wx.reLaunch({
-              url: '/pages/useredit/index'
-            })
-          } else {
-            wx.switchTab({
-              url: '/pages/index/index'
-            })
+          if (!is_not_direct) {
+            if (!res.data.data.entity_title || res.data.data.verify_status == 1) {
+              wx.reLaunch({
+                url: '/pages/useredit/index'
+              })
+            } else {
+              wx.switchTab({
+                url: '/pages/index/index'
+              })
+            }
           }
-
+          if (typeof is_not_direct == 'function') {
+            is_not_direct();
+          }
         }
 
         // this.globalData.user_session = res.data.data;
@@ -50,14 +54,14 @@ App({
       }
     });
   },
-  login() {
+  login(is_not_direct) {
       wx.login({
             success: res => {
             try {
               var user_session = wx.getStorageSync('user_session');
               if (user_session) {
                 this.globalData.user_session = user_session;
-                this.get_userinfo();
+                this.get_userinfo(is_not_direct);
               } else {
                 wx.request({
                   url: 'https://www.88plus.net/public/index.php/Apimanagerrecommend/laugh/login.html',
@@ -68,7 +72,7 @@ App({
 
                     this.globalData.user_session = res.data.data;
                     wx.setStorageSync('user_session', res.data.data);
-                    this.get_userinfo();
+                    this.get_userinfo(is_not_direct);
 
                   }.bind(this),
                   fail: function(res) {

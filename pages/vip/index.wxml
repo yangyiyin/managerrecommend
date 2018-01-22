@@ -24,7 +24,7 @@
         </view>
 
         <view class="price">{{price}}元/{{value_desc}}</view>
-        <view class="button">购买</view>
+        <button open-type="contact" class="button" style="width: auto">联系客服</button>
     </view>
 
 

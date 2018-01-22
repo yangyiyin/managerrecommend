@@ -8,6 +8,12 @@
         <view style="float: left;margin-left: 30rpx">点赞数:{{item.sum}}</view>
         <view style="float: right;">{{item.create_time}}</view>
         <view style="clear: both"></view>
+        <view >{{item.remark}}</view>
+        <view bindtap="focus_remark"  data-index="{{index}}" data-type="praise" class="button" style="width: 80rpx" wx:if="{{can_edit}}">备注</view>
+        <view wx:if="{{item.focus}}" style="padding-top: 50rpx;width: 400rpx;background: #fff;border: 1px solid #eee;height: 200rpx;position: fixed;top: 100rpx;left: 175rpx;z-index: 999">
+            <view style="width: 400rpx;margin:20rpx auto;font-size: 34rpx;text-align: center">备注:</view>
+            <input style="border: 1px solid #999;width: 80%;margin: 0 auto;"  bindblur="blur_remark" bindconfirm="remark" data-index="{{index}}" data-id="{{item.id}}" data-type="praise" cursor-spacing="0" focus="{{item.focus}}" />
+        </view>
     </view>
 
 

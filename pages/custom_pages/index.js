@@ -14,13 +14,13 @@ Page({
   onShow: function () {
     //console.log(1);
   },
-  onPullDownRefresh(){
-    this.get_list(1);
-    wx.stopPullDownRefresh();
-  },
   onReachBottom(){
     this.data.p ++;
     this.get_list();
+  },
+  onPullDownRefresh(){
+    this.get_list(1);
+    wx.stopPullDownRefresh();
   },
   get_list: function (refresh) {
     if (refresh) {
@@ -33,7 +33,7 @@ Page({
       p:this.data.p
     }
 
-    common.request('get','mypages',data,function (res) {
+    common.request('get','user_pages',data,function (res) {
       common.check_login(res);
       if (res.data.success && res.data.data.list && res.data.data.list.length) {
         var pages = this.data.pages.concat(res.data.data.list);
@@ -44,10 +44,10 @@ Page({
     }.bind(this));
   },
 
-  goto_tmp_page:function (event) {
-    var id = event.currentTarget.dataset.id;
+  goto_page:function (event) {
+    var id = event.currentTarget.dataset.page_id;
     wx.navigateTo({
-      url: '/pages/tmp_make/index?pageview=1&id='+id
+      url: '/pages/tmp_make/index?customerview=1&id='+id
     })
   },
   del_page:function(event){
@@ -59,7 +59,7 @@ Page({
           var data = {
             id:event.currentTarget.dataset.id
           }
-          common.request('post','del_page',data,function (res) {
+          common.request('post','del_user_page',data,function (res) {
             common.request_callback(res);
             this.data.pages.splice(event.currentTarget.dataset.index, 1);
             this.setData({

@@ -30,18 +30,24 @@
     <!--<include  wx:if="{{tmp_data.vote_list}}" src="../common/tmp_part/vote_list.wxml"/>-->
 
     <view wx-if="{{pageview}}" class="action_btn" style="bottom: 120rpx;background: rgba(0,0,0,0.4)"  bindtap="goto_page_detail">查看活动情况</view>
+    <view wx-if="{{pageview}}" class="action_btn" style="bottom: 220rpx;background: rgba(0,0,0,0.4)"  bindtap="goto_action">查看活动页面</view>
 
     <view wx-if="{{page_status == '1' && !preview}}" class="action_btn start_make" bindtap="start_make">开始制作</view>
 
     <input wx-if="{{page_status == '2'}}" bindinput="change_title" maxlength="20" placeholder="请输入页面标题,20字以内" style="position: fixed;left: 10rpx;bottom: 10rpx;width:500rpx;padding:10rpx;border: 1px solid #0CD400;background:rgba(0,0,0,0.5);color: #0CD400;"/>
     <view wx-if="{{page_status == '2'}}" class="action_btn complete_make" bindtap="complete_make">完成制作</view>
-    <view wx-if="{{page_status == '3'}}" class="action_btn share_make" bindtap="share_make" style="left:10rpx;right: auto">生成二维码分享</view>
-    <view wx-if="{{page_status == '3'}}" class="action_btn share_make" bindtap="share_make2">生成链接分享</view>
+    <view wx-if="{{page_status == '3' && !customerview}}" class="action_btn share_make" bindtap="share_make" style="">生成二维码分享</view>
+    <!--<view wx-if="{{page_status == '3' && !customerview}}" class="action_btn share_make" bindtap="share_make2">生成链接分享</view>-->
     <view wx-if="{{show_qrcode}}" style="position:fixed;background: rgb(200,200,200);width: 100%;height: 100%;top:0;left: 0;">
         <view style="width: 600rpx;margin: 200rpx auto;height: 400rpx;">
             <image bindtap="preview_qrcode" style="width: 200rpx;margin: 20rpx 200rpx;height: 200rpx" mode="scaleToFill" src="{{qrcode_link}}"></image>
-            <view style="margin-bottom: 20rpx">分享好友方法:  点击上方二维码预览,在预览窗口长按图片,选择发送给朋友,可多选好友。</view>
-            <view>分享朋友圈:  点击上方二维码预览,在预览窗口长按图片,选择保存图片,然后再到微信朋友圈手动发布,可自主配上文字说明。</view>
+            <view style="margin-bottom: 20rpx">
+                <view style="font-weight: bold">分享好友方法:</view>
+                点击上方二维码预览,在预览窗口长按图片,选择发送给朋友,可多选好友。或者<button style="display: inline-block;vertical-align: middle;font-size: 20rpx" open-type="share">直接点击</button></view>
+            <view style="clear: both"></view>
+            <view>
+                <view style="font-weight: bold">分享朋友圈:</view>
+                点击上方二维码预览,在预览窗口长按图片,选择保存图片,然后再到微信朋友圈手动发布,可自主配上文字说明。</view>
             <view bindtap="close_show_qrcode" style="height: 100rpx;width: 100rpx;margin: 20rpx auto;text-align: center;line-height: 100rpx;font-size: 36rpx;background: #ffffff;border-radius: 100rpx;">x</view>
         </view>
 
@@ -57,5 +63,48 @@
         </view>
 
     </view>
+
+</view>
+<view wx:if="{{rule_show==1 && page_status==1}}" style="width: 100%;height: 100%;background: #fff;position:fixed;top: 0rpx;left: 0rpx">
+    <view style="width: 600rpx;margin: 20rpx auto;font-size: 32rpx;text-align: center">
+        店长的推荐发布活动细则
+    </view>
+    <view style="width: 650rpx;margin: 0 auto;font-size: 24rpx;color: #999">
+        为了响应微信构建和谐网络的号召,以及保障用户的利益,如发现以下行为,一经发现将立即下架活动,严重者直接封锁账号不予以复议。
+    </view>
+    <view style="width: 650rpx;margin: 20rpx auto;font-size: 28rpx;">
+        一、不允许诱导分享
+    </view>
+    <view style="width: 650rpx;margin: 0 auto;font-size: 24rpx;color: #999">
+        不得以文字或者图片诱导用户分享,如出现分享好友得多少红包,转发让好友帮忙、求转发等类似的字眼。
+    </view>
+    <view style="width: 650rpx;margin: 20rpx auto;font-size: 28rpx;">
+        二、不允许诱导关注公众号或加微信好友
+    </view>
+    <view style="width: 650rpx;margin: 0 auto;font-size: 24rpx;color: #999">
+        不准以任何形式诱导用户关注公众号或者加微信好友,如扫一扫再参加活动,关注公众号送红包等。
+    </view>
+    <view style="width: 650rpx;margin: 20rpx auto;font-size: 28rpx;">
+        三、不得发布虚假活动
+    </view>
+    <view style="width: 650rpx;margin: 0 auto;font-size: 24rpx;color: #999">
+        不允许发布虚假活动、不属实活动、强制消费、服务不到位,一经核实将下架活动并封号处理,被保留提交相关法律机构的权限,并由商家承担由此带来的影响。
+    </view>
+    <view style="width: 650rpx;margin: 20rpx auto;font-size: 28rpx;">
+        四、不得发布错误的联系方式
+    </view>
+    <view style="width: 650rpx;margin: 0 auto;font-size: 24rpx;color: #999">
+        必须确保保留的商家联系方式是正确的,且保持畅通。否则一经核实,下架活动处理。
+    </view>
+
+    <view style="width: 650rpx;margin: 20rpx auto;font-size: 24rpx;color: red">
+        请仔细阅读细则,因违规造成的损失,平台概不负责,平台保留相关解释权及提交给相关部门处理的权利。
+    </view>
+
+    <view style="width: 650rpx;margin: 20rpx auto;text-align:right;font-size: 24rpx;">
+        店长的推荐-团队
+    </view>
+
+    <button bindtap="close_rule" style="width: 650rpx;margin: 20rpx auto" type="primary">同意细则,创建活动</button>
 
 </view>

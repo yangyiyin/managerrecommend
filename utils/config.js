@@ -17,6 +17,15 @@ var urls = {
     suggest_list:'https://www.88plus.net/public/index.php/Apimanagerrecommend/laugh/suggest_list.html',
     add_suggest:'https://www.88plus.net/public/index.php/Apimanagerrecommend/laugh/add_suggest.html',
     page_detail_info:'https://www.88plus.net/public/index.php/Apimanagerrecommend/laugh/page_detail_info.html',
+    sign:'https://www.88plus.net/public/index.php/Apimanagerrecommend/laugh/sign.html',
+    cutprice_sign:'https://www.88plus.net/public/index.php/Apimanagerrecommend/laugh/cutprice_sign.html',
+    cutprice_cut:'https://www.88plus.net/public/index.php/Apimanagerrecommend/laugh/cutprice_cut.html',
+    praise_sign:'https://www.88plus.net/public/index.php/Apimanagerrecommend/laugh/praise_sign.html',
+    praise_praise:'https://www.88plus.net/public/index.php/Apimanagerrecommend/laugh/praise_praise.html',
+    vote:'https://www.88plus.net/public/index.php/Apimanagerrecommend/laugh/vote.html',
+    user_pages:'https://www.88plus.net/public/index.php/Apimanagerrecommend/laugh/user_pages.html',
+    del_user_page:'https://www.88plus.net/public/index.php/Apimanagerrecommend/laugh/del_user_page.html',
+    remark_sign:'https://www.88plus.net/public/index.php/Apimanagerrecommend/laugh/remark_sign.html',
 }
 
 module.exports = {

@@ -1,7 +1,19 @@
-<view style="{{item.style}}" >
-    <view style="float: left;padding:20rpx;background: #0CD400;color: #fff;border-radius: 5rpx;">报名砍价</view>
+<view wx:if="{{!customerview}}" style="{{item.style}}" >
+    <view style="float: left;padding:20rpx;background: #0CD400;color: #fff;border-radius: 5rpx;">报名活动</view>
     <view style="float: left;padding: 20rpx;margin-left: 20rpx;background: #0CD400;color: #fff;border-radius: 5rpx;">喊人砍价</view>
     <view style="float: left;padding: 20rpx;margin-left: 20rpx;background: #0CD400;color: #fff;border-radius: 5rpx;">帮他砍价</view>
+    <view style="clear: both"></view>
+</view>
+
+<view wx:if="{{customerview}}" style="{{item.style}}" >
+
+    <view wx:if="{{!is_sign_cutprice}}" bindtap="custom_cutprice_sign" style="float: left;padding:20rpx;background: #0CD400;color: #fff;border-radius: 5rpx;">报名活动</view>
+    <view wx:if="{{is_sign_cutprice}}"  style="float: left;padding:20rpx;background: #999;color: #fff;border-radius: 5rpx;">已报名</view>
+    <view wx:if="{{is_sign_cutprice}}" bindtap="custom_cutprice_help" style="float: left;padding: 20rpx;margin-left: 20rpx;background: #0CD400;color: #fff;border-radius: 5rpx;">喊人砍价</view>
+
+    <view wx:if="{{!is_help_cutprice && extra_uid && !is_sign_cutprice}}" bindtap="custom_cutprice_cut" style="float: left;padding: 20rpx;margin-left: 20rpx;background: #0CD400;color: #fff;border-radius: 5rpx;">帮他砍价</view>
+    <view wx:if="{{is_help_cutprice && extra_uid && !is_sign_cutprice}}" style="float: left;padding: 20rpx;margin-left: 20rpx;background: #999;color: #fff;border-radius: 5rpx;">已砍价</view>
+
     <view style="clear: both"></view>
 </view>
 

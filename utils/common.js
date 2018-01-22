@@ -22,7 +22,8 @@ var request_callback = function (res, app) {
             app.login();
         } else {
             wx.showModal({
-                title: res.data.message
+                title: res.data.message,
+                showCancel:false
 
             });
         }
@@ -48,15 +49,15 @@ var check_login = function (res, app) {
             app.login();
         } else {
             wx.showModal({
-                title: res.data.message
-
+                title: res.data.message,
+                showCancel:false
             });
         }
 
     }
 }
 
-var check_session = function (app) {
+var check_session = function (app,is_not_direct) {
     if (!app) {
         app = getApp();
     }
@@ -68,7 +69,11 @@ var check_session = function (app) {
         });
         app.globalData.user_session = '';
         wx.setStorageSync('user_session','');
-        app.login();
+        app.login(is_not_direct);
+    } else {
+        if (typeof is_not_direct == 'function') {
+            is_not_direct();
+        }
     }
 }
 

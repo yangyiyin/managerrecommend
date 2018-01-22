@@ -3,16 +3,23 @@
 
 <view class="container">
 
+   <view wx:if="{{display == 2}}" class="main">
+
+      <view  bindtap="display1" style="margin-top: 20rpx;width: 200rpx;text-align: center;padding: 10rpx;color: #0CD400;background: #666;box-shadow:#000 0 0 5rpx;border-radius: 3rpx">我是店长</view>
+      <view  bindtap="display2" style="margin-top: 20rpx;width: 200rpx;text-align: center;padding: 10rpx;color: rgb(250,150,150);background: #666;box-shadow:#000 0 0 5rpx;border-radius: 3rpx">我是顾客</view>
+
+   </view>
 
 
 
+   <view wx:if="{{display == 1}}" class="main">
 
-   <view class="main">
+      店名: <input value="{{inputtitle}}" bindinput="bindinputtitle" style="border: 1px solid #999;color: #0CD400" placeholder="" cursor-spacing="10"/>
+      手机号: <input value="{{inputtel}}" bindinput="bindinputtel" type="number" maxlength="11" style="border: 1px solid #999;color: #0CD400" placeholder="" cursor-spacing="10"/>
+      地址: <input value="{{inputaddress}}" bindinput="bindinputaddress" style="border: 1px solid #999;color: #0CD400" placeholder="" cursor-spacing="10"/>
+      <view wx:if="{{submit==1}}" bindtap="submit" style="margin-top: 20rpx;width: 200rpx;text-align: center;padding: 10rpx;color: #0CD400;background: #666;box-shadow:#000 0 0 5rpx;border-radius: 3rpx">开始使用</view>
+      <view wx:if="{{submit==2}}"  style="border:none;margin-top: 20rpx;width: 400rpx;text-align: center;padding: 10rpx;color: rgb(200,200,0);background: none;border-radius: 3rpx">店铺审核中(1-3天)</view>
 
-      店名: <input bindinput="bindinputtitle" style="border: 1px solid #999;color: #0CD400" placeholder="" auto-focus cursor-spacing="10"/>
-      手机号: <input bindinput="bindinputtel" type="number" maxlength="11" style="border: 1px solid #999;color: #0CD400" placeholder="" auto-focus cursor-spacing="10"/>
-
-      <view bindtap="submit" style="margin-top: 20rpx;width: 200rpx;text-align: center;padding: 10rpx;color: #999;background: #666;box-shadow:#000 0 0 5rpx;border-radius: 3rpx">开始使用</view>
    </view>
 
 </view>

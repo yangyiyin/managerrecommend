@@ -3,6 +3,7 @@
   "navigationBarTextStyle": "black",
   "navigationBarTitleText": "我制作的页面",
   "backgroundTextStyle":"dark",
-  "backgroundColor":"#eeeeee"
+  "backgroundColor":"#eeeeee",
+  "enablePullDownRefresh":true
 
 }

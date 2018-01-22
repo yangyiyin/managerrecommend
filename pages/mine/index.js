@@ -63,5 +63,10 @@ Page({
     wx.navigateTo({
       url: '/pages/suggest/index'
     })
+  },
+  goto_user_page:function() {
+    wx.navigateTo({
+      url: '/pages/custom_pages/index'
+    })
   }
 })
