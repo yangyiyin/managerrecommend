@@ -52,7 +52,7 @@ Page({
     }
     if (option.scene) {
       var scene = decodeURIComponent(option.scene);
-      var scene_arr = scene.split(',');
+      var scene_arr = scene.split('a');
       data = {
         id:scene_arr[0]
       }
@@ -72,6 +72,9 @@ Page({
     data.extra_uid = this.data.extra_uid;
 
     if (option.pageview || option.customerview) {
+      this.setData({
+        rule_show:0
+      });
       if (option.customerview) {
        // console.log(1);
         common.check_session(app, function(){

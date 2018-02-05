@@ -8,10 +8,11 @@ Page({
     motto: '速冻量贩是登陆寄过来是顶级管理机构量贩几个量贩就公检法达刚路机放大观看了辅导机构反馈的建国饭店考虑过就发达国家发掉了给教',
     show_list:{'a':1,'b':1,'c':1,'d':1,'e':1,'f':1,'g':0},
     init_show_list:{'a':1,'b':1,'c':1,'d':1,'e':1,'f':1,'g':0},
-    sys_tips:''
+    sys_tips:'',
+    index_ads:[]
   },
   onLoad: function () {
-
+    this.get_ads();
   },
   onShow: function () {
     this.get_sys_tips();
@@ -68,5 +69,16 @@ Page({
     this.setData({
       sys_tips : ''
     });
-  }
+  },
+  get_ads:function () {
+    //获取欢迎信息
+    common.request('get','ads',{'names':'index'},function (res) {
+      if (res.data.success) {
+        this.setData({
+          index_ads : res.data.data.index
+        });
+      }
+
+    }.bind(this));
+  },
 })

@@ -26,6 +26,7 @@ var urls = {
     user_pages:'https://www.88plus.net/public/index.php/Apimanagerrecommend/laugh/user_pages.html',
     del_user_page:'https://www.88plus.net/public/index.php/Apimanagerrecommend/laugh/del_user_page.html',
     remark_sign:'https://www.88plus.net/public/index.php/Apimanagerrecommend/laugh/remark_sign.html',
+    ads:'https://www.88plus.net/public/index.php/Apimanagerrecommend/ads/index.html',
 }
 
 module.exports = {

@@ -2,12 +2,13 @@
 <view class="container">
     <view wx:if="{{sys_tips}}" class="sys-tips" bindtap="tap_sys_tips">{{sys_tips}}</view>
     <swiper autoplay="true" indicator-dots="true" wx:if="{{show_list.a}}">
-        <swiper-item>
-            <image class="swiper-item"  src="http://www.88plus.net/public/Uploads/2017-12-30/5a472bc3b3899.png"></image>
+        <swiper-item wx:if="{{index_ads.imgs}}" wx:for="{{index_ads.imgs}}" wx:key="index">
+            <!--<image class="swiper-item"  src="http://www.88plus.net/public/Uploads/2017-12-30/5a472bc3b3899.png"></image>-->
+            <image class="swiper-item"  src="{{item}}"></image>
         </swiper-item>
-        <swiper-item>
-            <image class="swiper-item"  src="http://www.88plus.net/public/Uploads/2017-12-30/5a472bdad506f.png"></image>
-        </swiper-item>
+        <!--<swiper-item>-->
+            <!--<image class="swiper-item"  src="http://www.88plus.net/public/Uploads/2017-12-30/5a472bdad506f.png"></image>-->
+        <!--</swiper-item>-->
     </swiper>
     <view class="back" bindtap="back" wx:if="{{show_list.g}}">返回</view>
     <view class="cat_item" bindtap="goto_timelimit" wx:if="{{show_list.b}}">
