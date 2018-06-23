@@ -56,6 +56,7 @@ Page({
       data = {
         id:scene_arr[0]
       }
+      option.id = scene_arr[0];
       option.customerview = 1;
       if (scene_arr[1]) {
         option.extra_uid = scene_arr[1];
