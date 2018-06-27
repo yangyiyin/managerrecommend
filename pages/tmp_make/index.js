@@ -96,7 +96,7 @@ Page({
                         var city = userInfo.city;
                         var country = userInfo.country;
 
-                        var data = {
+                        var data2 = {
                           user_name:nickName,
                           avatarUrl:avatarUrl,
                           gender:gender,
@@ -104,7 +104,7 @@ Page({
                           city:city
                         };
 
-                        common.request('post','info_modify',data, function (res) {
+                        common.request('post','info_modify',data2, function (res) {
                           app.get_userinfo(1);
                         })
                       }
@@ -373,7 +373,7 @@ Page({
       data.extra_uid = this.data.extra_uid;
     }
 
-    if (extra_uid) {
+    if (typeof extra_uid == 'number' || typeof extra_uid == 'string') {
       data.extra_uid = extra_uid;
       this.setData({
         extra_uid:extra_uid
