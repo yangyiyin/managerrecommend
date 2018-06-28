@@ -369,6 +369,7 @@ Page({
     var data = {
       id:this.data.page_id
     };
+    data.extra_uid = 0;
     if (this.data.extra_uid) {
       data.extra_uid = this.data.extra_uid;
     }
