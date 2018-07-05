@@ -26,11 +26,16 @@ Component({
         },
         handleClick ({ detail }) {
 
-            this.triggerEvent('changeitem', {item:this.data.item})
-
             this.setData({
                 visible: false
             });
+
+            if (detail.index == 1) {//删除
+                this.triggerEvent('triggerevent', {event:'del_block'})
+            } else {
+                this.triggerEvent('changeitem', {item:this.data.item})
+            }
+
         },
         tapInput(event){
             this.data.item.text = event.detail.value;

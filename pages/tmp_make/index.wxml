@@ -2,20 +2,14 @@
 
 <view class="container" style="background-image: url({{tmp_data.bg.src}});background-size:100%;background-repeat: repeat-y;position: relative;min-height:{{tmp_data.height}}">
 
-    <include  src="../common/pop_change_text.wxml"/>
-    <include  src="../common/pop_change_time_limit_left.wxml"/>
-    <include  src="../common/pop_change_img.wxml"/>
-    <include  src="../common/pop_change_cutprice_price.wxml"/>
-    <include  src="../common/pop_change_vote.wxml"/>
-    <include  src="../common/pop_change_vote_img.wxml"/>
 
     <view wx:key="index" wx:for="{{tmp_data.page}}">
 
 
         <!--<include wx:if="{{item.type == 'swiper'}}" src="../common/tmp_part/swiper.wxml"/>-->
-        <page_img wx:if="{{item.type == 'img'}}" item="{{item}}" can-edit="{{page_status == '2'}}" data-index="{{index}}" bindchangeitem="change_tmp_data_page"></page_img>
+        <page_img wx:if="{{item.type == 'img'}}" item="{{item}}" can-edit="{{page_status == '2'}}" data-index="{{index}}" bindchangeitem="change_tmp_data_page"  bindtriggerevent="triggerevent"></page_img>
         <!--<include  wx:if="{{item.type == 'img'}}" src="../common/tmp_part/img.wxml"/>-->
-        <page_text wx:if="{{item.type == 'text'}}" item="{{item}}" can-edit="{{page_status == '2'}}" data-index="{{index}}" bindchangeitem="change_tmp_data_page"></page_text>
+        <page_text wx:if="{{item.type == 'text'}}" item="{{item}}" can-edit="{{page_status == '2'}}" data-index="{{index}}" bindchangeitem="change_tmp_data_page"  bindtriggerevent="triggerevent"></page_text>
         <!--<include  wx:if="{{item.type == 'text'}}" src="../common/tmp_part/text.wxml"/>-->
         <page_sign wx:if="{{item.type == 'sign'}}" item="{{item}}" can-edit="{{page_status == '2'}}" page-id="{{page_id}}" customerview="{{customerview}}" data-index="{{index}}" bindtriggerevent="triggerevent" bindchangeitem="change_tmp_data_page"></page_sign>
         <!--<include  wx:if="{{item.type == 'sign'}}" src="../common/tmp_part/sign.wxml"/>-->
@@ -61,16 +55,16 @@
 
     </view>
 
-    <view wx-if="{{show_link}}" style="position:fixed;background: rgb(200,200,200);width: 100%;height: 100%;top:0;left: 0;">
-        <view style="width: 600rpx;margin: 200rpx auto;height: 400rpx;">
-            <text selectable style="margin-bottom: 50rpx;word-wrap:break-word;text-align: center">{{page_url}}</text>
-            <view bindtap="copy" data-content="{{page_url}}" style="height: 80rpx;width: 160rpx;margin: 20rpx auto;text-align: center;line-height: 80rpx;font-size: 28rpx;background: #0CD400;color: #fff;border-radius: 10rpx">复制链接</view>
+    <!--<view wx-if="{{show_link}}" style="position:fixed;background: rgb(200,200,200);width: 100%;height: 100%;top:0;left: 0;">-->
+        <!--<view style="width: 600rpx;margin: 200rpx auto;height: 400rpx;">-->
+            <!--<text selectable style="margin-bottom: 50rpx;word-wrap:break-word;text-align: center">{{page_url}}</text>-->
+            <!--<view bindtap="copy" data-content="{{page_url}}" style="height: 80rpx;width: 160rpx;margin: 20rpx auto;text-align: center;line-height: 80rpx;font-size: 28rpx;background: #0CD400;color: #fff;border-radius: 10rpx">复制链接</view>-->
 
-            <view >分享好友/朋友圈方法:  复制链接,发送给一个好友,然后在对应聊天中打开此链接(微信中),在打开的网页后,手机右上角有三个点的按钮,点击那个按钮,可选择发送给好友或者分享朋友圈。</view>
-            <view bindtap="close_show_link" style="height: 100rpx;width: 100rpx;margin: 20rpx auto;text-align: center;line-height: 100rpx;font-size: 36rpx;background: #ffffff;border-radius: 100rpx;">x</view>
-        </view>
+            <!--<view >分享好友/朋友圈方法:  复制链接,发送给一个好友,然后在对应聊天中打开此链接(微信中),在打开的网页后,手机右上角有三个点的按钮,点击那个按钮,可选择发送给好友或者分享朋友圈。</view>-->
+            <!--<view bindtap="close_show_link" style="height: 100rpx;width: 100rpx;margin: 20rpx auto;text-align: center;line-height: 100rpx;font-size: 36rpx;background: #ffffff;border-radius: 100rpx;">x</view>-->
+        <!--</view>-->
 
-    </view>
+    <!--</view>-->
 
 </view>
 <view wx:if="{{rule_show==1 && page_status==1}}" style="width: 100%;height: 100%;background: #fff;position:fixed;top: 0rpx;left: 0rpx">

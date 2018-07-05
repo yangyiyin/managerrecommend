@@ -1,2 +1,0 @@
-<view wx:if="{{!customerview}}" bindtap="change_text" data-text="{{item.text}}" data-index="{{index}}" class="edit-box{{page_status}} {{item.is_active}}" id="{{index}}" style="{{item.style}}" >{{item.text}}</view>
-<view wx:if="{{customerview}}" bindtap="custom_sign" class="edit-box{{page_status}} {{item.is_active}}" style="{{item.style}}" >{{item.text}}</view>

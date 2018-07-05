@@ -1,1 +1,0 @@
-<view bindtap="change_cutprice_price" data-index="{{index}}" class="edit-box{{page_status}} {{item.is_active}}" id="{{index}}" style="{{item.style}}" >{{item.cutprice_price}}<view style="display:inline-block;font-size: 24rpx;">元</view></view>

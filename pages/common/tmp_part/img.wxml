@@ -1,1 +1,0 @@
-<image bindtap="change_img" data-index="{{index}}" class="edit-box{{page_status}} {{item.is_active}}" id="{{index}}" style="{{item.style}}" mode="widthFix" src="{{item.src}}">暂无图片</image>

@@ -1,3 +1,17 @@
-<image class="img {{status_class}}" bindtap="change_img" id="{{index}}" style="{{item.style}}" mode="widthFix" src="{{item.src}}">
-    添加图片
-</image>
+<view  class="img {{status_class}}" bindtap="change_img" style="position: relative;{{item.style}}">
+    <image mode="widthFix" src="{{item.src}}">
+        添加图片
+    </image>
+    <!--<common_del wx:if="{{item.can_del_block}}" can-edit="{{canEdit}}"></common_del>-->
+</view>
+
+<dist_modal visible="{{ visible }}" actions="{{ actions }}" bind:click="handleClick">
+    <view>
+        设置图片
+        <view bindtap="changeimg" style="font-size: 80rpx;width: 150rpx;height: 150rpx;margin:0 auto;margin-bottom:20rpx;line-height: 150rpx;text-align: center;border: 1px dashed #000000;border-radius: 5rpx">
+            <block wx:if="{{src}}"><image style="width: 150rpx" src="{{src}}" mode="widthFix"></image></block>
+            <block wx:if="{{!src}}">+</block>
+        </view>
+
+    </view>
+</dist_modal>

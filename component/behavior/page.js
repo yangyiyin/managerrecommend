@@ -39,7 +39,19 @@ module.exports = Behavior({
     data: {
         status_class:'status_normal'
     },
-    attached: function(){},
+    attached: function(){
+        if (this.data.item.can_del_block) {
+            if (this.data.actions) {
+                this.data.actions.push( {
+                    name: '删除此模块',
+                    color: 'red'
+                });
+                this.setData({
+                    actions: this.data.actions
+                });
+            }
+        }
+    },
     methods: {
         myBehaviorMethod: function(){}
     }
