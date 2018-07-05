@@ -1,0 +1,4 @@
+<text class="{{status_class}}" bindtap="change_text" data-text="{{item.text}}" style="{{item.style}}" >{{item.text}}</text>
+<dist_modal visible="{{ visible }}" actions="{{ actions }}" bind:click="handleClick">
+    <view><input bindinput="tapInput" style="border: 1px solid #000;padding: 4px;width: 90%;margin: 0 auto;border-radius: 5px;" placeholder="请输入内容" auto-focus value="{{item.text}}"/></view>
+</dist_modal>

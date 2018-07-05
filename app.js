@@ -28,12 +28,12 @@ App({
         if (res.data.success) {
           this.globalData.userInfo = res.data.data;
           if (!is_not_direct) {
-            if (!res.data.data.entity_title || res.data.data.verify_status == 1) {
+            if (!parseInt(res.data.data.type)) {
               wx.reLaunch({
                 url: '/pages/useredit/index'
               })
             } else {
-              wx.switchTab({
+              wx.reLaunch({
                 url: '/pages/index/index'
               })
             }
@@ -41,6 +41,8 @@ App({
           if (typeof is_not_direct == 'function') {
             is_not_direct();
           }
+        } else {
+          //账号冻结等
         }
 
         // this.globalData.user_session = res.data.data;
@@ -90,3 +92,25 @@ App({
     });
   }
 })
+
+//,
+//  "tabBar": {
+//    "list": [
+//      {
+//        "pagePath": "pages/index/index",
+//        "text": "我要制作",
+//        "iconPath":"resource/images/work1.png",
+//        "selectedIconPath":"resource/images/work2.png"
+//      },
+//      {
+//        "pagePath": "pages/mine/index",
+//        "text": "个人中心",
+//        "iconPath":"resource/images/mine1.png",
+//        "selectedIconPath":"resource/images/mine2.png"
+//      }
+//    ],
+//    "color":"#999999",
+//    "selectedColor":"#999999",
+//    "backgroundColor":"#ffffff"
+//
+//  }

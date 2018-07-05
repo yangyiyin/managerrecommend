@@ -1,0 +1,17 @@
+
+<view bindtap="change_text" data-index="{{index}}" class="{{status_class}}" style="{{item.style}}" >
+    {{item.cutprice_price}}
+    <view style="display:inline-block;font-size: 24rpx;">元</view>
+    <view  wx:if="{{canEdit}}" style="display:inline-block;font-size: 24rpx;color: #999">(设置初价、底价和平均砍价值)</view>
+</view>
+
+<dist_modal visible="{{ visible }}" actions="{{ actions }}" bind:click="handleClick">
+    <view >原价(元):</view>
+    <input style="border: 1px solid #000;padding: 4px;width: 90%;margin: 0 auto;border-radius: 5px;" bindinput="tapInput1"  type="number" maxlength="7" value="{{item.cutprice_price}}" />
+    <view >最大优惠金额(元):</view>
+    <input style="border: 1px solid #000;padding: 4px;width: 90%;margin: 0 auto;border-radius: 5px;" bindinput="tapInput2" type="number" maxlength="7" value="{{item.cutprice_max_minus_price}}" />
+    <view>平均每次可砍价(元):</view>
+    <input style="border: 1px solid #000;padding: 4px;width: 90%;margin: 0 auto;border-radius: 5px;" bindinput="tapInput3" type="number" maxlength="7" value="{{item.cutprice_average_price}}" />
+
+    <!--<view><input bindinput="tapInput" style="border: 1px solid #000;padding: 4px;width: 90%;margin: 0 auto;border-radius: 5px;" placeholder="请输入内容" auto-focus value="{{item.text}}"/></view>-->
+</dist_modal>

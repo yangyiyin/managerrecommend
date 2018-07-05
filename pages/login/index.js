@@ -11,7 +11,7 @@ Page({
     setTimeout(function () {
       //登录
       app.login();
-    }, 1000);
+    }, 500);
 
 
   }

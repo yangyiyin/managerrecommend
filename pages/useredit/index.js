@@ -13,7 +13,7 @@ Page({
   },
   onLoad: function () {
 
-    if (app.globalData.userInfo.verify_status == 1) {
+    if (app.globalData.userInfo.type == 2) {
       this.setData({
         inputtitle:app.globalData.userInfo.entity_title,
         inputtel:app.globalData.userInfo.entity_tel,
@@ -28,7 +28,7 @@ Page({
   },
   onShow(){
     app.get_userinfo(function(){
-      if (app.globalData.userInfo.verify_status == 0 && app.globalData.userInfo.entity_title) {
+      if (parseInt(app.globalData.userInfo.type) ) {
         app.login();
       }
     });
@@ -40,9 +40,20 @@ Page({
 
   },
   display2:function(){
-    wx.reLaunch({
-      url: '/pages/custom_pages/index'
-    })
+    var data = {type:1}
+    common.request('post','info_modify',data, function (res) {
+      common.request_callback(res);
+      if (res.data.success) {
+        wx.reLaunch({
+          // url: '/pages/custom_pages/index'
+          url: '/pages/index/index'
+        });
+      } else {
+
+      }
+
+    }.bind(this))
+
   },
   bindinputtitle:function (e) {
     this.setData({
@@ -88,7 +99,7 @@ Page({
       });
       return;
     }
-    data.verify_status = 1;
+    data.type = 2;
 
     common.request('post','info_modify',data, function (res) {
       common.request_callback(res);

@@ -1,0 +1,10 @@
+.status_none{
+    border: none;
+}
+.status_active{
+    border: 1rpx dashed green;
+}
+
+.status_normal{
+    border: 1rpx dashed #f5800d;
+}

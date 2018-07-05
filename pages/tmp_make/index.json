@@ -4,6 +4,15 @@
   "navigationBarTitleText": "",
   "backgroundTextStyle":"dark",
   "backgroundColor":"#eeeeee",
-  "enablePullDownRefresh":true
-
+  "enablePullDownRefresh":true,
+  "usingComponents": {
+    "page_img": "../../component/page_img/index",
+    "page_text": "../../component/page_text/index",
+    "page_sign": "../../component/page_sign/index",
+    "page_timelimit": "../../component/page_timelimit/index",
+    "page_cutprice_btn": "../../component/page_cutprice_btn/index",
+    "page_cutprice_price": "../../component/page_cutprice_price/index",
+    "page_praise": "../../component/page_praise/index",
+    "page_vote": "../../component/page_vote/index"
+  }
 }

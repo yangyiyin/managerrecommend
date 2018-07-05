@@ -1,0 +1,7 @@
+
+@import "../wxss/component.wxss";
+.img {
+    font-size: 30rpx;
+    text-align: center;
+    line-height: 240rpx;
+}

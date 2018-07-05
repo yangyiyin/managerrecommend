@@ -1,5 +1,7 @@
 <!--index.wxml-->
 <view class="container">
+
+    <navigator style="position: absolute;top: 0;left: 0;width: 100rpx;height: 100rpx;z-index: 100;background: #fff;border-radius: 100rpx;text-align: center;line-height: 100rpx" url="/pages/mine/index" hover-class="navigator-hover">我的</navigator>
     <view wx:if="{{sys_tips}}" class="sys-tips" bindtap="tap_sys_tips">{{sys_tips}}</view>
     <swiper autoplay="true" indicator-dots="true" wx:if="{{show_list.a}}">
         <swiper-item wx:if="{{index_ads.imgs}}" wx:for="{{index_ads.imgs}}" wx:key="index">

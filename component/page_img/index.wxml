@@ -1,0 +1,3 @@
+<image class="img {{status_class}}" bindtap="change_img" id="{{index}}" style="{{item.style}}" mode="widthFix" src="{{item.src}}">
+    添加图片
+</image>

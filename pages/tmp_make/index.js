@@ -34,8 +34,8 @@ Page({
     cutprice_average_price:0,
     vote_num:0,
     preview:false,
-    pageview:false,
-    customerview:false,
+    pageview:false,//
+    customerview:false,//活动页面,用户报名页
     page_id:0,
     page_title:'',
     sign_list:[],
@@ -43,21 +43,22 @@ Page({
     praise_list:[],
     vote_list:[],
     extra_uid:0,
-    rule_show:1
+    rule_show:1,
+
   },
   onLoad: function (option) {
     //获取tmp_data信息
     var data = {
       id:option.id
     }
-    if (option.scene) {
+    if (option.scene) {//扫二维码进来
       var scene = decodeURIComponent(option.scene);
       var scene_arr = scene.split('a');
       data = {
         id:scene_arr[0]
       }
       option.id = scene_arr[0];
-      option.customerview = 1;
+      option.customerview = 1;//扫二维码进来的,就是活动页
       if (scene_arr[1]) {
         option.extra_uid = scene_arr[1];
       }
@@ -130,7 +131,7 @@ Page({
               extra_uid:parseInt(res.data.data.extra_uid),
               is_sign_praise:res.data.data.is_sign_praise,
               is_help_praise:res.data.data.is_help_praise,
-              page_id:option.id
+              page_id:parseInt(option.id)
             });
 
             wx.setNavigationBarTitle({
@@ -161,7 +162,7 @@ Page({
             extra_uid:parseInt(res.data.data.extra_uid),
             is_sign_praise:res.data.data.is_sign_praise,
             is_help_praise:res.data.data.is_help_praise,
-            page_id:option.id
+            page_id:parseInt(option.id)
           });
 
           wx.setNavigationBarTitle({
@@ -192,53 +193,13 @@ Page({
       }
       var tmp_data = res.data.data.content;
       for(var i in tmp_data.page) {
-        if (tmp_data.page[i].type == 'vote') {
-          tmp_data.page[i].vote_num_arr = [];
-          for(var j=0;j<tmp_data.page[i].vote_num;j++) {
-            tmp_data.page[i].vote_num_arr.push({src:"../../resource/images/tip.png",is_active:''});
-          }
-        }
+        // if (tmp_data.page[i].type == 'vote') {
+        //   tmp_data.page[i].vote_num_arr = [];
+        //   for(var j=0;j<tmp_data.page[i].vote_num;j++) {
+        //     tmp_data.page[i].vote_num_arr.push({src:"../../resource/images/tip.png",is_active:''});
+        //   }
+        // }
       }
-      // var tmp_data = {
-      //   height:'2000rpx',
-      //   bg:{src:'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1514186755969&di=900b661ac7399e6905f6d8404adffc29&imgtype=0&src=http%3A%2F%2Fa.hiphotos.baidu.com%2Fimage%2Fcrop%253D0%252C86%252C640%252C886%2Fsign%3D93c53d0fa164034f1b82984692f35509%2Fd009b3de9c82d1581481aa638a0a19d8bd3e42e5.jpg'},
-      //   music:{},
-      //   time_limit_left:40,
-      //   add_extra_img_max:2,
-      //   add_extra_text_max:2,
-      //   can_add_extra_img:true,
-      //   can_add_extra_text:true,
-      //   page:[
-      //     {
-      //       type:'img',
-      //       src:'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1514188641791&di=45ae3902f4b49090d4286e5543d4d027&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2Fc2fdfc039245d6885d62bcb0aec27d1ed21b2445.jpg',
-      //       is_available:true,
-      //       can_del_block:true,
-      //       style:'width:750rpx;'
-      //     },
-      //     {
-      //       type:'text',
-      //       text:'苹果特卖'+"\n"+'fsfsd',
-      //       is_available:true,
-      //       can_del_block:true,
-      //       style:'',
-      //
-      //     },
-      //     {
-      //       type:'sign',
-      //       text:'报名',
-      //       is_available:true,
-      //       can_del_block:false,
-      //       style:'padding:20rpx;background:#999;border-radius:5rpx;'
-      //     },
-      //     {
-      //       type:'timelimit',
-      //       is_available:true,
-      //       can_del_block:false,
-      //       style:''
-      //     }
-      //   ]
-      // }
       wx.setNavigationBarTitle({
         title: res.data.data.title
       })
@@ -254,8 +215,6 @@ Page({
       });
      // console.log(tmp_data);
     }.bind(this));
-
-
 
   },
   get_page_info:function(){
@@ -352,7 +311,7 @@ Page({
       common.request_callback(res);
       this.setData({
         page_url:res.data.data.url,
-        page_id:res.data.data.page_id
+        page_id:parseInt(res.data.data.page_id)
       })
 
     }.bind(this))
@@ -1066,6 +1025,44 @@ Page({
     this.setData({
       rule_show:2
     })
+  },
+
+  /**
+   * 组件item改变,实时更改tmp_data
+   * @param event
+   */
+  change_tmp_data_page(event) {
+
+    this.data.tmp_data.page[event.currentTarget.dataset.index] = event.detail.item;
+    this.setData({
+      tmp_data:this.data.tmp_data
+    })
+
+  },
+
+  /**
+   * 组件item改变,实时更改tmp_data
+   * @param event
+   */
+  change_tmp_data(event) {
+
+    this.data.tmp_data[event.detail.key] = event.detail.value;
+    this.setData({
+      tmp_data:this.data.tmp_data
+    })
+
+  },
+
+  /**
+   * 组件触发本父组件的方法
+   * @param event
+   */
+  triggerevent(event) {
+    if (event.detail.param) {
+      this[event.detail.event](event.detail.param);
+    } else {
+      this[event.detail.event]();
+    }
   }
 
 })
