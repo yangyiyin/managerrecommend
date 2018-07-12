@@ -1,7 +1,7 @@
 
-<view wx:if="{{!customerview}}" class="{{status_class}}" bindtap="change_text" style="{{item.style}}" >{{item.text}}</view>
-<view wx:if="{{customerview}}" bindtap="custom_sign"  style="{{item.style}}" >{{item.text}}</view>
+<view wx:if="{{!customerview}}" class="{{status_class}}" bindtap="change_text" style="padding: 20rpx;background: #0CD400;color: #fff;border-radius:5rpx;{{item.style}}" >{{item.text}}</view>
+<view wx:if="{{customerview}}" bindtap="custom_sign"  style="padding: 20rpx;background: #0CD400;color: #fff;border-radius:5rpx;{{item.style}}" >{{item.text}}</view>
 
 <dist_modal visible="{{ visible }}" actions="{{ actions }}" bind:click="handleClick">
-    <view><input bindinput="tapInput" style="border: 1px solid #000;padding: 4px;width: 90%;margin: 0 auto;border-radius: 5px;" placeholder="请输入内容" auto-focus value="{{item.text}}"/></view>
+    <view><input bindinput="tapInput" style="border: 1px solid #000;padding: 4px;width: 90%;margin: 0 auto;border-radius: 5px;" placeholder="请输入内容"  value="{{item.text}}"/></view>
 </dist_modal>

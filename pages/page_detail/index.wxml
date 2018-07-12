@@ -4,4 +4,6 @@
     <include  wx:if="{{detail.show_cutprice_list}}" src="../common/tmp_part/cutprice_list.wxml"/>
     <include  wx:if="{{detail.show_praise_list}}" src="../common/tmp_part/praise_list.wxml"/>
     <include  wx:if="{{detail.show_vote_list}}" src="../common/tmp_part/vote_list.wxml"/>
+    <include  wx:if="{{detail.show_fight_group_list}}" src="../common/tmp_part/fight_group_list.wxml"/>
+    <include  wx:if="{{detail.show_quick_buy_list}}" src="../common/tmp_part/quick_buy_list.wxml"/>
 </view>

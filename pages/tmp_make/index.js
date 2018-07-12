@@ -122,11 +122,15 @@ Page({
         cutprice_list:res.data.data.cutprice_list,
         praise_list:res.data.data.praise_list,
         vote_list:res.data.data.vote_list,
-        is_sign_cutprice:res.data.data.is_sign_cutprice,
-        is_help_cutprice:res.data.data.is_help_cutprice,
+        // fight_group_list:res.data.data.fight_group_list,
+        // quick_buy_list:res.data.data.quick_buy_list,
+        is_sign_cutprice:Boolean(res.data.data.is_sign_cutprice),
+        is_help_cutprice:Boolean(res.data.data.is_help_cutprice),
         extra_uid:parseInt(res.data.data.extra_uid),
-        is_sign_praise:res.data.data.is_sign_praise,
-        is_help_praise:res.data.data.is_help_praise,
+        is_sign_praise:Boolean(res.data.data.is_sign_praise),
+        is_help_praise:Boolean(res.data.data.is_help_praise),
+        is_sign_fightgroup:Boolean(res.data.data.is_sign_fightgroup),
+        is_help_fightgroup:Boolean(res.data.data.is_help_fightgroup),
 
       });
 

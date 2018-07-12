@@ -1,6 +1,6 @@
 
 <!--默认样式-->
-<view wx:if="!item.style_type" style="{{item.style}}" >
+<view wx:if="{{!item.style_type}}" style="{{item.style}}" >
 
 
         <view bindtap="change_text" data-current_item="{{item}}" data-current_index="{{index2}}" class="{{status_class}}" wx:for="{{item.vote_num_arr}}" wx:key="index" wx:for-index="index2" style="width: 710rpx;margin:0 auto;position: relative;box-shadow: 0rpx 2rpx 5px #999;margin-top: 20rpx">

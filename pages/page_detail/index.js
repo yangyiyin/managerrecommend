@@ -9,6 +9,8 @@ Page({
     praise_list:[],
     cutprice_list:[],
     vote_list:[],
+    fight_group_list:[],
+    quick_buy_list:[],
     detail:[],
     p:1,
     can_edit:true,
@@ -31,6 +33,8 @@ Page({
         praise_list:res.data.data.praise_list,
         cutprice_list:res.data.data.cutprice_list,
         vote_list:res.data.data.vote_list,
+        fight_group_list:res.data.data.fight_group_list,
+        quick_buy_list:res.data.data.quick_buy_list,
         detail:res.data.data
       });
 

@@ -1,0 +1,39 @@
+
+<view wx:if="{{!customerview}}" bindtap="change_text" class="{{status_class}}" style="width: 730rpx;padding:0 10rpx;height: 50rpx;{{item.style}}" >
+    <view style="float: left;">
+        <view  style="display: inline-block;font-size: 30rpx;color: #c67605;line-height:50rpx;">{{item.fight_group_price}}元</view>
+        <view style="display: inline-block;line-height:50rpx;">({{item.fight_group_number}}人团)</view>
+    </view>
+    <view style="float:right;width:60rpx;height: 50rpx;padding:0 20rpx;line-height:50rpx;background: #0CD400;color: #fff;border-radius: 5rpx;">开团</view>
+    <view style="clear: both"></view>
+</view>
+
+<view wx:if="{{customerview}}" style="width: 730rpx;padding:0 10rpx;height: 50rpx;{{item.style}}" >
+    <view style="float: left;">
+        <view class="{{status_class}}"   bindtap="change_text" style="display: inline-block;font-size: 30rpx;color: #c67605;line-height:50rpx;">{{item.fight_group_price}}元</view>
+        <view style="display: inline-block;line-height:50rpx;">({{item.fight_group_number}}人团)</view>
+    </view>
+
+
+    <view wx:if="{{!isHelpFightgroup && extraUid && !isSignFightgroup}}" bindtap="custom_fight_group_join" style="float:right;width:60rpx;height: 50rpx;padding:0 20rpx;line-height:50rpx;background: #0CD400;color: #fff;border-radius: 5rpx;">参团</view>
+    <view wx:if="{{isHelpFightgroup && extraUid && !isSignFightgroup}}"  style="float:right;width:60rpx;height: 50rpx;padding:0 20rpx;line-height:50rpx;background: #999;color: #fff;border-radius: 5rpx;">已参团</view>
+
+    <view wx:if="{{isSignFightgroup}}" bindtap="custom_fight_group_help" style="float:right;width:60rpx;height: 50rpx;padding:0 20rpx;line-height:50rpx;background: #0CD400;color: #fff;border-radius: 5rpx;">喊人参团</view>
+
+    <view wx:if="{{!isSignFightgroup}}" bindtap="custom_fight_group_sign" style="float:right;width:60rpx;height: 50rpx;padding:0 20rpx;line-height:50rpx;background: #0CD400;color: #fff;border-radius: 5rpx;">开团</view>
+    <view wx:if="{{isSignFightgroup}}" style="float:right;width:60rpx;height: 50rpx;padding:0 20rpx;line-height:50rpx;background: #999;color: #fff;border-radius: 5rpx;">已开团</view>
+
+    <view style="clear: both"></view>
+
+
+</view>
+
+
+<!--<view wx:if="{{customerview}}" bindtap="custom_sign"  style="padding: 20rpx;background: #0CD400;color: #fff;border-radius:5rpx;{{item.style}}" >{{item.text}}</view>-->
+
+<dist_modal visible="{{ visible }}" actions="{{ actions }}" bind:click="handleClick">
+    <view >价格(元):</view>
+    <view><input bindinput="tapInput" style="border: 1px solid #000;padding: 4px;width: 90%;margin: 0 auto;border-radius: 5px;" placeholder="请输入价格" value="{{item.fight_group_price}}"/></view>
+    <view >人数:</view>
+    <view><input bindinput="tapInput2" style="border: 1px solid #000;padding: 4px;width: 90%;margin: 0 auto;border-radius: 5px;" placeholder="请输入人数"  value="{{item.fight_group_number}}"/></view>
+</dist_modal>

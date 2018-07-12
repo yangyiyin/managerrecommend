@@ -1,0 +1,27 @@
+<view  class=""  style="position:relative;width: 690rpx;padding: 20rpx;border: 1rpx solid #0CD400;margin-top: 10rpx" >
+    <!--<view bindtap="del_activity_block" data-block="praise_list" wx:if="{{page_status == '2'}}" style="position: absolute;top: 0;right: 0;background: red;color: #fff;padding: 20rpx;">删除</view>-->
+
+    <view style="background: #0CD400;color: #fff;padding: 10rpx">拼团情况</view>
+
+    <view wx:if="{{fight_group_list.length}}" wx:for="{{fight_group_list}}" wx:key="{{index}}" style="margin-top: 10rpx">
+        <view style="float: left">昵称:{{item.user.user_name}}</view>
+        <view style="float: left;margin-left: 30rpx">价格:{{item.price}}({{item.max_number}}人团)</view>
+        <view style="float: left;margin-left: 30rpx">
+            {{item.user_name}}
+        </view>
+        <view wx:if="{{item.status==0}}" style="float: right;">未成团</view>
+        <view wx:if="{{item.status==1}}" style="float: right;">已成团</view>
+        <view style="clear: both"></view>
+    </view>
+
+
+
+    <view wx:if="{{!fight_group_list.length}}" style="margin-top: 10rpx">
+        <view style="float: left">暂无信息</view>
+        <view style="float: right;"></view>
+        <view style="clear: both"></view>
+    </view>
+
+
+
+</view>

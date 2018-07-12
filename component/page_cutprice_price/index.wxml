@@ -13,5 +13,5 @@
     <view>平均每次可砍价(元):</view>
     <input style="border: 1px solid #000;padding: 4px;width: 90%;margin: 0 auto;border-radius: 5px;" bindinput="tapInput3" type="number" maxlength="7" value="{{item.cutprice_average_price}}" />
 
-    <!--<view><input bindinput="tapInput" style="border: 1px solid #000;padding: 4px;width: 90%;margin: 0 auto;border-radius: 5px;" placeholder="请输入内容" auto-focus value="{{item.text}}"/></view>-->
+    <!--<view><input bindinput="tapInput" style="border: 1px solid #000;padding: 4px;width: 90%;margin: 0 auto;border-radius: 5px;" placeholder="请输入内容"  value="{{item.text}}"/></view>-->
 </dist_modal>
