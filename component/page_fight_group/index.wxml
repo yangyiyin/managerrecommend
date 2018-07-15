@@ -20,7 +20,7 @@
 
     <view wx:if="{{isSignFightgroup}}" bindtap="custom_fight_group_help" style="float:right;width:60rpx;height: 50rpx;padding:0 20rpx;line-height:50rpx;background: #0CD400;color: #fff;border-radius: 5rpx;">喊人参团</view>
 
-    <view wx:if="{{!isSignFightgroup}}" bindtap="custom_fight_group_sign" style="float:right;width:60rpx;height: 50rpx;padding:0 20rpx;line-height:50rpx;background: #0CD400;color: #fff;border-radius: 5rpx;">开团</view>
+    <view wx:if="{{!isSignFightgroup}}" bindtap="show_phone_modal" data-callback="handle_verify_code_sign_success" style="float:right;width:60rpx;height: 50rpx;padding:0 20rpx;line-height:50rpx;background: #0CD400;color: #fff;border-radius: 5rpx;">开团</view>
     <view wx:if="{{isSignFightgroup}}" style="float:right;width:60rpx;height: 50rpx;padding:0 20rpx;line-height:50rpx;background: #999;color: #fff;border-radius: 5rpx;">已开团</view>
 
     <view style="clear: both"></view>
@@ -37,3 +37,6 @@
     <view >人数:</view>
     <view><input bindinput="tapInput2" style="border: 1px solid #000;padding: 4px;width: 90%;margin: 0 auto;border-radius: 5px;" placeholder="请输入人数"  value="{{item.fight_group_number}}"/></view>
 </dist_modal>
+
+<include src="../tmp/phone.wxml"/>
+

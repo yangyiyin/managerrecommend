@@ -1,0 +1,6 @@
+<dist_modal visible="{{ phone_modal_visible }}" actions="{{ phone_modal_actions }}" bind:click="phoneModalHandleClick">
+    <view >联系手机号:</view>
+    <view><input bindinput="tapInputPhone" style="border: 1px solid #000;padding: 4px;width: 90%;margin: 0 auto;border-radius: 5px;" placeholder="请输入联系手机号" value=""/></view>
+    <view >验证码:</view>
+    <view><input bindinput="tapInputCode" style="border: 1px solid #000;padding: 4px;width: 90%;margin: 0 auto;border-radius: 5px;" placeholder="请输入验证码"  value=""/></view>
+</dist_modal>

@@ -23,6 +23,7 @@ var request_callback = function (res, app) {
         } else {
             wx.showModal({
                 title: res.data.message,
+                content: '',
                 showCancel:false
 
             });
@@ -50,6 +51,7 @@ var check_login = function (res, app) {
         } else {
             wx.showModal({
                 title: res.data.message,
+                content: '',
                 showCancel:false
             });
         }

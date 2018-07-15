@@ -75,26 +75,37 @@ Component({
                  }
             }.bind(this));
         },
+        handle_verify_code_sign_success(data) {
+            this.custom_fight_group_sign();
+        },
         fight_group_sign(pay_no, pageId, _this) {
+
             var data = {
                 id:pageId,
                 pay_no:pay_no
 
             };
             var time = 20;
-            wx.showNavigationBarLoading();
+            wx.showLoading({
+                title: '支付中。。。',
+            })
             //轮询回调支付状态,创建订单
             var int_ins = setInterval(function(){
                 if (time <= 0) {
-                    wx.hideNavigationBarLoading();
+                    wx.hideLoading()
                     clearInterval(int_ins);
+                    wx.showModal({
+                        title: res.data.message,
+                        content: '',
+                        showCancel:false
+                    });
+
                     return ;
                 }
                 common.request('post','fightgroup_sign',data,function (res) {
                     if (res.data.success) {
-                        console.log(123);
                         _this.triggerEvent('triggerevent', {event:'get_page_info'});
-                        wx.hideNavigationBarLoading();
+                        wx.hideLoading()
                         clearInterval(int_ins);
                         return ;
                     } else {

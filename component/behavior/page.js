@@ -1,6 +1,7 @@
 /**
  * Created by yyy on 18/7/3.
  */
+var common = require('../../utils/common.js');
 module.exports = Behavior({
     behaviors: [],
     properties: {
@@ -37,7 +38,18 @@ module.exports = Behavior({
         }
     },
     data: {
-        status_class:'status_normal'
+        status_class:'status_normal',
+        phone_modal_visible:false,
+        phone_modal_actions:[
+
+            {
+                name: '确认',
+                color: '#19be6b'
+            }
+        ],
+        page_sign_phone:'',
+        page_sign_phone_code:'',
+        callback:''
     },
     attached: function(){
         if (this.data.item.can_del_block) {
@@ -53,6 +65,50 @@ module.exports = Behavior({
         }
     },
     methods: {
-        myBehaviorMethod: function(){}
+        show_phone_modal(event) {
+
+            this.setData({
+                phone_modal_visible: true,
+                callback: event.currentTarget.dataset.callback
+            });
+        },
+        phoneModalHandleClick ({ detail }) {
+
+            //验证
+            var data = {
+                phone:this.data.page_sign_phone,
+                code:this.data.page_sign_phone_code,
+
+            }
+            common.request('post','verify_code',data,function (res) {
+                this.setData({
+                    phone_modal_visible: false
+                });
+                if (res.data.success) {
+                    if (this[this.data.callback]) {
+                        this[this.data.callback](data);
+                    } else {
+                        console.log(123);
+                    }
+                } else {
+                    wx.showModal({
+                        title: res.data.message,
+                        content: '',
+                        showCancel:false
+                    });
+                }
+
+
+            }.bind(this));
+
+
+        },
+        tapInputPhone(event){
+            this.data.page_sign_phone = event.detail.value;
+        },
+        tapInputCode(event){
+            this.data.page_sign_phone_code = event.detail.value;
+        },
+
     }
 })
