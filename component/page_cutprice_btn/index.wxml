@@ -8,7 +8,7 @@
 
 <view wx:if="{{customerview}}" style="{{item.style}}" >
 
-    <view wx:if="{{!isSignCutprice}}" bindtap="custom_cutprice_sign" style="float: left;padding:20rpx;background: #0CD400;color: #fff;border-radius: 5rpx;">报名活动</view>
+    <view wx:if="{{!isSignCutprice}}" bindtap="show_phone_modal" data-callback="custom_cutprice_sign" style="float: left;padding:20rpx;background: #0CD400;color: #fff;border-radius: 5rpx;">报名活动</view>
     <view wx:if="{{isSignCutprice}}"  style="float: left;padding:20rpx;background: #999;color: #fff;border-radius: 5rpx;">已报名</view>
     <view wx:if="{{isSignCutprice}}" bindtap="custom_cutprice_help" style="float: left;padding: 20rpx;margin-left: 20rpx;background: #0CD400;color: #fff;border-radius: 5rpx;">喊人砍价</view>
 
@@ -18,3 +18,4 @@
     <view style="clear: both"></view>
 </view>
 
+<include src="../tmp/phone.wxml"/>

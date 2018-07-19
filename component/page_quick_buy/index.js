@@ -46,7 +46,8 @@ Component({
         },
         quick_buy:function(){
             var data = {
-                id:this.data.pageId
+                id:this.data.pageId,
+                phone:this.data.page_sign_phone
             };
             common.request('post','quick_buy',data,function (res) {
                 common.request_callback(res);

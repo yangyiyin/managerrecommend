@@ -11,7 +11,7 @@
     <view style="float: left;">
         <view  style="display: inline-block;font-size: 30rpx;color: #c67605;line-height:50rpx;">{{item.quick_buy_price}}元</view>
     </view>
-    <view style="float:right;width:60rpx;height: 50rpx;padding:0 20rpx;line-height:50rpx;background: #0CD400;color: #fff;border-radius: 5rpx;" bindtap="quick_buy">立即抢购</view>
+    <view style="float:right;width:60rpx;height: 50rpx;padding:0 20rpx;line-height:50rpx;background: #0CD400;color: #fff;border-radius: 5rpx;" bindtap="show_phone_modal" data-callback="quick_buy">立即抢购</view>
     <view style="clear: both"></view>
 </view>
 
@@ -21,3 +21,4 @@
     <view >价格(元):</view>
     <view><input bindinput="tapInput" style="border: 1px solid #000;padding: 4px;width: 90%;margin: 0 auto;border-radius: 5px;" placeholder="请输入价格" value="{{item.quick_buy_price}}"/></view>
 </dist_modal>
+<include src="../tmp/phone.wxml"/>

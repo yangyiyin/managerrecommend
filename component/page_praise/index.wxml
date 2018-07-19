@@ -10,7 +10,7 @@
 <view wx:if="{{customerview}}" style="{{item.style}}" >
 
 
-    <view  wx:if="{{!isSignPraise}}" bindtap="custom_praise_sign" style="float: left;padding: 20rpx;background: #0CD400;color: #fff;border-radius: 5rpx;">报名活动</view>
+    <view  wx:if="{{!isSignPraise}}" bindtap="show_phone_modal" data-callback="custom_praise_sign" style="float: left;padding: 20rpx;background: #0CD400;color: #fff;border-radius: 5rpx;">报名活动</view>
     <view  wx:if="{{isSignPraise}}" bindtap="custom_praise_sign" style="float: left;padding: 20rpx;background: #999;color: #fff;border-radius: 5rpx;">已报名</view>
 
     <view wx:if="{{isSignPraise}}" bindtap="custom_praise_help" style="float: left;padding: 20rpx;margin-left: 20rpx;background: #0CD400;color: #fff;border-radius: 5rpx;">喊人点赞</view>
@@ -19,3 +19,5 @@
 
     <view style="clear: both"></view>
 </view>
+
+<include src="../tmp/phone.wxml"/>

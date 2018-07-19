@@ -20,7 +20,8 @@ Component({
 
         custom_praise_sign:function(){
             var data = {
-                id:this.data.pageId
+                id:this.data.pageId,
+                phone:this.data.page_sign_phone
             };
             common.request('post','praise_sign',data,function (res) {
                 common.request_callback(res);

@@ -20,7 +20,7 @@ Page({
     }.bind(this), 500)
   },
   onShareAppMessage(options) {
-    var title = '店长的推荐';
+    var title = '神奇店长';
     var that = this;
     return {
       title:title,

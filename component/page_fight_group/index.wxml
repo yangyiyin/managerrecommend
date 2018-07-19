@@ -15,7 +15,7 @@
     </view>
 
 
-    <view wx:if="{{!isHelpFightgroup && extraUid && !isSignFightgroup}}" bindtap="custom_fight_group_join" style="float:right;width:60rpx;height: 50rpx;padding:0 20rpx;line-height:50rpx;background: #0CD400;color: #fff;border-radius: 5rpx;">参团</view>
+    <view wx:if="{{!isHelpFightgroup && extraUid && !isSignFightgroup}}" bindtap="show_phone_modal" data-callback="handle_verify_code_join_success"  style="float:right;width:60rpx;height: 50rpx;padding:0 20rpx;line-height:50rpx;background: #0CD400;color: #fff;border-radius: 5rpx;">参团</view>
     <view wx:if="{{isHelpFightgroup && extraUid && !isSignFightgroup}}"  style="float:right;width:60rpx;height: 50rpx;padding:0 20rpx;line-height:50rpx;background: #999;color: #fff;border-radius: 5rpx;">已参团</view>
 
     <view wx:if="{{isSignFightgroup}}" bindtap="custom_fight_group_help" style="float:right;width:60rpx;height: 50rpx;padding:0 20rpx;line-height:50rpx;background: #0CD400;color: #fff;border-radius: 5rpx;">喊人参团</view>

@@ -78,11 +78,15 @@ Component({
         handle_verify_code_sign_success(data) {
             this.custom_fight_group_sign();
         },
+        handle_verify_code_join_success(data) {
+            this.custom_fight_group_join();
+        },
         fight_group_sign(pay_no, pageId, _this) {
 
             var data = {
                 id:pageId,
-                pay_no:pay_no
+                pay_no:pay_no,
+                phone:this.data.page_sign_phone
 
             };
             var time = 20;
@@ -124,14 +128,74 @@ Component({
         custom_fight_group_join:function(){
             var data = {
                 id:this.data.pageId,
-                extra_uid:this.data.extraUid
+                extra_uid:this.data.extraUid,
+                activity_label:'fight_group'
             };
-            common.request('post','fightgroup_join',data,function (res) {
+            common.request('post','fightgroup_sign_pay',data,function (res) {
                 common.request_callback(res);
                 if (res.data.success) {
-                    this.triggerEvent('triggerevent', {event:'get_page_info'})
+                    //调起支付
+                    var _this = this;
+                    wx.requestPayment({
+                        'timeStamp': String(res.data.data.timeStamp),
+                        'nonceStr': res.data.data.nonceStr,
+                        'package': res.data.data.package,
+                        'signType':res.data.data.signType,
+                        'paySign': res.data.data.sign,
+                        'success':function(ret){
+
+                            _this.fight_group_join(res.data.data.pay_no, data.id,_this, data.extra_uid);
+                        },
+                        'fail':function(ret){
+                        }
+                    })
+
                 }
             }.bind(this));
+
         },
+
+        fight_group_join(pay_no, pageId, _this, extra_uid) {
+
+            var data = {
+                id:pageId,
+                pay_no:pay_no,
+                extra_uid:extra_uid,
+                phone:this.data.page_sign_phone
+
+            };
+            var time = 20;
+            wx.showLoading({
+                title: '支付中。。。',
+            })
+            //轮询回调支付状态,创建订单
+            var int_ins = setInterval(function(){
+                if (time <= 0) {
+                    wx.hideLoading()
+                    clearInterval(int_ins);
+                    wx.showModal({
+                        title: res.data.message,
+                        content: '',
+                        showCancel:false
+                    });
+
+                    return ;
+                }
+                common.request('post','fightgroup_join',data,function (res) {
+                    if (res.data.success) {
+                        _this.triggerEvent('triggerevent', {event:'get_page_info'});
+                        wx.hideLoading()
+                        clearInterval(int_ins);
+                        return ;
+                    } else {
+                    }
+
+                });
+                time --;
+            }, 500);
+
+
+        },
+
     }
 });

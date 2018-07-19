@@ -18,7 +18,7 @@ Page({
     this.get_sys_tips();
   },
   onShareAppMessage(options) {
-    var title = '店长的推荐';
+    var title = '神奇店长';
     var that = this;
     return {
       title:title,

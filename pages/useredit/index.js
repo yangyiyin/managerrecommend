@@ -7,6 +7,7 @@ Page({
     inputtitle:'',
     inputtel:'',
     inputaddress:'',
+    inputcode:'',
     submit:1,
     display:2
 
@@ -45,8 +46,8 @@ Page({
       common.request_callback(res);
       if (res.data.success) {
         wx.reLaunch({
-          // url: '/pages/custom_pages/index'
-          url: '/pages/index/index'
+           url: '/pages/custom_pages/index'
+          //url: '/pages/index/index'
         });
       } else {
 
@@ -63,6 +64,11 @@ Page({
   bindinputtel:function (e) {
     this.setData({
       inputtel: e.detail.value
+    });
+  },
+  bindinputcode:function (e) {
+    this.setData({
+      inputcode: e.detail.value
     });
   },
   bindinputaddress:function (e) {
@@ -101,14 +107,53 @@ Page({
     }
     data.type = 2;
 
-    common.request('post','info_modify',data, function (res) {
-      common.request_callback(res);
-      if (res.data.success) {
-        app.login();
-      } else {
+    //验证
+    var data_code_vrify = {
+      phone:this.data.inputtel,
+      code:this.data.inputcode,
 
+    }
+    common.request('post','verify_code',data_code_vrify,function (res) {
+
+      if (res.data.success) {
+        common.request('post','info_modify',data, function (res) {
+          common.request_callback(res);
+          if (res.data.success) {
+            app.login();
+          } else {
+
+          }
+
+        }.bind(this));
+      } else {
+        wx.showModal({
+          title: res.data.message,
+          content: '',
+          showCancel:false
+        });
       }
 
-    }.bind(this))
-  }
+
+    }.bind(this));
+  },
+  send_code(){
+    var data = {
+      phone:this.data.inputtel
+
+    }
+    common.request('post','send_code',data,function (res) {
+
+      if (res.data.success) {
+
+      } else {
+        wx.showModal({
+          title: res.data.message,
+          content: '',
+          showCancel:false
+        });
+      }
+
+
+    }.bind(this));
+  },
 })

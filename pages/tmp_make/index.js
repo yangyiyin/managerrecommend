@@ -44,6 +44,7 @@ Page({
     vote_list:[],
     extra_uid:0,
     rule_show:1, //0不展示 1展示 2关闭
+    pick_code:''
 
   },
   onLoad: function (option) {
@@ -131,6 +132,7 @@ Page({
         is_help_praise:Boolean(res.data.data.is_help_praise),
         is_sign_fightgroup:Boolean(res.data.data.is_sign_fightgroup),
         is_help_fightgroup:Boolean(res.data.data.is_help_fightgroup),
+        pick_code:res.data.data.pick_code
 
       });
 
@@ -321,7 +323,7 @@ Page({
   },
 
   onShareAppMessage:function() {
-    var title = '店长的推荐';
+    var title = '神奇店长';
     return {
       title:title,
       path:'pages/tmp_make/index?customerview=1&id='+this.data.page_id+'&extra_uid='+this.data.extra_uid,
@@ -342,6 +344,13 @@ Page({
     this.setData({
       rule_show:2
     })
+  },
+  show_pick_code() {
+    wx.showModal({
+      title: '提货码',
+      content: this.data.pick_code,
+      showCancel:false
+    });
   },
 
   /**

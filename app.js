@@ -32,6 +32,10 @@ App({
               wx.reLaunch({
                 url: '/pages/useredit/index'
               })
+            } else if(res.data.data.type == '1') {//顾客
+              wx.reLaunch({
+                url: '/pages/custom_pages/index'
+              })
             } else {
               wx.reLaunch({
                 url: '/pages/index/index'

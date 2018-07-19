@@ -1,3 +1,6 @@
 {
-    "component": true
+    "component": true,
+    "usingComponents": {
+        "dist_modal": "../../dist/modal/index"
+    }
 }
