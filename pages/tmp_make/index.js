@@ -347,7 +347,7 @@ Page({
   },
   show_pick_code() {
     wx.showModal({
-      title: '提货码',
+      title: '凭证码',
       content: this.data.pick_code,
       showCancel:false
     });

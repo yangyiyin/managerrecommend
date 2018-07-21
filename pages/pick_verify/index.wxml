@@ -1,0 +1,26 @@
+<!--index.wxml-->
+
+
+<view class="container">
+
+
+   <view class="main">
+
+
+      手机号: <input value="{{inputtel}}" bindinput="bindinputtel" type="number" maxlength="11" style="border: 1px solid #999;color: #0CD400" placeholder="" cursor-spacing="10"/>
+      凭证码: <input value="{{inputcode}}" bindinput="bindinputcode" type="number" maxlength="6" style="border: 1px solid #999;color: #0CD400" placeholder="" cursor-spacing="10"/>
+
+      <view bindtap="submit" style="margin-top: 20rpx;width: 200rpx;text-align: center;padding: 10rpx;color: #0CD400;background: #666;box-shadow:#000 0 0 5rpx;border-radius: 3rpx">验证</view>
+
+   </view>
+
+</view>
+<dist_modal visible="{{ visible }}" actions="{{ actions }}" bind:click="handleClick">
+   <view wx:if="{{msg}}">{{msg}}</view>
+   <view wx:if="{{pick_data.title}}">活动名称:{{pick_data.title}}</view>
+   <view wx:if="{{pick_data.price}}">价格:{{pick_data.price}}元</view>
+   <view wx:if="{{pick_data.sum}}">点赞数:{{pick_data.sum}}</view>
+   <view wx:if="{{pick_data.create_time}}">创建时间:{{pick_data.create_time}}</view>
+   <view wx:if="{{pick_data.payed}}">已支付</view>
+   <view wx:if="{{!pick_data.payed}}">需到店支付</view>
+</dist_modal>

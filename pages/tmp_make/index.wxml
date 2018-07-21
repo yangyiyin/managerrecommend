@@ -26,7 +26,7 @@
 
     <view wx-if="{{pageview}}" class="action_btn" style="bottom: 120rpx;background: rgba(0,0,0,0.4)"  bindtap="goto_page_detail">查看活动情况</view>
     <view wx-if="{{pageview}}" class="action_btn" style="bottom: 220rpx;background: rgba(0,0,0,0.4)"  bindtap="goto_action">查看活动页面</view>
-    <view wx-if="{{customerview && pick_code}}" class="action_btn" style="bottom: 320rpx;background: rgba(0,0,0,0.4)"  bindtap="show_pick_code">提货码</view>
+    <view wx-if="{{customerview && pick_code}}" class="action_btn" style="bottom: 320rpx;background: rgba(0,0,0,0.4)"  bindtap="show_pick_code">凭证码</view>
 
     <view wx-if="{{page_status == '1' && !preview}}" class="action_btn start_make" bindtap="start_make">开始制作</view>
 

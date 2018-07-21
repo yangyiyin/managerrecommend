@@ -13,6 +13,13 @@ Page({
   },
   onLoad: function () {
     this.get_ads();
+    if (app.globalData.userInfo.tips) {
+      wx.showModal({
+        title: 'vip到期提醒',
+        content: app.globalData.userInfo.tips,
+        showCancel:false
+      });
+    }
   },
   onShow: function () {
     this.get_sys_tips();

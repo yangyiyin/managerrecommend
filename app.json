@@ -14,7 +14,8 @@
     "pages/useredit/index",
     "pages/suggest/index",
     "pages/page_detail/index",
-    "pages/custom_pages/index"
+    "pages/custom_pages/index",
+    "pages/pick_verify/index"
   ],
   "window":{
     "navigationBarBackgroundColor": "#3A3A3A"
