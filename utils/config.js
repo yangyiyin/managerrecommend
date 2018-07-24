@@ -34,6 +34,8 @@ var urls = {
     verify_code:'https://www.88plus.net/public/index.php/Apimanagerrecommend/laugh/verify_code.html',
     send_code:'https://www.88plus.net/public/index.php/Apimanagerrecommend/laugh/send_code.html',
     pick_verify:'https://www.88plus.net/public/index.php/Apimanagerrecommend/laugh/pick_verify.html',
+    user_phones:'https://www.88plus.net/public/index.php/Apimanagerrecommend/user/user_phones.html',
+    statistics_point:'https://www.88plus.net/public/index.php/Apimanagerrecommend/laugh/statistics_point.html',
     ads:'https://www.88plus.net/public/index.php/Apimanagerrecommend/ads/index.html',
 }
 

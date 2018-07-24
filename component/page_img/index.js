@@ -1,4 +1,6 @@
-var pageBehavior = require('../behavior/page')
+var pageBehavior = require('../behavior/page');
+const config = require('../../utils/config.js');
+const app = getApp();
 Component({
     behaviors: [pageBehavior],
     properties: {
@@ -25,8 +27,22 @@ Component({
             if (detail.index == 1) {//删除
                 this.triggerEvent('triggerevent', {event:'del_block'})
             } else {
-                this.data.item.src = this.data.src;
-                this.triggerEvent('changeitem', {item:this.data.item})
+                //上传
+                wx.uploadFile({
+                    url: config.urls.img_upload,
+                    filePath: this.data.src,
+                    name: 'img',
+                    formData:{
+                        'user_session':app.globalData.user_session
+                    },
+                    success: function(res){
+                        res.data = JSON.parse(res.data);
+                        //common.check_login(res, app);
+                        this.data.src = res.data.data;
+                        this.data.item.src = this.data.src;
+                        this.triggerEvent('changeitem', {item:this.data.item})
+                    }.bind(this)
+                });
             }
         },
         changeimg(){
@@ -64,30 +80,5 @@ Component({
                 src:this.data.item.src ? this.data.item.src : ''
             });
         }
-
-
-        // change_img() {
-        //     if (!this.data.canEdit) {
-        //         return;
-        //     }
-        //
-        //     wx.chooseImage({
-        //         count: 1, // 默认9
-        //         sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
-        //         sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
-        //         success: function (res) {
-        //             // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
-        //             var tempFilePaths = res.tempFilePaths;
-        //             var tempFiles = res.tempFiles;
-        //             this.data.item.src = tempFilePaths[0];
-        //             this.setData({
-        //                 item: this.data.item
-        //             });
-        //             this.triggerEvent('changeitem', {item:this.data.item})
-        //
-        //         }.bind(this)
-        //     })
-        //
-        // }
     }
 });

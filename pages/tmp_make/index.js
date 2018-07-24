@@ -38,13 +38,22 @@ Page({
     customerview:false,//活动页面,用户报名页
     page_id:0,
     page_title:'',
+    page_stock:0,
     sign_list:[],
     cutprice_list:[],
     praise_list:[],
     vote_list:[],
     extra_uid:0,
-    rule_show:1, //0不展示 1展示 2关闭
-    pick_code:''
+    rule_show:0, //0不展示 1展示 2关闭
+    pick_code:'',
+    pick_code_actions: [
+      {
+        name: '确认',
+        color: '#19be6b'
+      }
+    ],
+    pick_code_visible:false,
+    stock_none:false
 
   },
   onLoad: function (option) {
@@ -70,12 +79,12 @@ Page({
 
     if (option.pageview || option.customerview) {
       this.setData({
-        rule_show:0,
         page_id: this.data.id,
         page_status:3
       });
 
       if (option.customerview) {
+        common.request('get','statistics_point',{page_id:this.data.page_id, type:1}, function (res) {});
         common.check_session(app, function(){
 
           this.get_page_info();
@@ -87,6 +96,10 @@ Page({
 
       return;
     }
+    this.setData({
+      rule_show:1
+    });
+
     common.check_session(app);
     common.request('get','tmp_info',{id:this.data.id},function (res) {
       common.check_login(res);
@@ -132,7 +145,8 @@ Page({
         is_help_praise:Boolean(res.data.data.is_help_praise),
         is_sign_fightgroup:Boolean(res.data.data.is_sign_fightgroup),
         is_help_fightgroup:Boolean(res.data.data.is_help_fightgroup),
-        pick_code:res.data.data.pick_code
+        pick_code:res.data.data.pick_code,
+        stock_none:res.data.data.stock_none
 
       });
 
@@ -147,6 +161,15 @@ Page({
       this.setData({
         tmp_data:tmp_data
       });
+
+      if (this.data.customerview && this.data.stock_none) {
+        wx.showModal({
+          title: '提示',
+          content: '当前库存不足,无法报名活动',
+          showCancel:false
+        });
+      }
+
     }.bind(this));
   },
   onShow: function() {},
@@ -172,6 +195,7 @@ Page({
     data.tmp_data = this.data.tmp_data;
     data.tmp_id = this.data.id;
     data.page_title = this.data.page_title;
+    data.page_stock = this.data.page_stock;
     common.request('post','page_submit',data, function (res) {
       common.request_callback(res);
       this.setData({
@@ -223,7 +247,8 @@ Page({
   preview_qrcode:function () {
     wx.previewImage({
       urls: [this.data.qrcode_link] // 需要预览的图片http链接列表
-    })
+    });
+    common.request('get','statistics_point',{page_id:this.data.page_id, type:2}, function (res) {});
   },
   close_show_qrcode:function () {
     this.setData({
@@ -249,22 +274,7 @@ Page({
         can_add_extra_img:false
       })
     }
-    // var index = this.data.tmp_data.page.length - 1;
-    //
-    // this.active_current_node(index);
-    // this.data.current_index = index;
-    // this.data.add_extra_img_num++;
-    // if (this.data.add_extra_img_num >= this.data.tmp_data.add_extra_img_max) {
-    //   this.setData({
-    //     can_add_extra_img:false
-    //   })
-    // }
-    // this.setData({
-    //   img_path : '',
-    //   can_del_block: this.data.tmp_data.page[this.data.current_index].can_del_block
-    // });
-    //
-    // this.pop_change_img(1);
+
   },
   add_extra_text:function () {
     var new_text = {
@@ -287,22 +297,7 @@ Page({
         can_add_extra_text:false
       })
     }
-    // var index = this.data.tmp_data.page.length - 1;
-    //
-    // this.active_current_node(index);
-    // this.data.current_index = index;
-    // this.data.add_extra_text_num++;
-    // if (this.data.add_extra_text_num >= this.data.tmp_data.add_extra_text_max) {
-    //   this.setData({
-    //     can_add_extra_text:false
-    //   })
-    // }
-    // this.setData({
-    //   img_path : '',
-    //   can_del_block: this.data.tmp_data.page[this.data.current_index].can_del_block
-    // });
-    //
-    // this.pop_change_text(1);
+
   },
   goto_page_detail:function () {
 
@@ -321,16 +316,20 @@ Page({
       page_title: e.detail.value
     });
   },
-
+  change_stock: function(e){
+    this.setData({
+      page_stock: e.detail.value
+    });
+  },
   onShareAppMessage:function() {
     var title = '神奇店长';
+    common.request('get','statistics_point',{page_id:this.data.page_id, type:2}, function (res) {});
     return {
       title:title,
       path:'pages/tmp_make/index?customerview=1&id='+this.data.page_id+'&extra_uid='+this.data.extra_uid,
-      imageUrl:'',
-      success:function(){
-      }
+      imageUrl:''
     }
+
   },
   onPullDownRefresh(){
     if (this.data.customerview) {
@@ -346,11 +345,21 @@ Page({
     })
   },
   show_pick_code() {
-    wx.showModal({
-      title: '凭证码',
-      content: this.data.pick_code,
-      showCancel:false
-    });
+    // wx.showModal({
+    //   title: '凭证码',
+    //   content: this.data.pick_code,
+    //   showCancel:false
+    // });
+    this.setData({
+      pick_code_visible:true
+    })
+  },
+
+  close_pick_code() {
+
+    this.setData({
+      pick_code_visible:false
+    })
   },
 
   /**

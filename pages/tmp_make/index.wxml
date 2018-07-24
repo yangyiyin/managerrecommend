@@ -13,7 +13,7 @@
         <page_cutprice_price wx:if="{{item.type == 'cutprice_price'}}" item="{{item}}" can-edit="{{page_status == '2'}}" data-index="{{index}}" bindchangeitem="change_tmp_data_page"></page_cutprice_price>
         <page_praise wx:if="{{item.type == 'praise'}}" item="{{item}}" can-edit="{{page_status == '2'}}" page-id="{{page_id}}" is-sign-praise="{{is_sign_praise}}" is-help-praise="{{is_help_praise}}" extra-uid="{{extra_uid}}" customerview="{{customerview}}" data-index="{{index}}" bindtriggerevent="triggerevent"></page_praise>
         <page_vote wx:if="{{item.type == 'vote'}}" item="{{item}}" can-edit="{{page_status == '2'}}" page-id="{{page_id}}" customerview="{{customerview}}" pageview="{{pageview}}" data-index="{{index}}" bindtriggerevent="triggerevent" bindchangeitem="change_tmp_data_page"></page_vote>
-        <page_fight_group wx:if="{{item.type == 'fight_group'}}" item="{{item}}" can-edit="{{page_status == '2'}}" page-id="{{page_id}}" is-sign-fightgroup="{{is_sign_fightgroup}}" is-help-fightgroup="{{is_help_fightgroup}}" extra-uid="{{extra_uid}}" customerview="{{customerview}}" data-index="{{index}}" bindtriggerevent="triggerevent" bindchangeitem="change_tmp_data_page"></page_fight_group>
+        <!--<page_fight_group wx:if="{{item.type == 'fight_group'}}" item="{{item}}" can-edit="{{page_status == '2'}}" page-id="{{page_id}}" is-sign-fightgroup="{{is_sign_fightgroup}}" is-help-fightgroup="{{is_help_fightgroup}}" extra-uid="{{extra_uid}}" customerview="{{customerview}}" data-index="{{index}}" bindtriggerevent="triggerevent" bindchangeitem="change_tmp_data_page"></page_fight_group>-->
         <page_quick_buy wx:if="{{item.type == 'quick_buy'}}" item="{{item}}" can-edit="{{page_status == '2'}}" page-id="{{page_id}}" customerview="{{customerview}}" data-index="{{index}}" bindtriggerevent="triggerevent" bindchangeitem="change_tmp_data_page"></page_quick_buy>
 
     </view>
@@ -30,6 +30,7 @@
 
     <view wx-if="{{page_status == '1' && !preview}}" class="action_btn start_make" bindtap="start_make">开始制作</view>
 
+    <input wx-if="{{page_status == '2' && tmp_data.has_stock}}" bindinput="change_stock" maxlength="9" placeholder="请输入库存数量" type="number" style="position: fixed;left: 10rpx;bottom: 150rpx;width:500rpx;padding:10rpx;border: 1px solid #0CD400;background:rgba(0,0,0,0.5);color: #0CD400;"/>
     <input wx-if="{{page_status == '2'}}" bindinput="change_title" maxlength="20" placeholder="请输入页面标题,20字以内" style="position: fixed;left: 10rpx;bottom: 10rpx;width:500rpx;padding:10rpx;border: 1px solid #0CD400;background:rgba(0,0,0,0.5);color: #0CD400;"/>
     <view wx-if="{{page_status == '2'}}" class="action_btn complete_make" bindtap="complete_make">完成制作</view>
     <view wx-if="{{page_status == '3' && !customerview}}" class="action_btn share_make" bindtap="share_make" style="">生成二维码分享</view>
@@ -48,59 +49,9 @@
         </view>
 
     </view>
-
-    <!--<view wx-if="{{show_link}}" style="position:fixed;background: rgb(200,200,200);width: 100%;height: 100%;top:0;left: 0;">-->
-        <!--<view style="width: 600rpx;margin: 200rpx auto;height: 400rpx;">-->
-            <!--<text selectable style="margin-bottom: 50rpx;word-wrap:break-word;text-align: center">{{page_url}}</text>-->
-            <!--<view bindtap="copy" data-content="{{page_url}}" style="height: 80rpx;width: 160rpx;margin: 20rpx auto;text-align: center;line-height: 80rpx;font-size: 28rpx;background: #0CD400;color: #fff;border-radius: 10rpx">复制链接</view>-->
-
-            <!--<view >分享好友/朋友圈方法:  复制链接,发送给一个好友,然后在对应聊天中打开此链接(微信中),在打开的网页后,手机右上角有三个点的按钮,点击那个按钮,可选择发送给好友或者分享朋友圈。</view>-->
-            <!--<view bindtap="close_show_link" style="height: 100rpx;width: 100rpx;margin: 20rpx auto;text-align: center;line-height: 100rpx;font-size: 36rpx;background: #ffffff;border-radius: 100rpx;">x</view>-->
-        <!--</view>-->
-
-    <!--</view>-->
-
 </view>
-<view wx:if="{{rule_show==1 && page_status==1}}" style="width: 100%;height: 100%;background: #fff;position:fixed;top: 0rpx;left: 0rpx">
-    <view style="width: 600rpx;margin: 20rpx auto;font-size: 32rpx;text-align: center">
-        神奇店长发布活动细则
-    </view>
-    <view style="width: 650rpx;margin: 0 auto;font-size: 24rpx;color: #999">
-        为了响应微信构建和谐网络的号召,以及保障用户的利益,如发现以下行为,一经发现将立即下架活动,严重者直接封锁账号不予以复议。
-    </view>
-    <view style="width: 650rpx;margin: 20rpx auto;font-size: 28rpx;">
-        一、不允许诱导分享
-    </view>
-    <view style="width: 650rpx;margin: 0 auto;font-size: 24rpx;color: #999">
-        不得以文字或者图片诱导用户分享,如出现分享好友得多少红包,转发让好友帮忙、求转发等类似的字眼。
-    </view>
-    <view style="width: 650rpx;margin: 20rpx auto;font-size: 28rpx;">
-        二、不允许诱导关注公众号或加微信好友
-    </view>
-    <view style="width: 650rpx;margin: 0 auto;font-size: 24rpx;color: #999">
-        不准以任何形式诱导用户关注公众号或者加微信好友,如扫一扫再参加活动,关注公众号送红包等。
-    </view>
-    <view style="width: 650rpx;margin: 20rpx auto;font-size: 28rpx;">
-        三、不得发布虚假活动
-    </view>
-    <view style="width: 650rpx;margin: 0 auto;font-size: 24rpx;color: #999">
-        不允许发布虚假活动、不属实活动、强制消费、服务不到位,一经核实将下架活动并封号处理,被保留提交相关法律机构的权限,并由商家承担由此带来的影响。
-    </view>
-    <view style="width: 650rpx;margin: 20rpx auto;font-size: 28rpx;">
-        四、不得发布错误的联系方式
-    </view>
-    <view style="width: 650rpx;margin: 0 auto;font-size: 24rpx;color: #999">
-        必须确保保留的商家联系方式是正确的,且保持畅通。否则一经核实,下架活动处理。
-    </view>
+<include  wx:if="{{rule_show==1 && page_status==1}}" src="../common/agreement/make_page.wxml"/>
 
-    <view style="width: 650rpx;margin: 20rpx auto;font-size: 24rpx;color: red">
-        请仔细阅读细则,因违规造成的损失,平台概不负责,平台保留相关解释权及提交给相关部门处理的权利。
-    </view>
-
-    <view style="width: 650rpx;margin: 20rpx auto;text-align:right;font-size: 24rpx;">
-        神奇店长-团队
-    </view>
-
-    <button bindtap="close_rule" style="width: 650rpx;margin: 20rpx auto" type="primary">同意细则,创建活动</button>
-
-</view>
+<dist_modal visible="{{ pick_code_visible }}" actions="{{ pick_code_actions }}" bind:click="close_pick_code">
+    <view>凭证码:{{pick_code}}</view>
+</dist_modal>

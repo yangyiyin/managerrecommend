@@ -1,0 +1,43 @@
+<view style="width: 100%;height: 100%;background: #fff;position:fixed;top: 0rpx;left: 0rpx">
+    <view style="width: 600rpx;margin: 20rpx auto;font-size: 32rpx;text-align: center">
+        神奇店长发布活动细则
+    </view>
+    <view style="width: 650rpx;margin: 0 auto;font-size: 24rpx;color: #999">
+        为了响应微信构建和谐网络的号召,以及保障用户的利益,如发现以下行为,一经发现将立即下架活动,严重者直接封锁账号不予以复议。
+    </view>
+    <view style="width: 650rpx;margin: 20rpx auto;font-size: 28rpx;">
+        一、不允许诱导分享
+    </view>
+    <view style="width: 650rpx;margin: 0 auto;font-size: 24rpx;color: #999">
+        不得以文字或者图片诱导用户分享,如出现分享好友得多少红包,转发让好友帮忙、求转发等类似的字眼。
+    </view>
+    <view style="width: 650rpx;margin: 20rpx auto;font-size: 28rpx;">
+        二、不允许诱导关注公众号或加微信好友
+    </view>
+    <view style="width: 650rpx;margin: 0 auto;font-size: 24rpx;color: #999">
+        不准以任何形式诱导用户关注公众号或者加微信好友,如扫一扫再参加活动,关注公众号送红包等。
+    </view>
+    <view style="width: 650rpx;margin: 20rpx auto;font-size: 28rpx;">
+        三、不得发布虚假活动
+    </view>
+    <view style="width: 650rpx;margin: 0 auto;font-size: 24rpx;color: #999">
+        不允许发布虚假活动、不属实活动、强制消费、服务不到位,一经核实将下架活动并封号处理,被保留提交相关法律机构的权限,并由商家承担由此带来的影响。
+    </view>
+    <view style="width: 650rpx;margin: 20rpx auto;font-size: 28rpx;">
+        四、不得发布错误的联系方式
+    </view>
+    <view style="width: 650rpx;margin: 0 auto;font-size: 24rpx;color: #999">
+        必须确保保留的商家联系方式是正确的,且保持畅通。否则一经核实,下架活动处理。
+    </view>
+
+    <view style="width: 650rpx;margin: 20rpx auto;font-size: 24rpx;color: red">
+        请仔细阅读细则,因违规造成的损失,平台概不负责,平台保留相关解释权及提交给相关部门处理的权利。
+    </view>
+
+    <view style="width: 650rpx;margin: 20rpx auto;text-align:right;font-size: 24rpx;">
+        神奇店长-团队
+    </view>
+
+    <button bindtap="close_rule" style="width: 650rpx;margin: 20rpx auto" type="primary">同意细则,创建活动</button>
+
+</view>

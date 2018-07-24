@@ -54,25 +54,25 @@ Component({
                 activity_label:'fight_group'
             };
             common.request('post','fightgroup_sign_pay',data,function (res) {
-                 common.request_callback(res);
-                 if (res.data.success) {
-                     //调起支付
-                     var _this = this;
-                     wx.requestPayment({
-                         'timeStamp': String(res.data.data.timeStamp),
-                         'nonceStr': res.data.data.nonceStr,
-                         'package': res.data.data.package,
-                         'signType':res.data.data.signType,
-                         'paySign': res.data.data.sign,
-                         'success':function(ret){
+                common.request_callback(res);
+                if (res.data.success) {
+                    //调起支付
+                    var _this = this;
+                    wx.requestPayment({
+                        'timeStamp': String(res.data.data.timeStamp),
+                        'nonceStr': res.data.data.nonceStr,
+                        'package': res.data.data.package,
+                        'signType':res.data.data.signType,
+                        'paySign': res.data.data.sign,
+                        'success':function(ret){
 
-                             _this.fight_group_sign(res.data.data.pay_no, data.id,_this);
-                         },
-                         'fail':function(ret){
-                         }
-                     })
+                            _this.fight_group_sign(res.data.data.pay_no, data.id,_this);
+                        },
+                        'fail':function(ret){
+                        }
+                    })
 
-                 }
+                }
             }.bind(this));
         },
         handle_verify_code_sign_success(data) {
@@ -109,8 +109,11 @@ Component({
                 common.request('post','fightgroup_sign',data,function (res) {
                     if (res.data.success) {
                         _this.triggerEvent('triggerevent', {event:'get_page_info'});
+                        _this.triggerEvent('triggerevent', {event:'show_pick_code'});
                         wx.hideLoading()
                         clearInterval(int_ins);
+                        common.request('get','statistics_point',{page_id:pageId, type:3}, function (res) {});
+
                         return ;
                     } else {
                     }
@@ -126,6 +129,7 @@ Component({
             this.triggerEvent('triggerevent', {event:'share_make', param:app.globalData.userInfo.id})
         },
         custom_fight_group_join:function(){
+
             var data = {
                 id:this.data.pageId,
                 extra_uid:this.data.extraUid,
@@ -184,8 +188,10 @@ Component({
                 common.request('post','fightgroup_join',data,function (res) {
                     if (res.data.success) {
                         _this.triggerEvent('triggerevent', {event:'get_page_info'});
+                        _this.triggerEvent('triggerevent', {event:'show_pick_code'});
                         wx.hideLoading()
                         clearInterval(int_ins);
+                        common.request('get','statistics_point',{page_id:pageId, type:3}, function (res) {});
                         return ;
                     } else {
                     }

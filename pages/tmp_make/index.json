@@ -15,6 +15,7 @@
     "page_praise": "../../component/page_praise/index",
     "page_vote": "../../component/page_vote/index",
     "page_fight_group": "../../component/page_fight_group/index",
-    "page_quick_buy": "../../component/page_quick_buy/index"
+    "page_quick_buy": "../../component/page_quick_buy/index",
+    "dist_modal": "../../dist/modal/index"
   }
 }

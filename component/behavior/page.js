@@ -52,7 +52,8 @@ module.exports = Behavior({
         ],
         page_sign_phone:'',
         page_sign_phone_code:'',
-        callback:''
+        callback:'',
+        phone_list:[]
     },
     attached: function(){
         if (this.data.item.can_del_block) {
@@ -69,6 +70,19 @@ module.exports = Behavior({
     },
     methods: {
         show_phone_modal(event) {
+            common.request('get','user_phones',{},function (res) {
+
+                if (res.data.success) {
+                    this.setData({
+                        phone_list: res.data.data
+                    });
+                } else {
+                    this.setData({
+                        phone_list: []
+                    });
+                }
+            }.bind(this));
+
 
             this.setData({
                 phone_modal_visible: true,
