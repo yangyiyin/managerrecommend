@@ -113,3 +113,17 @@ swiper{
   line-height: 40rpx;
 
 }
+
+.scroll-view_H{
+  white-space: nowrap;
+  background: #fff;
+  z-index: 9;
+  height:240rpx;
+  overflow: hidden;
+}
+
+.scroll-view-item_H{
+  display: inline-block;
+  margin-left: 20rpx;
+  margin-bottom: 30rpx;
+}

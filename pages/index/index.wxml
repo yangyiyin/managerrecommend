@@ -1,82 +1,150 @@
 <!--index.wxml-->
 <view class="container">
 
-    <navigator style="position: absolute;top: 0;left: 0;width: 100rpx;height: 100rpx;z-index: 100;background: #fff;border-radius: 100rpx;text-align: center;line-height: 100rpx" url="/pages/mine/index" hover-class="navigator-hover">我的</navigator>
-    <navigator style="position: absolute;top: 100rpx;left: 0;width: 100rpx;height: 100rpx;z-index: 100;background: #fff;border-radius: 100rpx;text-align: center;line-height: 100rpx" url="/pages/pick_verify/index" hover-class="navigator-hover">凭证验证</navigator>
-    <view wx:if="{{sys_tips}}" class="sys-tips" bindtap="tap_sys_tips">{{sys_tips}}</view>
-    <swiper autoplay="true" indicator-dots="true" wx:if="{{show_list.a}}">
-        <swiper-item wx:if="{{index_ads.imgs}}" wx:for="{{index_ads.imgs}}" wx:key="index">
-            <!--<image class="swiper-item"  src="http://www.88plus.net/public/Uploads/2017-12-30/5a472bc3b3899.png"></image>-->
-            <image class="swiper-item"  src="{{item}}"></image>
-        </swiper-item>
-        <!--<swiper-item>-->
-            <!--<image class="swiper-item"  src="http://www.88plus.net/public/Uploads/2017-12-30/5a472bdad506f.png"></image>-->
+    <!--<navigator style="position: absolute;top: 0;left: 0;width: 100rpx;height: 100rpx;z-index: 100;background: #fff;border-radius: 100rpx;text-align: center;line-height: 100rpx" url="/pages/mine/index" hover-class="navigator-hover">我的</navigator>-->
+    <!--<navigator style="position: absolute;top: 100rpx;left: 0;width: 100rpx;height: 100rpx;z-index: 100;background: #fff;border-radius: 100rpx;text-align: center;line-height: 100rpx" url="/pages/pick_verify/index" hover-class="navigator-hover">凭证验证</navigator>-->
+    <!--<view wx:if="{{sys_tips}}" class="sys-tips" bindtap="tap_sys_tips">{{sys_tips}}</view>-->
+    <yxs_msg_bar item_num="{{sys_tips.length}}" time="5000" bindclose="close_tip">
+        <view wx:for="{{sys_tips}}" wx:key="index" bindtap="go_webview" data-link="{{item.link}}">
+            <view style="display: inline-block;vertical-align: middle"><image style="width: 30rpx" mode="widthFix" src="http://paz3jxo1v.bkt.clouddn.com/topbar_icon_tips.png"></image></view>
+            {{item.title}}
+            <view style="display: inline-block" >查看详情</view>
+        </view>
+    </yxs_msg_bar>
+    <!--<swiper autoplay="true" indicator-dots="true" wx:if="{{show_list.a}}">-->
+        <!--<swiper-item wx:if="{{index_ads.imgs}}" wx:for="{{index_ads.imgs}}" wx:key="index">-->
+            <!--<image class="swiper-item"  src="{{item}}"></image>-->
         <!--</swiper-item>-->
-    </swiper>
-    <view class="back" bindtap="back" wx:if="{{show_list.g}}">返回</view>
-    <view class="cat_item" bindtap="goto_timelimit" wx:if="{{show_list.b}}">
-        <view class="icon">
-            <image  mode="aspectFit" src="../../resource/images/timelimit.png"></image>
+
+    <!--</swiper>-->
+    <!--<view class="back" bindtap="back" wx:if="{{show_list.g}}">返回</view>-->
+    <!--<view class="cat_item" bindtap="goto_timelimit" wx:if="{{show_list.b}}">-->
+        <!--<view class="icon">-->
+            <!--<image  mode="aspectFit" src="../../resource/images/timelimit.png"></image>-->
+        <!--</view>-->
+        <!--<view class="info">-->
+            <!--<view class="title">限时抢购类</view>-->
+            <!--<view class="desc">活动在一定时间内抢购报名</view>-->
+            <!--&lt;!&ndash;<view class="btn1">示例</view>&ndash;&gt;-->
+            <!--&lt;!&ndash;<view class="btn2">制作</view>&ndash;&gt;-->
+        <!--</view>-->
+    <!--</view>-->
+
+    <!--<view class="cat_item" bindtap="goto_cutprice" wx:if="{{show_list.c}}">-->
+        <!--<view class="icon">-->
+            <!--<image  mode="aspectFit" src="../../resource/images/cutprice.png"></image>-->
+
+        <!--</view>-->
+        <!--<view class="info">-->
+            <!--<view class="title">砍价类</view>-->
+            <!--<view class="desc">活动设置最低价,报名之后可喊人砍价</view>-->
+            <!--&lt;!&ndash;<view class="btn1">示例</view>&ndash;&gt;-->
+            <!--&lt;!&ndash;<view class="btn2">制作</view>&ndash;&gt;-->
+        <!--</view>-->
+    <!--</view>-->
+
+    <!--<view class="cat_item" bindtap="goto_praise" wx:if="{{show_list.d}}">-->
+        <!--<view class="icon">-->
+            <!--<image  mode="aspectFit" src="../../resource/images/prise.png"></image>-->
+
+        <!--</view>-->
+        <!--<view class="info">-->
+            <!--<view class="title">集赞类</view>-->
+            <!--<view class="desc">活动设置集赞功能,集赞排名奖励</view>-->
+            <!--&lt;!&ndash;<view class="btn1">示例</view>&ndash;&gt;-->
+            <!--&lt;!&ndash;<view class="btn2">制作</view>&ndash;&gt;-->
+        <!--</view>-->
+    <!--</view>-->
+
+    <!--<view class="cat_item" bindtap="goto_sort" wx:if="{{show_list.e}}">-->
+        <!--<view class="icon">-->
+            <!--<image  mode="aspectFit" src="../../resource/images/sort.png"></image>-->
+
+        <!--</view>-->
+        <!--<view class="info">-->
+            <!--<view class="title">投票类</view>-->
+            <!--<view class="desc">活动设置投票功能,投票排行</view>-->
+            <!--&lt;!&ndash;<view class="btn1">示例</view>&ndash;&gt;-->
+            <!--&lt;!&ndash;<view class="btn2">制作</view>&ndash;&gt;-->
+        <!--</view>-->
+    <!--</view>-->
+
+    <!--<view class="cat_item" bindtap="goto_word" wx:if="{{show_list.f}}">-->
+        <!--<view class="icon">-->
+            <!--<image  mode="aspectFit" src="../../resource/images/tuwen.png"></image>-->
+
+        <!--</view>-->
+        <!--<view class="info">-->
+            <!--<view class="title">图文类</view>-->
+            <!--<view class="desc">用于图片和文字的信息展示,排版自如</view>-->
+            <!--&lt;!&ndash;<view class="btn1">示例</view>&ndash;&gt;-->
+            <!--&lt;!&ndash;<view class="btn2">制作</view>&ndash;&gt;-->
+        <!--</view>-->
+    <!--</view>-->
+    <!--<include wx:if="{{show_list.b1}}" src="../common/tmplist_timelimit.wxml"/>-->
+
+    <view style="height: 20rpx;background: #fff"></view>
+    <yxs_title_bar title="我使用过的模板" bindgoto="" more="{{false}}"></yxs_title_bar>
+    <scroll-view wx:if="{{my_tmplist.length}}" scroll-left="0"class="scroll-view_H" scroll-x="true" bindscroll="" style="width: 100%">
+        <view bindtap="goto_tmp" data-id="{{item.id}}" wx:for="{{my_tmplist}}" wx:key="index" class="scroll-view-item_H" ><image style="width: 300rpx;height:200rpx" mode="aspectFill" src="{{item.img}}"></image></view>
+    </scroll-view>
+
+    <view style="width: 710rpx;background: #fff;padding: 20rpx;" wx:if="{{!my_tmplist.length}}">
+        <image style="width: 300rpx;margin:0 auto;display: block" mode="widthFix" src="http://paz3jxo1v.bkt.clouddn.com/blank.png"></image>
+        <view style="text-align: center;margin-top: 20rpx">还没有使用过的模板<view style="display: inline-block;color: #2782C1">(去选模板)</view></view>
+    </view>
+    <view style="height: 20rpx;"></view>
+    <view style="height: 20rpx;background: #fff"></view>
+    <yxs_title_bar title="最新模板"></yxs_title_bar>
+    <view style="background: #fff;padding: 0 20rpx">
+        <view bindtap="goto_tmp" data-id="{{item.id}}" wx:for="{{all_tmplist}}" wx:key="index" style="margin-bottom: 20rpx;position: relative">
+            <image style="width: 710rpx" mode="widthFix" src="{{item.img}}"></image>
+            <image style="width: 80rpx;position: absolute;right: 0;top: 10rpx" mode="widthFix" src="{{item.icon}}"></image>
+            <view style="position: absolute;bottom: 30rpx;padding: 0 40rpx;color: #fff">{{item.tmp_data.desc}}</view>
         </view>
-        <view class="info">
-            <view class="title">限时抢购类</view>
-            <view class="desc">活动在一定时间内抢购报名</view>
-            <!--<view class="btn1">示例</view>-->
-            <!--<view class="btn2">制作</view>-->
-        </view>
+        <!--<view style="margin-bottom: 20rpx;position: relative">-->
+            <!--<image style="width: 710rpx" mode="widthFix" src="http://paz3jxo1v.bkt.clouddn.com/img2.jpg"></image>-->
+            <!--<image style="width: 80rpx;position: absolute;right: 0;top: 10rpx" mode="widthFix" src="http://paz3jxo1v.bkt.clouddn.com/lable_discount.png"></image>-->
+            <!--<view style="position: absolute;bottom: 20rpx;padding: 0 40rpx;color: #fff">在设定的活动期限内,以更优惠的价格出售商品;仅支持到店支付</view>-->
+        <!--</view>-->
+
+        <view wx:if="{{all_tmplist_has_more}}"> <image style="width: 710rpx;margin-bottom: 20rpx" mode="widthFix" src="http://paz3jxo1v.bkt.clouddn.com/btn_more.png"></image></view>
     </view>
 
-    <view class="cat_item" bindtap="goto_cutprice" wx:if="{{show_list.c}}">
-        <view class="icon">
-            <image  mode="aspectFit" src="../../resource/images/cutprice.png"></image>
-
-        </view>
-        <view class="info">
-            <view class="title">砍价类</view>
-            <view class="desc">活动设置最低价,报名之后可喊人砍价</view>
-            <!--<view class="btn1">示例</view>-->
-            <!--<view class="btn2">制作</view>-->
-        </view>
+    <view style="position: fixed;bottom: 40rpx;left: 20rpx;">
+        <yxs_round_menu items="{{menus}}" deg="90" bindshow_verify_code="show_verify_code" bindgoto_mine="goto_mine"></yxs_round_menu>
     </view>
 
-    <view class="cat_item" bindtap="goto_praise" wx:if="{{show_list.d}}">
-        <view class="icon">
-            <image  mode="aspectFit" src="../../resource/images/prise.png"></image>
+    <yxs_modal visible="{{verify_code_show}}" success_btn="{{!verify_code_show_info}}" bindcallback_success="submit">
+        <view hidden="{{verify_code_show_info}}" slot="content">
+            <yxs_input width="550" height="80" maxlength="20" title="验证凭证" placeholder="手机号码" bindchange="bindinputtel" error_info="{{inputtel_error}}"></yxs_input>
+            <view style="height:10rpx"></view>
+            <yxs_input width="550" height="80" maxlength="20" placeholder="凭证码" bindchange="bindinputcode" error_info="{{inputcode_error}}"></yxs_input>
 
         </view>
-        <view class="info">
-            <view class="title">集赞类</view>
-            <view class="desc">活动设置集赞功能,集赞排名奖励</view>
-            <!--<view class="btn1">示例</view>-->
-            <!--<view class="btn2">制作</view>-->
+        <view hidden="{{verify_code_show_info}}" slot="foot" style="text-align: right;margin-top: 50rpx">
+            您也可以<view  bindtap="saoyisao" style="display: inline-block;color: #4C99CA">扫描二维码验证></view>
         </view>
-    </view>
 
-    <view class="cat_item" bindtap="goto_sort" wx:if="{{show_list.e}}">
-        <view class="icon">
-            <image  mode="aspectFit" src="../../resource/images/sort.png"></image>
+        <view hidden="{{!verify_code_show_info}}" slot="content">
+            <view style="width: 550rpx;padding: 30rpx">
+                <view style="width: 300rpx;margin: 0 auto" hidden="{{!pick_data.success}}"><image style="width: 300rpx" mode="widthFix" src="http://paz3jxo1v.bkt.clouddn.com/pop_img1.png"></image></view>
+                <view style="width: 300rpx;margin: 0 auto" hidden="{{pick_data.success}}"><image style="width: 300rpx" mode="widthFix" src="http://paz3jxo1v.bkt.clouddn.com/pop_img1.png"></image></view>
+                <view style="font-size: 45rpx;width: 500rpx;text-align: center">{{pick_data.message}}</view>
+                <view style="font-size: 20rpx;width: 500rpx;color: #999;text-align: center">请务必确认活动信息无误哦!</view>
+                <view style="width: 550rpx;border-top: 1px solid #eee;margin-top: 30rpx" hidden="{{!pick_data.data}}">
+                    <view style="display: inline-block;width: 150rpx;float: left"><image style="width: 150rpx;vertical-align: middle;" mode="widthFix" src="{{pick_data.data.img}}"></image></view>
+                   <view style="display: inline-block;width: 300rpx;margin-left: 50rpx;float: left">
+                       <view style="margin-top: 30rpx">{{pick_data.data.title}}</view>
+                       <view style="font-size: 20rpx;color: #999;margin-top: 20rpx">{{pick_data.data.time_start}}-{{pick_data.data.time_end}}</view>
+                   </view>
+                </view>
+            </view>
 
-        </view>
-        <view class="info">
-            <view class="title">投票类</view>
-            <view class="desc">活动设置投票功能,投票排行</view>
-            <!--<view class="btn1">示例</view>-->
-            <!--<view class="btn2">制作</view>-->
-        </view>
-    </view>
-
-    <view class="cat_item" bindtap="goto_word" wx:if="{{show_list.f}}">
-        <view class="icon">
-            <image  mode="aspectFit" src="../../resource/images/tuwen.png"></image>
 
         </view>
-        <view class="info">
-            <view class="title">图文类</view>
-            <view class="desc">用于图片和文字的信息展示,排版自如</view>
-            <!--<view class="btn1">示例</view>-->
-            <!--<view class="btn2">制作</view>-->
-        </view>
-    </view>
-    <include wx:if="{{show_list.b1}}" src="../common/tmplist_timelimit.wxml"/>
+
+    </yxs_modal>
+
 
 </view>

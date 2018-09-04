@@ -1,0 +1,21 @@
+<view class="box">
+    <view class="main" bindtap="open_close">
+        <image animation="{{animation}}" hidden="{{active}}" class="icon" mode="widthFix" src="http://paz3jxo1v.bkt.clouddn.com/btn_home.png"></image>
+        <image hidden="{{!active}}" class="icon" mode="widthFix" src="http://paz3jxo1v.bkt.clouddn.com/btn_home_close.png"></image>
+    </view>
+    <view wx:for="{{items}}" wx:key="index" class="sub" animation="{{item.animation}}" bindtap="tapitem" data-item="{{item}}">
+        <image class="icon" mode="widthFix" src="{{item.img}}"></image>
+    </view>
+
+    <!--<view class="sub" style="top:-{{Math.cos(0*0.017453293) * 150}}rpx;left:{{Math.sin(0*0.017453293) * 150}}rpx">-->
+        <!--<image class="icon" mode="widthFix" src="http://paz3jxo1v.bkt.clouddn.com/btn_home.png"></image>-->
+    <!--</view>-->
+
+    <!--<view class="sub" style="top:-{{Math.cos(30*0.017453293) * 150}}rpx;left:{{Math.sin(30*0.017453293) * 150}}rpx">-->
+        <!--<image class="icon" mode="widthFix" src="http://paz3jxo1v.bkt.clouddn.com/btn_home.png"></image>-->
+    <!--</view>-->
+
+    <!--<view class="sub" style="top:-{{Math.cos(60*0.017453293) * 150}}rpx;left:{{Math.sin(60*0.017453293) * 150}}rpx">-->
+        <!--<image class="icon" mode="widthFix" src="http://paz3jxo1v.bkt.clouddn.com/btn_home.png"></image>-->
+    <!--</view>-->
+</view>

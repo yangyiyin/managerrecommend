@@ -3,5 +3,12 @@
   "navigationBarTextStyle": "black",
   "navigationBarTitleText": "神奇店长",
   "backgroundTextStyle":"dark",
-  "backgroundColor":"#eeeeee"
+  "backgroundColor":"#eeeeee",
+  "usingComponents": {
+    "yxs_msg_bar":"../../yixsu_component/yxs_msg_bar/index",
+    "yxs_title_bar":"../../yixsu_component/yxs_title_bar/index",
+    "yxs_round_menu":"../../yixsu_component/yxs_round_menu/index",
+    "yxs_modal":"../../yixsu_component/yxs_modal/index",
+    "yxs_input":"../../yixsu_component/yxs_input/index"
+  }
 }

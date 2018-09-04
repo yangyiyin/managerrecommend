@@ -1,5 +1,7 @@
 {
-
-  "backgroundColor": "#3A3A3A"
-
+  "disableScroll": true,
+  "usingComponents": {
+    "yxs_modal":"../../yixsu_component/yxs_modal/index",
+    "yxs_input":"../../yixsu_component/yxs_input/index"
+  }
 }

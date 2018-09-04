@@ -1,0 +1,8 @@
+<view animation="{{animation}}" hidden="{{!visible}}" class="box">
+    <view class="close" bindtap="close"><image style="width: 100%" mode="widthFix" src="http://paz3jxo1v.bkt.clouddn.com/pop_btn_close.png"></image></view>
+    <view style="clear: both"></view>
+    <slot name="content"></slot>
+    <view wx:if="{{success_btn}}" class="btn" bindtap="success_callback">确     定</view>
+    <slot name="foot"></slot>
+</view>
+<view hidden="{{!visible}}" class="shade"></view>

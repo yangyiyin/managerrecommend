@@ -1,0 +1,29 @@
+.box{
+    position: relative;
+    width: 150rpx;
+    height: 150rpx;
+}
+.main{
+    z-index: 99;
+}
+.sub{
+    opacity: 0;
+}
+.main,.sub{
+    text-align: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 150rpx;
+    line-height: 150rpx;
+    width: 150rpx;
+    height: 150rpx;
+}
+.icon{
+    width: 150rpx;
+}
+.main .icon{
+    width: 110rpx;
+    vertical-align: middle;
+    margin: 0 auto;
+}

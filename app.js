@@ -10,7 +10,8 @@ App({
   },
   globalData: {
     userInfo: null,
-    user_session:null
+    user_session:null,
+    current_cut_img:''
   },
   get_common_request_data:function () {
     return {
@@ -20,7 +21,7 @@ App({
   get_userinfo(is_not_direct){
     var data = this.get_common_request_data();
     wx.request({
-      url: 'https://www.88plus.net/public/index.php/Apimanagerrecommend/User/info.html',
+      url: 'https://yixsu.com/public/index.php/Apimanagerrecommend/User/info.html',
       data:data,
       method:'GET',
       success: function(res) {
@@ -70,7 +71,7 @@ App({
                 this.get_userinfo(is_not_direct);
               } else {
                 wx.request({
-                  url: 'https://www.88plus.net/public/index.php/Apimanagerrecommend/laugh/login.html',
+                  url: 'https://yixsu.com/public/index.php/Apimanagerrecommend/laugh/login.html',
                   data:{code:res.code},
                   method:'POST',
                   success: function(res) {

@@ -15,9 +15,13 @@
     "pages/suggest/index",
     "pages/page_detail/index",
     "pages/custom_pages/index",
-    "pages/pick_verify/index"
+    "pages/pick_verify/index",
+    "pages/cutInside/cutInside",
+    "pages/webview/index"
   ],
   "window":{
-    "navigationBarBackgroundColor": "#3A3A3A"
+    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "神奇店长"
   }
 }

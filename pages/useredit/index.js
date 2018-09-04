@@ -2,6 +2,7 @@
 //获取应用实例
 const app = getApp()
 const common = require('../../utils/common.js');
+const util = require('../../utils/util.js');
 Page({
   data: {
     inputtitle:'',
@@ -9,7 +10,8 @@ Page({
     inputaddress:'',
     inputcode:'',
     submit:1,
-    display:2
+    display:2,
+    isPoneAvailable:false
 
   },
   onLoad: function () {
@@ -25,6 +27,7 @@ Page({
     } else {
 
     }
+
 
   },
   onShow(){
@@ -60,16 +63,33 @@ Page({
     this.setData({
       inputtitle: e.detail.value
     });
+    if (e.detail.value) {
+      this.setData({
+        inputtitle_error:''
+      })
+    }
+
   },
   bindinputtel:function (e) {
     this.setData({
-      inputtel: e.detail.value
+      inputtel: e.detail.value,
+      isPoneAvailable: util.isPoneAvailable(e.detail.value)
     });
+    if (e.detail.value) {
+      this.setData({
+        inputtel_error:''
+      })
+    }
   },
   bindinputcode:function (e) {
     this.setData({
       inputcode: e.detail.value
     });
+    if (e.detail.value) {
+      this.setData({
+        inputcode_error:''
+      })
+    }
   },
   bindinputaddress:function (e) {
     this.setData({
@@ -83,28 +103,33 @@ Page({
     data.entity_tel = this.data.inputtel;
     data.address = this.data.inputaddress;
     if (!data.entity_title) {
-      wx.showToast({
-        title: '请输入店名',
-        image:'../../resource/images/tip.png'
-      });
+      this.setData({
+        inputtitle_error:'请输入店名'
+      })
       return;
     }
 
     if (!data.entity_tel) {
-      wx.showToast({
-        title: '请输入手机号',
-        image:'../../resource/images/tip.png'
-      });
+      this.setData({
+        inputtel_error:'请输入手机号'
+      })
       return;
     }
 
-    if (!data.address) {
-      wx.showToast({
-        title: '请输入店铺地址',
-        image:'../../resource/images/tip.png'
-      });
+    if (!this.data.inputcode) {
+      this.setData({
+        inputcode_error:'请输入验证码'
+      })
       return;
     }
+
+    // if (!data.address) {
+    //   wx.showToast({
+    //     title: '请输入店铺地址',
+    //     image:'../../resource/images/tip.png'
+    //   });
+    //   return;
+    // }
     data.type = 2;
 
     //验证
@@ -156,4 +181,7 @@ Page({
 
     }.bind(this));
   },
+  submit_shop_info() {
+    console.log(1);
+  }
 })

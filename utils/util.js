@@ -14,6 +14,20 @@ const formatNumber = n => {
   return n[1] ? n : '0' + n
 }
 
+
+function isPoneAvailable(str) {
+  return str;
+  console.log(1);
+  var myreg=/^[1][1,2,3,4,5,6,7,8,9][0-9]{9}$/;
+  if (!myreg.test(str)) {
+    return false;
+  } else {
+    return true;
+  }
+}
+
+
 module.exports = {
-  formatTime: formatTime
+  formatTime: formatTime,
+  isPoneAvailable:isPoneAvailable
 }

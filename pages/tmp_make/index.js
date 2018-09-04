@@ -53,7 +53,8 @@ Page({
       }
     ],
     pick_code_visible:false,
-    stock_none:false
+    stock_none:false,
+    current_cut_img:''
 
   },
   onLoad: function (option) {
@@ -172,7 +173,12 @@ Page({
 
     }.bind(this));
   },
-  onShow: function() {},
+  onShow: function() {
+    console.log(app.globalData.current_cut_img);
+    this.setData({
+      current_cut_img:app.globalData.current_cut_img
+    })
+  },
   start_make:function() {
     this.setData({
       page_status:2

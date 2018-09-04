@@ -1,0 +1,7 @@
+.box{
+    height: 80rpx;
+    line-height: 80rpx;
+    vertical-align: middle;
+    padding: 0 20rpx;
+    background: #fff;
+}

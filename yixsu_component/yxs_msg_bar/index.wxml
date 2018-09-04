@@ -1,0 +1,5 @@
+<view class="bar" hidden="{{!item_num}}">
+    <view class="close" bindtap="close"><image style="width: 100%" mode="widthFix" src="http://paz3jxo1v.bkt.clouddn.com/topbar_btn_close.png"></image></view>
+    <view style="margin-top:-{{margin_top}}rpx" ></view>
+    <slot></slot>
+</view>

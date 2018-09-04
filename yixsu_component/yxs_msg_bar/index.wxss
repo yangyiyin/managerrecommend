@@ -1,0 +1,19 @@
+.bar{
+    padding: 0 20rpx;
+    background: #F9F694;
+    position: relative;
+    height: 80rpx;
+    overflow: hidden;
+    line-height: 80rpx;
+    vertical-align: middle;
+}
+
+.close {
+    width: 30rpx;
+    padding: 5rpx;
+    position: absolute;
+    right: 40rpx;
+}
+.block{
+
+}
