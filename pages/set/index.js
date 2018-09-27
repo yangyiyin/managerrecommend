@@ -7,40 +7,32 @@ Page({
   data: {
     motto: 'Hello World222',
     globalData:app.globalData,
-
+    current_cut_img:''
   },
   onLoad: function () {
 
 
   },
+  onShow: function() {
+    this.setData({
+      current_cut_img:app.globalData.current_cut_img
+    });
+  },
   change_user_name(e) {
+    this.data.is_change = true;
     this.data.globalData.userInfo.user_name = e.detail.value
     this.setData({
       globalData: this.data.globalData
     });
   },
-  modify_user_name () {
-    // var data = app.get_common_request_data();
-    // data.user_name = this.data.globalData.userInfo.user_name;
-    //
-    // wx.request({
-    //   url: 'https://www.88plus.net/public/index.php/Apimanagerrecommend/User/info_modify.html',
-    //   data:data,
-    //   method:'POST',
-    //   success: function(res) {
-    //     common.request_callback(res);
-    //     app.globalData.userInfo.user_name = data.user_name;
-    //   }.bind(this),
-    //   fail: function(res) {
-    //     console.log(res)
-    //   },
-    //   complete: function(res) {
-    //     console.log(res)
-    //   }
-    // });
-
-
+  change_address(e) {
+    this.data.is_change = true;
+    this.data.globalData.userInfo.address = e.detail.value
+    this.setData({
+      globalData: this.data.globalData
+    });
   },
+
   change_avatar() {
     wx.chooseImage({
       count: 1, // 默认9
@@ -58,12 +50,6 @@ Page({
           globalData: this.data.globalData
         });
 
-        // wx.previewImage({
-        //   current: '', // 当前显示图片的http链接
-        //   urls: tempFilePaths // 需要预览的图片http链接列表
-        // })
-
-
       }.bind(this)
     })
   },
@@ -72,14 +58,18 @@ Page({
     // var data = app.get_common_request_data();
     // data.user_name = this.data.globalData.userInfo.user_name;
 
-    if (this.data.is_change_avatar) {
+    if (this.data.current_cut_img) {
+      app.globalData.userInfo.avatar = this.data.current_cut_img;
+      app.globalData.userInfo.user_name = this.data.globalData.userInfo.user_name;
+      app.globalData.userInfo.address = this.data.globalData.userInfo.address;
       wx.uploadFile({
         url: config.urls.info_modify,
-        filePath: this.data.globalData.userInfo.avatar,
+        filePath: this.data.current_cut_img,
         name: 'avatar',
         formData:{
           'user_session':app.globalData.user_session,
-          'user_name': this.data.globalData.userInfo.user_name
+          'user_name': this.data.globalData.userInfo.user_name,
+          'address': this.data.globalData.userInfo.address
         },
         success: function(res){
           //var data = res.data
@@ -87,17 +77,23 @@ Page({
           res.data = JSON.parse(res.data);
           common.request_callback(res);
           app.globalData.userInfo.user_name = this.data.globalData.userInfo.user_name;
-          app.globalData.userInfo.avatar = this.data.globalData.userInfo.avatar;
+          app.globalData.userInfo.address = this.data.globalData.userInfo.address;
+          app.globalData.userInfo.avatar = this.data.current_cut_img;
+
+          app.globalData.current_cut_img = '';
         }.bind(this)
       });
-    } else {
-
+    } else if (this.data.is_change) {
+      app.globalData.userInfo.user_name = this.data.globalData.userInfo.user_name;
+      app.globalData.userInfo.address = this.data.globalData.userInfo.address;
       var data = {};
       data.user_name = this.data.globalData.userInfo.user_name;
+      data.address = this.data.globalData.userInfo.address;
 
       common.request('post','info_modify',data, function (res) {
         common.request_callback(res);
         app.globalData.userInfo.user_name = data.user_name;
+        app.globalData.userInfo.address = data.address;
 
       }.bind(this))
     }

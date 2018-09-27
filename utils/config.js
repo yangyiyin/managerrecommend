@@ -1,4 +1,5 @@
-var base_url = 'https://yixsu.com/public/index.php';
+// var base_url = 'https://yixsu.com/public/index.php';
+var base_url = 'http://www.myweb.com/git-res/shop-y/index.php';
 
 var urls = {
     page_submit:base_url+'/Apimanagerrecommend/laugh/page_submit.html',
@@ -14,6 +15,7 @@ var urls = {
     page_info:base_url+'/Apimanagerrecommend/laugh/page_info.html',
     info_modify:base_url+'/Apimanagerrecommend/User/info_modify.html',
     sys_tips:base_url+'/Apimanagerrecommend/laugh/sys_tips.html',
+    sys_news:base_url+'/Apimanagerrecommend/laugh/sys_news.html',
     contact:base_url+'/Apimanagerrecommend/laugh/contact.html',
     suggest_list:base_url+'/Apimanagerrecommend/laugh/suggest_list.html',
     add_suggest:base_url+'/Apimanagerrecommend/laugh/add_suggest.html',
@@ -25,6 +27,8 @@ var urls = {
     praise_praise:base_url+'/Apimanagerrecommend/laugh/praise_praise.html',
     fightgroup_sign:base_url+'/Apimanagerrecommend/laugh/fightgroup_sign.html',
     fightgroup_sign_pay:base_url+'/Apimanagerrecommend/pay/wechat_pay_create.html',
+    vip_pay:base_url+'/Apimanagerrecommend/pay/wechat_pay_create_vip.html',
+    vip_extend:base_url+'/Apimanagerrecommend/vip/extend.html',
     fightgroup_join:base_url+'/Apimanagerrecommend/laugh/fightgroup_join.html',
     fightgroup_join_pay:base_url+'/Apimanagerrecommend/pay/wechat_pay_create.html',
     quick_buy:base_url+'/Apimanagerrecommend/laugh/quick_buy.html',
@@ -36,6 +40,7 @@ var urls = {
     send_code:base_url+'/Apimanagerrecommend/laugh/send_code.html',
     pick_verify:base_url+'/Apimanagerrecommend/laugh/pick_verify.html',
     user_phones:base_url+'/Apimanagerrecommend/user/user_phones.html',
+    get_price_list:base_url+'/Apimanagerrecommend/vip/get_vip_price.html',
     statistics_point:base_url+'/Apimanagerrecommend/laugh/statistics_point.html',
     ads:base_url+'/Apimanagerrecommend/ads/index.html',
 }

@@ -1,7 +1,7 @@
 
 .container {
-  background: #eee;
-  display:block
+  display:block;
+  width: 750rpx;
 }
 
 .mine-top{
@@ -82,4 +82,107 @@
 }
 .label.past{
   background: #aaa;
+}
+
+.user_info{
+  width: 100%;
+  height: 800rpx;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: linear-gradient(to right, #E55467 , #EC604D);
+}
+
+.vip{
+  width: 100%;
+  height: 500rpx;
+  position: absolute;
+  top: 250rpx;
+  left: 0;
+}
+.vip_card {
+  width: 700rpx;
+  margin: 0 auto;
+  border-radius: 10rpx;
+  max-height: 500rpx;
+  position: relative;
+}
+.body{
+  min-height: 500rpx;
+  position: relative;
+  top: 600rpx;
+  left: 0;
+  background: white;
+  z-index: 3;
+  padding: 20rpx;
+}
+.avatar{
+  width: 120rpx;height: 120rpx;margin: 0 auto;margin-top: 60rpx;position: relative;border-radius: 120rpx;
+}
+.avatar .icon{
+  position: absolute;top: -17rpx;right: 0rpx;width: 40rpx;height: 40rpx;
+}
+.shop_name{
+  text-align: center;width: 100%;margin-top: 20rpx;color: #fff;font-size: 36rpx;
+}
+.set{
+  position: absolute;width: 60rpx;height: 60rpx;right: 20rpx;top: 20rpx;
+}
+.top_left_text{
+  float: left;
+}
+.top_right_text {
+  float: right;
+}
+.top_left_text {
+  color: #999;
+}
+.middle_text{
+  text-align: center;
+  font-size: 30rpx;
+  color: #999;
+  margin-top: 20rpx;
+}
+.item{
+  padding: 10rpx 0;
+  height: 100rpx;line-height: 100rpx;
+  border-bottom: 1rpx solid #eee;
+}
+.item:after{
+  border: none;
+}
+.logo,.title,.right_info {
+  display: inline-block;
+}
+.logo{
+  width: 80rpx;
+  height: 80rpx;
+  vertical-align: middle;
+  margin-left: 10rpx;
+}
+.title {
+  font-size: 36rpx;
+  color: #555;
+  margin-left: 30rpx;
+}
+.right_info{
+  float: right;
+  margin-right: 10rpx;
+  font-size: 32rpx;
+  color: #999;
+}
+.right_info .a, .right_info .b{
+  font-size: 26rpx;
+  line-height: 40rpx;
+}
+.right_info .a{
+  margin-top: 10rpx;
+}
+
+.day_left{
+  background: linear-gradient(to right, #E51E81 , #7D24DF);
+  color: #fff;
+  border-radius: 100rpx;
+  padding: 0 10rpx;
+  margin-left: 10rpx;
 }

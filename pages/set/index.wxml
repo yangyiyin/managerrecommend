@@ -4,17 +4,26 @@
 
 
       <view class="mine-items" style="margin-top: 1px">
-         <view class="mine-item-2" bindtap="change_avatar">
+         <view class="mine-item-2">
             头像
-            <image  style="width: 50rpx;height:50rpx;margin-top:25rpx;float: right;border-radius: 50rpx;margin-right: 60rpx;" mode="aspectFit" src="{{globalData.userInfo.avatar}}"></image>
-         </view>
-         <view class="mine-item-2" style="position: absolute">
-            笔名
-         </view>
-         <input bindinput="change_user_name" style="text-align: right;padding-right: 30rpx;margin-top: 30rpx;margin-bottom: 30rpx" value="{{globalData.userInfo.user_name}}" maxlength="10" placeholder="最多输入10个字" />
+            <!--<image  style="width: 50rpx;height:50rpx;margin-top:25rpx;float: right;border-radius: 50rpx;margin-right: 60rpx;" mode="aspectFit" src="{{globalData.userInfo.avatar}}"></image>-->
+            <view style="width: 80rpx;height:80rpx;float: right;border-radius: 50rpx;margin-right: 60rpx;">
+               <yxs_upload currentcutimg="{{current_cut_img}}" src="{{globalData.userInfo.avatar}}"></yxs_upload>
+            </view>
 
-         <view class="mine-item-line1"></view>
-         <view class="mine-item-line2"></view>
+         </view>
+         <view class="mine-item-2" >
+            店铺名称
+            <input bindinput="change_user_name" style="width:400rpx;display:inline-block;float:right;margin-right:20rpx;text-align: right;margin-top: 30rpx;margin-bottom: 30rpx" value="{{globalData.userInfo.user_name}}"  placeholder="最多输入10个字" />
+
+         </view>
+         <view style="clear: both"></view>
+
+         <view class="mine-item-2" >
+            店铺地址
+            <input bindinput="change_address" style="width:400rpx;font-size:24rpx;display:inline-block;float:right;margin-right:20rpx;text-align: right;margin-top: 30rpx;margin-bottom: 30rpx" value="{{globalData.userInfo.address}}" maxlength="50" placeholder="最多输入50个字" />
+
+         </view>
       </view>
 
    </view>

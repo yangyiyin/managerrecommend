@@ -1,6 +1,6 @@
 var pageBehavior = require('../behavior/page');
 var common = require('../../utils/common.js');
-var init_vote = {src:'http://paz3jxo1v.bkt.clouddn.com/logo144.png',desc:'描述内容描述内容描述内容描述内容描述内容描述内容描述内容描述内容'};
+var init_vote = {src:'http://qiniu-pub.yixsu.com/logo144.png',desc:'描述内容描述内容描述内容描述内容描述内容描述内容描述内容描述内容'};
 Component({
     behaviors: [pageBehavior],
     properties: {

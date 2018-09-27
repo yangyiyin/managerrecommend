@@ -3,6 +3,9 @@
   "navigationBarTextStyle": "black",
   "navigationBarTitleText": "个人中心",
   "backgroundTextStyle":"dark",
-  "backgroundColor":"#eeeeee"
+  "disableScroll":true,
+  "usingComponents": {
+    "yxs_round_menu":"../../yixsu_component/yxs_round_menu/index"
 
+  }
 }

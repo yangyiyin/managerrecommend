@@ -1,0 +1,5 @@
+<view style="width: 100%;height:100%;">
+    <image hidden="{{src}}" bindtap="choose_img" style="width: 100%;height:100%;vertical-align:middle;border-radius: 100%;border: 1rpx dashed #ddd" mode="aspectFill" src="http://pbw56w09g.bkt.clouddn.com/切图_74.png"></image>
+    <image hidden="{{!src}}" bindtap="choose_img" style="width: 100%;height:100%;vertical-align:middle;border-radius: 100%;border: 1rpx dashed #ddd" mode="aspectFill" src="{{src}}"></image>
+
+</view>

@@ -1,6 +1,6 @@
 <view class="box" bindtap="goto">
     <view style="display: inline-block">{{title}}</view>
     <view wx:if="{{more}}" style="display:inline-block;float: right">
-        <image src="http://paz3jxo1v.bkt.clouddn.com/list_icon_arrow.png" mode="widthFix" style="display:inline-block;width: 16rpx;vertical-align: middle"/>
+        <image src="http://qiniu-pub.yixsu.com/list_icon_arrow.png" mode="widthFix" style="display:inline-block;width: 16rpx;vertical-align: middle"/>
     </view>
 </view>

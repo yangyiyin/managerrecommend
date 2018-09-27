@@ -10,10 +10,11 @@ Page({
     show_list:{'a':1,'b':1,'c':1,'d':1,'e':1,'f':1,'g':0},
     init_show_list:{'a':1,'b':1,'c':1,'d':1,'e':1,'f':1,'g':0},
     sys_tips:[],
+    sys_news:null,
     index_ads:[],
     menus:[
-      {img:'http://paz3jxo1v.bkt.clouddn.com/btn_home_verify.png',bind_function:'show_verify_code'},
-      {img:'http://paz3jxo1v.bkt.clouddn.com/btn_home_me.png', bind_function:'goto_mine'}
+      {img:'http://qiniu-pub.yixsu.com/btn_home_verify.png',bind_function:'show_verify_code'},
+      {img:'http://qiniu-pub.yixsu.com/btn_home_me.png', bind_function:'goto_mine'}
     ],
     verify_code_show:false,
     verify_code_show_info:false,
@@ -35,6 +36,7 @@ Page({
       });
     }
     this.get_sys_tips();
+    this.get_sys_news();
     this.get_all_tmplist();
 
 
@@ -43,7 +45,7 @@ Page({
     this.get_my_tmplist();
   },
   onShareAppMessage(options) {
-    var title = '神奇店长';
+    var title = '店长营销工具';
     var that = this;
     return {
       title:title,
@@ -83,7 +85,7 @@ Page({
     })
   },
   goto_mine: function(){
-    wx.navigateTo({
+    wx.redirectTo({
       url: '/pages/mine/index'
     })
   },
@@ -93,17 +95,39 @@ Page({
       url: '/pages/tmp_make/index?id='+id
     })
   },
+  goto_my_tmp(){
+    wx.navigateTo({
+      url: '/pages/my_tmp/index'
+    })
+  },
+  goto_tmp_shop(){
+    wx.navigateTo({
+      url: '/pages/tmpshop/index'
+    })
+  },
   get_sys_tips:function () {
     //获取欢迎信息
     common.request('get','sys_tips',{},function (res) {
-      this.setData({
-        sys_tips : res.data.data
-      });
+      if (res.data.success) {
+        this.setData({
+          sys_tips : res.data.data
+        });
+      }
+    }.bind(this));
+  },
+  get_sys_news:function () {
+    //获取欢迎信息
+    common.request('post','sys_news',{},function (res) {
+      if (res.data.success) {
+        this.setData({
+          sys_news : res.data.data
+        });
+      }
     }.bind(this));
   },
   get_all_tmplist:function () {
     //获取欢迎信息
-    common.request('get','alltmplist',{},function (res) {
+    common.request('get','alltmplist',{from:'newest'},function (res) {
       this.setData({
         all_tmplist : res.data.data.list,
         all_tmplist_has_more:res.data.data.has_more
@@ -137,13 +161,22 @@ Page({
   },
   go_webview(event) {
     var link = event.currentTarget.dataset.link;
+    var id = event.currentTarget.dataset.id;
     if (!link) {
       return;
     }
 
-    wx.navigateTo({
-      url: '/pages/webview/index?link='+link
-    })
+    if (link.indexOf('weapp_page://') != -1) {
+      var page = link.replace('weapp_page://', '');
+      wx.navigateTo({
+        url: page
+      })
+    } else if (link.indexOf('https://') != -1 || link.indexOf('http://') != -1) {
+        wx.navigateTo({
+          url: '/pages/webview/index?link='+encodeURIComponent(link+'?news_id='+id+'&token='+app.globalData.user_session)
+        })
+    }
+
   },
   show_verify_code(){
     this.setData({

@@ -30,8 +30,8 @@ Page({
    // this.get_tmp_list(true);
   },
   onReachBottom(){
-    this.data.p ++;
-    this.get_tmp_list();
+    // this.data.p ++;
+    // this.get_tmp_list();
   },
   get_tmp_list: function (refresh) {
     if (refresh) {
@@ -45,12 +45,11 @@ Page({
       p:this.data.p
     }
 
-    common.request('get','alltmplist',data,function (res) {
+    common.request('get','my_tmplist',data,function (res) {
       common.check_login(res);
-      if (res.data.success && res.data.data.list && res.data.data.list.length) {
-        var tmp_list = this.data.tmp_list.concat(res.data.data.list);
+      if (res.data.success && res.data.data) {
         this.setData({
-          tmp_list:tmp_list
+          tmp_list:res.data.data
         })
       }
     }.bind(this));

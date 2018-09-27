@@ -1,6 +1,6 @@
 <view style="width: 100%;height: 100%;background: #fff;position:fixed;top: 0rpx;left: 0rpx">
     <view style="width: 600rpx;margin: 20rpx auto;font-size: 32rpx;text-align: center">
-        神奇店长发布活动细则
+        店长营销工具发布活动细则
     </view>
     <view style="width: 650rpx;margin: 0 auto;font-size: 24rpx;color: #999">
         为了响应微信构建和谐网络的号召,以及保障用户的利益,如发现以下行为,一经发现将立即下架活动,严重者直接封锁账号不予以复议。
@@ -35,7 +35,7 @@
     </view>
 
     <view style="width: 650rpx;margin: 20rpx auto;text-align:right;font-size: 24rpx;">
-        神奇店长-团队
+        店长营销工具-团队
     </view>
 
     <button bindtap="close_rule" style="width: 650rpx;margin: 20rpx auto" type="primary">同意细则,创建活动</button>

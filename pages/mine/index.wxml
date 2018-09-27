@@ -1,57 +1,146 @@
 <!--index.wxml-->
-<view class="container">
-    <view class="main">
-        <image class="mine-top-bg" mode="scaleToFill" src="../../resource/images/bg.png"></image>
-        <view class="mine-top">
+<view class="container" style="height: 100%;overflow-y: scroll">
+    <image wx:if="{{userInfo.avatar}}"  class="img" style="width:810rpx;filter: blur(20rpx);position: absolute;top:-30rpx;left:-30rpx;z-index: 1;" mode="widthFix" src="{{userInfo.avatar}}"></image>
 
-            <image  bindtap="goto_set" class="avatar" mode="scaleToFill" src="{{userInfo.avatar}}"></image>
-            <view class="label_area">
-                <view wx:if="{{userInfo.is_vip && !userInfo.is_past}}" class="label ">
-                    会员
+    <view style="height: 360rpx;position: relative;width: 100%">
+
+        <view class="user_info" style="{{userInfo.avatar ? 'background:#fff' : ''}}">
+            <view class="avatar" style="z-index: 2">
+                <image wx:if="{{!userInfo.avatar}}" class="img"  mode="widthFix" src="http://qiniu-pub.yixsu.com/default.png"></image>
+                <image wx:if="{{userInfo.avatar}}" class="img" style="border-radius: 100%;" mode="widthFix" src="{{userInfo.avatar}}"></image>
+                <view class="icon">
+                    <image wx:if="{{userInfo.is_vip && !userInfo.is_past}}" class="img" mode="widthFix" src="http://qiniu-pub.yixsu.com/icon_vip.png"></image>
+                    <image wx:if="{{!userInfo.is_vip || userInfo.is_past}}" class="img" mode="widthFix" src="http://qiniu-pub.yixsu.com/icon_notvip.png"></image>
                 </view>
-                <view wx:if="{{userInfo.is_vip && userInfo.is_past}}" class="label past">
-                    会员
+            </view>
+
+            <view style="z-index: 2;position: relative" class="shop_name">{{userInfo.user_name}}</view>
+            <view style="z-index: 2" class="set"  bindtap="goto_set">
+                <image class="img" mode="widthFix" src="http://qiniu-pub.yixsu.com/me_btn_setting.png"></image>
+            </view>
+        </view>
+
+        <view class="vip" style="top:{{260 + (init.top) / 5}}rpx;z-index: 2">
+            <view class="ke">
+                <view class="vip_card">
+                    <image wx:if="{{userInfo.is_vip && !userInfo.is_past}}" style="width: 100%;position: absolute;top: 0;left: 0;z-index: 0" mode="widthFix" src="http://qiniu-pub.yixsu.com/me_card_vipbg1.png"></image>
+                    <image wx:if="{{!userInfo.is_vip || userInfo.is_past}}" style="width: 100%;position: absolute;top: 0;left: 0;z-index: 0" mode="widthFix" src="http://qiniu-pub.yixsu.com/me_card_notvipbg1.png"></image>
+                    <view style="z-index: 2;position: relative;width: 630rpx;top: 40rpx;margin: 0 auto">
+                        <view wx:if="{{!userInfo.is_vip || userInfo.is_past}}" class="top_left_text">您还不是vip会员</view>
+                        <view wx:if="{{userInfo.is_vip && !userInfo.is_past}}" style="color: #B67927" class="top_left_text"><image style="width: 30rpx;vertical-align: middle;margin-top: -5rpx;" mode="widthFix" src="http://qiniu-pub.yixsu.com/card_icon_vip.png"></image>店长营销工具vip会员</view>
+                        <view wx:if="{{userInfo.day_left}}" class="top_left_text day_left">{{userInfo.day_left}}</view>
+                        <view class="top_right_text" bindtap="goto_vip">会员中心></view>
+                        <view style="clear: both"></view>
+                        <view wx:if="{{!userInfo.is_vip || userInfo.is_past}}" class="middle_text">去会员中心开通vip,享海量店铺营销模板。</view>
+                        <view wx:if="{{userInfo.is_vip && !userInfo.is_past}}" class="middle_text" style="color: #333">  {{userInfo.vip.end_time}}到期 </view>
+                    </view>
                 </view>
             </view>
-            <view class="info">
-                {{userInfo.day_left}}
-            </view>
-            <view  bindtap="goto_set" class="username">
-                {{userInfo.user_name}}
-            </view>
-
         </view>
-
-        <view bindtap="goto_vip" class="mine-item">
-            <image class="ico" mode="aspectFit" src="../../resource/images/huiyuan.png"></image>
-            <text>会员中心</text>
-        </view>
-
-        <view bindtap="goto_mypages" class="mine-item">
-            <image class="ico" mode="aspectFit" src="../../resource/images/page.png"></image>
-            <text>我制作的页面</text>
-        </view>
-
-        <view bindtap="goto_tmpshop" class="mine-item">
-            <image class="ico" mode="aspectFit" src="../../resource/images/moban.png"></image>
-            <text>选模板</text>
-        </view>
-
-        <button class="mine-item" open-type="contact" style="font-size: 28rpx;text-align: left;padding-left: 0">
-            <image class="ico" mode="aspectFit" src="../../resource/images/kefu.png"></image>
-            <text>联系客服</text>
-        </button>
-
-        <view bindtap="goto_suggest" class="mine-item">
-            <image class="ico" mode="aspectFit" src="../../resource/images/liuyan.png"></image>
-            <text>问题反馈</text>
-        </view>
-
-        <view bindtap="goto_user_page" class="mine-item">
-            <image class="ico" mode="aspectFit" src="../../resource/images/user_page.png"></image>
-            <text>我参与的活动</text>
-        </view>
-
     </view>
+
+    <view class="body" bindtouchmove="touchmove" bindtouchstart="touchstart" bindtouchend="touchend" style="top:{{init.top}}rpx;">
+        <view class="content">
+            <view style="padding: 10rpx 0;" bindtap="goto_mypages">
+                <image class="img" mode="widthFix" src="http://qiniu-pub.yixsu.com/me_btn_imake.png"></image>
+            </view>
+
+            <view class="item" bindtap="goto_tmpshop">
+                <view class="logo">
+                    <image class="img" mode="widthFix" src="http://qiniu-pub.yixsu.com/me_list_icon_template.png"></image>
+                </view>
+                <view class="title">模板中心</view>
+                <view class="right_info">
+                    去选模板
+                </view>
+            </view>
+
+            <view class="item" bindtap="goto_user_page">
+                <view class="logo">
+                    <image class="img" mode="widthFix" src="http://qiniu-pub.yixsu.com/me_list_icon_activity.png"></image>
+                </view>
+                <view class="title">我参加的活动</view>
+                <view class="right_info">
+
+                </view>
+            </view>
+
+            <view class="item" bindtap="goto_help">
+                <view class="logo">
+                    <image class="img" mode="widthFix" src="http://qiniu-pub.yixsu.com/me_list_icon_help.png"></image>
+                </view>
+                <view class="title">查看制作宝典</view>
+                <view class="right_info">
+                    宝典在手,轻松动手
+                </view>
+            </view>
+            <button class="item" open-type="contact" style="background: none;text-align: left;height: 120rpx;">
+                <view class="logo">
+                    <image class="img" mode="widthFix" src="http://qiniu-pub.yixsu.com/me_list_icon_service.png"></image>
+                </view>
+                <view class="title">联系客服</view>
+                <view class="right_info">
+                    </view>
+            </button>
+
+
+        </view>
+    </view>
+    <view style="position: fixed;bottom: 40rpx;left: 20rpx;z-index: 99">
+        <yxs_round_menu items="{{menus}}" link="/pages/index/index" icon="http://qiniu-pub.yixsu.com/btn_backhome.png"></yxs_round_menu>
+    </view>
+    <!--<view class="main">-->
+        <!--<image class="mine-top-bg" mode="scaleToFill" src="../../resource/images/bg.png"></image>-->
+        <!--<view class="mine-top">-->
+
+            <!--<image  bindtap="goto_set" class="avatar" mode="scaleToFill" src="{{userInfo.avatar}}"></image>-->
+            <!--<view class="label_area">-->
+                <!--<view wx:if="{{userInfo.is_vip && !userInfo.is_past}}" class="label ">-->
+                    <!--会员-->
+                <!--</view>-->
+                <!--<view wx:if="{{userInfo.is_vip && userInfo.is_past}}" class="label past">-->
+                    <!--会员-->
+                <!--</view>-->
+            <!--</view>-->
+            <!--<view class="info">-->
+                <!--{{userInfo.day_left}}-->
+            <!--</view>-->
+            <!--<view  bindtap="goto_set" class="username">-->
+                <!--{{userInfo.user_name}}-->
+            <!--</view>-->
+
+        <!--</view>-->
+
+        <!--<view bindtap="goto_vip" class="mine-item">-->
+            <!--<image class="ico" mode="aspectFit" src="../../resource/images/huiyuan.png"></image>-->
+            <!--<text>会员中心</text>-->
+        <!--</view>-->
+
+        <!--<view bindtap="goto_mypages" class="mine-item">-->
+            <!--<image class="ico" mode="aspectFit" src="../../resource/images/page.png"></image>-->
+            <!--<text>我制作的页面</text>-->
+        <!--</view>-->
+
+        <!--<view bindtap="goto_tmpshop" class="mine-item">-->
+            <!--<image class="ico" mode="aspectFit" src="../../resource/images/moban.png"></image>-->
+            <!--<text>选模板</text>-->
+        <!--</view>-->
+
+        <!--<button class="mine-item" open-type="contact" style="font-size: 28rpx;text-align: left;padding-left: 0">-->
+            <!--<image class="ico" mode="aspectFit" src="../../resource/images/kefu.png"></image>-->
+            <!--<text>联系客服</text>-->
+        <!--</button>-->
+
+        <!--<view bindtap="goto_suggest" class="mine-item">-->
+            <!--<image class="ico" mode="aspectFit" src="../../resource/images/liuyan.png"></image>-->
+            <!--<text>问题反馈</text>-->
+        <!--</view>-->
+
+        <!--<view bindtap="goto_user_page" class="mine-item">-->
+            <!--<image class="ico" mode="aspectFit" src="../../resource/images/user_page.png"></image>-->
+            <!--<text>我参与的活动</text>-->
+        <!--</view>-->
+
+    <!--</view>-->
 
 </view>

@@ -6,10 +6,10 @@ var request_callback = function (res, app) {
         app = getApp();
     }
     if (res.data.success) {
-      wx.showToast({
-        title: res.data.message
-
-      });
+      // wx.showToast({
+      //   title: res.data.message
+      //
+      // });
     } else {
         if (res.data.error_code == 101 || res.data.error_code == 102) {
             wx.showToast({
@@ -22,7 +22,7 @@ var request_callback = function (res, app) {
             app.login();
         } else {
             wx.showModal({
-                title: res.data.message,
+                title: res.data.message ? res.data.message : '系统异常',
                 content: '',
                 showCancel:false
 
@@ -50,7 +50,7 @@ var check_login = function (res, app) {
             app.login();
         } else {
             wx.showModal({
-                title: res.data.message,
+                title: res.data.message ? res.data.message : '系统异常',
                 content: '',
                 showCancel:false
             });
@@ -111,9 +111,19 @@ var request = function (method,url,user_data,callback) {
     });
 }
 
+var show_toast = function (msg, icon) {
+
+    wx.showToast({
+        title: msg ? msg : '系统繁忙,请稍后再试',
+        duration:2000,
+        icon:icon ? icon : "none"
+    });
+}
+
 module.exports = {
     request_callback: request_callback,
     check_login:check_login,
     check_session:check_session,
+    show_toast:show_toast,
     request:request
 }

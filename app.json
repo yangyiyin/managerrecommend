@@ -1,15 +1,16 @@
 {
   "pages":[
     "pages/login/index",
+    "pages/webview/index",
+    "pages/mypages/index",
+    "pages/vip/index",
+    "pages/mine/index",
     "pages/index/index",
     "pages/set/index",
     "pages/about/index",
     "pages/tmp_make/index",
     "pages/tmplist/index",
-    "pages/mine/index",
     "pages/tmpshop/index",
-    "pages/vip/index",
-    "pages/mypages/index",
     "pages/contact/index",
     "pages/useredit/index",
     "pages/suggest/index",
@@ -17,11 +18,11 @@
     "pages/custom_pages/index",
     "pages/pick_verify/index",
     "pages/cutInside/cutInside",
-    "pages/webview/index"
+    "pages/my_tmp/index"
   ],
   "window":{
     "navigationBarBackgroundColor": "#ffffff",
     "navigationBarTextStyle": "black",
-    "navigationBarTitleText": "神奇店长"
+    "navigationBarTitleText": "店长营销工具"
   }
 }

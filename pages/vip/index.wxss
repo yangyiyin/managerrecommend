@@ -1,6 +1,6 @@
 
 .container {
-  background: #eee;
+  background: #fff;
   display:block
 }
 
@@ -35,3 +35,76 @@
   margin: 0rpx auto;
   padding: 15rpx;
 }
+
+.card{
+  position: relative;
+}
+.info{
+  position: relative;
+  z-index: 1;
+  top:180rpx;
+  left: 110rpx;
+  line-height: 50rpx;
+  color: #333;
+}
+.choose_type{
+  position: relative;
+  top: 250rpx;
+  padding: 15rpx;
+}
+.item{
+  float: left;
+  width: 202rpx;
+  height: 202rpx;
+  margin: 15rpx;
+  border: 4rpx solid #DBDCDD;
+  border-radius: 10rpx;
+  text-align: center;
+  position: relative;
+  line-height: 30rpx;
+}
+.item.active{
+  border-color: #D2A56C;
+}
+.item .icon{
+  position: absolute;
+  top:0;
+  right: 0;
+  text-align: center;
+  width: 130rpx;
+  height: 20rpx;
+  color: #fff;
+  font-size: 24rpx;
+
+}
+.middle_block{
+  width: 750rpx;
+  height: 30rpx;
+  background: #eee;
+  margin-left: -15rpx;
+}
+.vip_info{
+  text-align: center;
+}
+.line{
+  width: 200rpx;
+  height: 1rpx;
+  background: #666;
+  display: inline-block;
+  line-height: 40rpx;
+}
+.tequan{
+  display: inline-block;
+  line-height: 40rpx;
+  font-size: 32rpx;
+  margin: 0 50rpx;
+  margin-top: 30rpx;
+}
+.tree_box{
+  display: inline-block;
+  margin: 0 20rpx;
+  width: 200rpx;
+}
+
+
+

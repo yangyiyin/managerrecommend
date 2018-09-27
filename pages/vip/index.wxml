@@ -1,31 +1,106 @@
 <!--index.wxml-->
 <view class="container">
-    <view wx:if="{{userInfo.is_vip}}" class="top">
-        <view class="info">当前会员信息:</view>
-        <view class="date">
-            {{userInfo.vip.start_time}}至{{userInfo.vip.end_time}}
+    <view class="card">
+        <image wx:if="{{!userInfo.is_vip}}" style="width: 100%;position: absolute;top: 0;left: 0;z-index: 0" mode="widthFix" src="http://qiniu-pub.yixsu.com/vipcentertop1.png"></image>
+        <image wx:if="{{userInfo.is_vip}}" style="width: 100%;position: absolute;top: 0;left: 0;z-index: 0" mode="widthFix" src="http://qiniu-pub.yixsu.com/vipcentertop2.png"></image>
+        <view class="info">
+            <view style="font-size: 32rpx;font-style: italic">{{userInfo.user_name}}</view>
+            <view wx:if="{{!userInfo.is_vip}}">您还不是Vip会员哦,开通会员,享海量模板。</view>
+            <view wx:if="{{userInfo.is_vip}}">您的vip将于{{userInfo.vip.end_time}}到期</view>
         </view>
     </view>
-    <view wx:if="{{!userInfo.is_vip}}" class="top">
-        <view class="info">您还不是会员</view>
 
-    </view>
-
-    <view class="top" style="background: #eee;border-top: 1px solid #ddd">
-        <view class="info" style="font-size: 24rpx">选择时长购买会员:</view>
-        <view class="section section_gap" style="position: relative">
-            <view class="body-view">
-                <slider bindchange="change_value" min="1" max="14" backgroundColor="#ddd" value="{{value}}"/>
+    <view class="choose_type">
+        <view class="item {{item.active ? 'active' : ''}}"  wx:key="index" wx:for="{{price_info_list}}" data-item="{{item}}" data-index="{{index}}" bindtap="choose_item">
+            <view class="icon" wx:if="{{item.remark}}">
+                <image class="img" mode="widthFix" src="http://qiniu-pub.yixsu.com/vip_bg.png"></image>
             </view>
-            <view class="min_date" style="font-size: 18rpx;color: red;position: absolute;left: 250rpx;top:-40rpx">半年</view>
-            <view class="min_date" style="font-size: 18rpx;color: red;position: absolute;left: 520rpx;top:-40rpx">一年</view>
-            <view class="min_date" style="font-size: 18rpx;color: red;position: absolute;left: 570rpx;top:-40rpx">两年</view>
-            <view class="min_date" style="font-size: 18rpx;color: red;position: absolute;left: 620rpx;top:-40rpx">三年</view>
-        </view>
+            <view class="icon" wx:if="{{item.remark}}">
+                <view>{{item.remark}}</view>
+            </view>
 
-        <view class="price">{{price}}元/{{value_desc}}</view>
-        <button open-type="contact" class="button" style="width: auto">联系客服</button>
+            <view style="margin-top: 40rpx;">{{item.time}}</view>
+            <view style="font-size: 36rpx;color: red;line-height: 50rpx;">¥{{item.price}}元</view>
+            <text style="font-size: 24rpx;color: #E6BF90" decode>{{item.price_month}}</text>
+            <view style="font-size: 24rpx;text-decoration: line-through;">{{item.price_old}}</view>
+
+        </view>
+        <!--<view class="item">-->
+            <!--<view style="margin-top: 40rpx;">6个月</view>-->
+            <!--<view style="font-size: 36rpx;color: red;line-height: 50rpx;">¥49元</view>-->
+            <!--<view style="font-size: 24rpx;color: #E6BF90">低至8元/月</view>-->
+            <!--<view style="font-size: 24rpx;text-decoration: line-through;">¥90元</view>-->
+        <!--</view>-->
+        <!--<view class="item">-->
+            <!--<view style="margin-top: 40rpx;">1个月</view>-->
+            <!--<view style="font-size: 36rpx;color: red;line-height: 50rpx;">¥9元</view>-->
+            <!--<text style="font-size: 24rpx;color: #E6BF90" decode>&nbsp;</text>-->
+            <!--<view style="font-size: 24rpx;text-decoration: line-through;">¥15元</view>-->
+        <!--</view>-->
+        <view style="clear: both"></view>
+        <view bindtap="pay" wx:if="{{!userInfo.is_vip}}" class="btn" style="width: 600rpx;font-size: 32rpx;margin-top: 30rpx;">立即开通</view>
+        <view bindtap="pay" wx:if="{{userInfo.is_vip}}" class="btn" style="width: 600rpx;font-size: 32rpx;margin-top: 30rpx;">立即续费</view>
+
+        <view class="middle_block" style="margin-top: 30rpx;"></view>
+
+        <view class="vip_info">
+            <view class="line"></view>
+            <view class="tequan">
+                <image style="width: 40rpx;vertical-align: middle;margin-top: -5rpx" mode="widthFix" src="http://qiniu-pub.yixsu.com/me_vip_icon.png"></image>
+                会员特权
+            </view>
+            <view class="line"></view>
+
+
+            <view class="tree_box" style="margin-top: 30rpx;">
+                <image style="width: 100rpx;" mode="widthFix" src="http://qiniu-pub.yixsu.com/vip_icon1.png"></image>
+                <view>尊享海量模板</view>
+                <view class="min-info">精品活动模板</view>
+
+            </view>
+            <view class="tree_box">
+                <image style="width: 100rpx;" mode="widthFix" src="http://qiniu-pub.yixsu.com/vip_icon2.png"></image>
+                <view>免费发布</view>
+                <view class="min-info">朋友圈、好友分享</view>
+            </view>
+            <view class="tree_box">
+                <image style="width: 100rpx;" mode="widthFix" src="http://qiniu-pub.yixsu.com/vip_icon3.png"></image>
+                <view>数据统计</view>
+                <view class="min-info">分析客户行为</view>
+            </view>
+        </view>
     </view>
+
+
+
+
+
+    <!--<view wx:if="{{userInfo.is_vip}}" class="top">-->
+        <!--<view class="info">当前会员信息:</view>-->
+        <!--<view class="date">-->
+            <!--{{userInfo.vip.start_time}}至{{userInfo.vip.end_time}}-->
+        <!--</view>-->
+    <!--</view>-->
+    <!--<view wx:if="{{!userInfo.is_vip}}" class="top">-->
+        <!--<view class="info">您还不是会员</view>-->
+
+    <!--</view>-->
+
+    <!--<view class="top" style="background: #eee;border-top: 1px solid #ddd">-->
+        <!--<view class="info" style="font-size: 24rpx">选择时长购买会员:</view>-->
+        <!--<view class="section section_gap" style="position: relative">-->
+            <!--<view class="body-view">-->
+                <!--<slider bindchange="change_value" min="1" max="14" backgroundColor="#ddd" value="{{value}}"/>-->
+            <!--</view>-->
+            <!--<view class="min_date" style="font-size: 18rpx;color: red;position: absolute;left: 250rpx;top:-40rpx">半年</view>-->
+            <!--<view class="min_date" style="font-size: 18rpx;color: red;position: absolute;left: 520rpx;top:-40rpx">一年</view>-->
+            <!--<view class="min_date" style="font-size: 18rpx;color: red;position: absolute;left: 570rpx;top:-40rpx">两年</view>-->
+            <!--<view class="min_date" style="font-size: 18rpx;color: red;position: absolute;left: 620rpx;top:-40rpx">三年</view>-->
+        <!--</view>-->
+
+        <!--<view class="price">{{price}}元/{{value_desc}}</view>-->
+        <!--<button open-type="contact" class="button" style="width: auto">联系客服</button>-->
+    <!--</view>-->
 
 
 </view>

@@ -1,18 +1,20 @@
 
-<view wx:if="{{!customerview}}" bindtap="change_text" class="{{status_class}}" style="width: 730rpx;padding:0 10rpx;height: 50rpx;{{item.style}}" >
-    <view style="float: left;">
-        <view  style="display: inline-block;font-size: 30rpx;color: #c67605;line-height:50rpx;">{{item.quick_buy_price}}元</view>
-    </view>
-    <view style="float:right;width:60rpx;height: 50rpx;padding:0 20rpx;line-height:50rpx;background: #0CD400;color: #fff;border-radius: 5rpx;">立即抢购</view>
-    <view style="clear: both"></view>
+<view wx:if="{{!customerview}}"  style="{{item.style}}" >
+    <!--<view style="float: left;">-->
+        <!--<view  style="display: inline-block;font-size: 30rpx;color: #c67605;line-height:50rpx;">{{item.quick_buy_price}}元</view>-->
+    <!--</view>-->
+    <!--<view style="float:right;width:60rpx;height: 50rpx;padding:0 20rpx;line-height:50rpx;background: #0CD400;color: #fff;border-radius: 5rpx;">立即抢购</view>-->
+    <!--<view style="clear: both"></view>-->
+    <view class="cover"></view>
 </view>
 
-<view wx:if="{{customerview}}" bindtap="change_text" class="{{status_class}}" style="width: 730rpx;padding:0 10rpx;height: 50rpx;{{item.style}}" >
-    <view style="float: left;">
-        <view  style="display: inline-block;font-size: 30rpx;color: #c67605;line-height:50rpx;">{{item.quick_buy_price}}元</view>
-    </view>
-    <view style="float:right;width:60rpx;height: 50rpx;padding:0 20rpx;line-height:50rpx;background: #0CD400;color: #fff;border-radius: 5rpx;" bindtap="show_phone_modal" data-callback="quick_buy">立即抢购</view>
-    <view style="clear: both"></view>
+<view wx:if="{{customerview}}" style="{{item.style}}" bindtap="show_phone_modal">
+    <!--<view style="float: left;">-->
+        <!--<view  style="display: inline-block;font-size: 30rpx;color: #c67605;line-height:50rpx;">{{item.quick_buy_price}}元</view>-->
+    <!--</view>-->
+    <!--<view style="float:right;width:60rpx;height: 50rpx;padding:0 20rpx;line-height:50rpx;background: #0CD400;color: #fff;border-radius: 5rpx;" bindtap="show_phone_modal" data-callback="quick_buy">立即抢购</view>-->
+    <!--<view style="clear: both"></view>-->
+
 </view>
 
 <!--<view wx:if="{{customerview}}" bindtap="custom_sign"  style="padding: 20rpx;background: #0CD400;color: #fff;border-radius:5rpx;{{item.style}}" >{{item.text}}</view>-->

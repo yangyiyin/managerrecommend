@@ -58,9 +58,10 @@ module.exports = Behavior({
     attached: function(){
         if (this.data.item.can_del_block) {
             if (this.data.actions) {
-                this.data.actions.push( {
+                this.data.actions.unshift( {
                     name: '删除此模块',
-                    color: 'red'
+                    color: 'red',
+                    key:'del'
                 });
                 this.setData({
                     actions: this.data.actions

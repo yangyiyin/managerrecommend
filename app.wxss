@@ -1,16 +1,17 @@
 /**app.wxss**/
 page{
   height:100%;
-  background: #eeeeee;
+  background: #fff;
 }
 
 .container {
-  height: 100%;
+  color: #333;
   display: flex;
   flex-direction: column;
   align-items: center;
   box-sizing: border-box;
   font-size: 28rpx;
+  overflow-x: hidden;
 
 }
 
@@ -38,7 +39,8 @@ page{
   padding: 20rpx;
   background: #fff;
   border-radius: 10rpx;
-  font-size: 24rpx;
+  font-size: 30rpx;
+  text-align: center;
 }
 
 .sys-tips{
@@ -50,4 +52,28 @@ page{
   left: 0;
   z-index: 99;
   width: 742rpx;
+}
+
+.img {
+  width: 100%;
+  height:100%;
+}
+.ke{
+  width: 100%;height: 100%;position: relative;
+}
+.btn{
+
+  background: #38CA45;
+  color: #fff;
+  border-radius: 10rpx;
+  width: 100%;
+  text-align: center;
+  padding: 25rpx 0;
+  margin: 0 auto;
+
+
+}
+.min-info{
+  font-size: 24rpx;
+  color: #999;
 }

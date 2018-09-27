@@ -13,6 +13,14 @@ Component({
         radius:{
             type:Number,
             value:150
+        },
+        link:{
+            type:String,
+            value:''
+        },
+        icon:{
+            type:String,
+            value:'http://qiniu-pub.yixsu.com/btn_home.png'
         }
 
     },
@@ -21,9 +29,9 @@ Component({
     },
     attached(){
 
-        if (!this.data.deg) {
+        if (!this.data.deg && this.data.items.length) {
             this.setData({
-                deg:(360 / items.length)
+                deg:(360 / this.data.items.length)
             })
         }
 
@@ -61,6 +69,14 @@ Component({
     methods: {
 
         open_close(){
+
+            if (this.data.link) {
+                wx.redirectTo({
+                    url: this.data.link
+                });
+                return;
+            }
+
             if (!this.data.active) {
                 this.open();
             } else {

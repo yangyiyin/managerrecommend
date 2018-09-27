@@ -1,10 +1,24 @@
+.cover{
+    background: rgba(255,0,0,0.3);
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
 .status_none{
     border: none;
 }
 .status_active{
+    position: relative;
     border: 1rpx dashed green;
 }
 
 .status_normal{
+    position: relative;
     border: 1rpx dashed #f5800d;
+}
+.status_normal .cover{
+    display: block;
 }

@@ -1,0 +1,4 @@
+<view class="box" wx:if="{{visible}}">
+    <image bindtap="close" style="width: 50rpx;position: fixed;top: 30%;right: 50rpx;margin-top: -55rpx;"  mode="widthFix" src="http://qiniu-pub.yixsu.com/page_pop_btn_close.png"></image>
+    <image bindtap="goto_link" style="width: 650rpx;position: fixed;top: 30%;left: 50rpx;"  mode="widthFix" src="{{img}}"></image>
+</view>

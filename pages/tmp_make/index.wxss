@@ -105,3 +105,15 @@ swiper{
     margin:1rpx 0;
 
 }
+.bottom_btn{
+    width: 750rpx;
+    height: 100rpx;
+    line-height: 100rpx;
+    background: #fff;
+    text-align: center;
+    box-shadow: 0px 0px 5px rgba(0,0,0,0.5);
+    position: fixed;
+    bottom: 0;
+    left: 0;
+
+}

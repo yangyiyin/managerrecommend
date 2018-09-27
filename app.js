@@ -19,47 +19,49 @@ App({
     }
   },
   get_userinfo(is_not_direct){
-    var data = this.get_common_request_data();
-    wx.request({
-      url: 'https://yixsu.com/public/index.php/Apimanagerrecommend/User/info.html',
-      data:data,
-      method:'GET',
-      success: function(res) {
-        common.request_callback(res,this);
-        if (res.data.success) {
-          this.globalData.userInfo = res.data.data;
-          if (!is_not_direct) {
-            if (!parseInt(res.data.data.type)) {
-              wx.reLaunch({
-                url: '/pages/useredit/index'
-              })
-            } else if(res.data.data.type == '1') {//顾客
-              wx.reLaunch({
-                url: '/pages/custom_pages/index'
-              })
-            } else {
-              wx.reLaunch({
-                url: '/pages/index/index'
-              })
+    return new Promise(function (resolve, reject) {
+      var data = this.get_common_request_data();
+      wx.request({
+        url: 'https://yixsu.com/public/index.php/Apimanagerrecommend/User/info.html',
+        data:data,
+        method:'GET',
+        success: function(res) {
+          common.request_callback(res,this);
+          if (res.data.success) {
+            this.globalData.userInfo = res.data.data;
+            if (!is_not_direct) {
+              if (!parseInt(res.data.data.type)) {
+                wx.reLaunch({
+                  url: '/pages/useredit/index'
+                })
+              } else if(res.data.data.type == '1') {//顾客
+                wx.reLaunch({
+                  url: '/pages/custom_pages/index'
+                })
+              } else {
+                wx.reLaunch({
+                  url: '/pages/index/index'
+                })
+              }
             }
+            if (typeof is_not_direct == 'function') {
+              is_not_direct();
+            }
+          } else {
+            //账号冻结等
           }
-          if (typeof is_not_direct == 'function') {
-            is_not_direct();
-          }
-        } else {
-          //账号冻结等
+          resolve();
+          // this.globalData.user_session = res.data.data;
+          // wx.setStorageSync('user_session', res.data.data);
+        }.bind(this),
+        fail: function(res) {
+          resolve();
+        },
+        complete: function(res) {
+          resolve();
         }
-
-        // this.globalData.user_session = res.data.data;
-        // wx.setStorageSync('user_session', res.data.data);
-      }.bind(this),
-      fail: function(res) {
-        console.log(res)
-      },
-      complete: function(res) {
-        //console.log(res)
-      }
-    });
+      });
+    }.bind(this))
   },
   login(is_not_direct) {
       wx.login({

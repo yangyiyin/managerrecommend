@@ -2,20 +2,20 @@
 
 
 <view class="container">
-   <image src="http://paz3jxo1v.bkt.clouddn.com/bg.png" mode="aspectFill" style="width: 750rpx;height:100%;position: absolute;z-index: -1;"/>
+   <image src="http://qiniu-pub.yixsu.com/bg.png" mode="aspectFill" style="width: 750rpx;height:100%;position: absolute;z-index: -1;"/>
 
    <view class="main">
 
       <view  bindtap="display1" style="height:100rpx;line-height:100rpx;width: 450rpx;padding: 10rpx;color: #000;background: #fff;box-shadow:#999 0 5rpx 10rpx;border-radius: 8rpx">
-         <image src="http://paz3jxo1v.bkt.clouddn.com/choose_icon_chief.png" mode="widthFix" style="width: 60rpx;vertical-align:middle;margin-left: 30rpx;line-height:90rpx;"/>
+         <image src="http://qiniu-pub.yixsu.com/choose_icon_chief.png" mode="widthFix" style="width: 60rpx;vertical-align:middle;margin-left: 30rpx;line-height:90rpx;"/>
          <view style="display: inline-block;line-height:100rpx;height:100rpx;margin-left: 60rpx;font-size: 40rpx">我是店长</view>
-         <image style="display: inline-block;" src="http://paz3jxo1v.bkt.clouddn.com/list_icon_arrow.png" mode="widthFix" style="width: 20rpx;vertical-align:middle;margin-left: 80rpx"/>
+         <image style="display: inline-block;" src="http://qiniu-pub.yixsu.com/list_icon_arrow.png" mode="widthFix" style="width: 20rpx;vertical-align:middle;margin-left: 80rpx"/>
 
       </view>
       <view  bindtap="display2" style="height:100rpx;line-height:100rpx;margin-top: 40rpx;width: 450rpx;padding: 10rpx;color: #000;background: #fff;box-shadow:#999 0 5rpx 10rpx;border-radius: 8rpx">
-         <image src="http://paz3jxo1v.bkt.clouddn.com/choose_icon_customer.png" mode="widthFix" style="width: 60rpx;vertical-align:middle;margin-left: 30rpx;line-height:90rpx;"/>
+         <image src="http://qiniu-pub.yixsu.com/choose_icon_customer.png" mode="widthFix" style="width: 60rpx;vertical-align:middle;margin-left: 30rpx;line-height:90rpx;"/>
          <view style="display: inline-block;line-height:100rpx;height:100rpx;margin-left: 60rpx;font-size: 40rpx">我是顾客</view>
-         <image style="display: inline-block;" src="http://paz3jxo1v.bkt.clouddn.com/list_icon_arrow.png" mode="widthFix" style="width: 20rpx;vertical-align:middle;margin-left: 80rpx"/>
+         <image style="display: inline-block;" src="http://qiniu-pub.yixsu.com/list_icon_arrow.png" mode="widthFix" style="width: 20rpx;vertical-align:middle;margin-left: 80rpx"/>
 
       </view>
 

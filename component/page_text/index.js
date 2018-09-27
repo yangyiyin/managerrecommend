@@ -29,8 +29,8 @@ Component({
             this.setData({
                 visible: false
             });
-
-            if (detail.index == 1) {//删除
+            // console.log(detail);
+            if (detail.key == 'del') {//删除
                 this.triggerEvent('triggerevent', {event:'del_block'})
             } else {
                 this.triggerEvent('changeitem', {item:this.data.item})

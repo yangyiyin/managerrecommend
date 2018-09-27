@@ -83,3 +83,25 @@
 .label.past{
   background: #aaa;
 }
+
+.item{
+  width: 710rpx;
+  padding: 30rpx;
+  border-bottom: 1rpx solid #eeeeee;
+  height: 200rpx;
+}
+
+.left, .right{
+  display: inline-block;
+}
+
+.left{
+  width: 300rpx;
+  height:200rpx;
+  overflow: hidden;
+}
+.right{
+  width: 370rpx;
+  float: right;
+  margin-left: 20rpx;
+}

@@ -3,7 +3,10 @@
   "navigationBarTextStyle": "black",
   "navigationBarTitleText": "我制作的页面",
   "backgroundTextStyle":"dark",
-  "backgroundColor":"#eeeeee",
-  "enablePullDownRefresh":true
+  "backgroundColor":"#fff",
+  "enablePullDownRefresh":true,
+  "usingComponents": {
+    "i-tag": "../../dist/tag/index"
+  }
 
 }

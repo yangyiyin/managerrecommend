@@ -1,7 +1,6 @@
 {
   "navigationBarBackgroundColor": "#ffffff",
   "navigationBarTextStyle": "black",
-  "navigationBarTitleText": "神奇店长",
   "backgroundTextStyle":"dark",
   "backgroundColor":"#eeeeee",
   "usingComponents": {
@@ -9,6 +8,7 @@
     "yxs_title_bar":"../../yixsu_component/yxs_title_bar/index",
     "yxs_round_menu":"../../yixsu_component/yxs_round_menu/index",
     "yxs_modal":"../../yixsu_component/yxs_modal/index",
-    "yxs_input":"../../yixsu_component/yxs_input/index"
+    "yxs_input":"../../yixsu_component/yxs_input/index",
+    "yxs_sys_news":"../../yixsu_component/yxs_sys_news/index"
   }
 }

@@ -1,9 +1,4 @@
 /**index.wxss**/
-page{
-    height:100%;
-    background: #3A3A3A;
-}
-
 .main{
     margin-top: 210rpx;
     margin-left: 40rpx;

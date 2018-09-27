@@ -1,8 +1,13 @@
 <view  class="{{status_class}}" data-text="{{item.text}}" bindtap="change_text" style="position: relative;{{item.style}}">
     <text >{{item.text}}</text>
     <!--<common_del wx:if="{{item.can_del_block}}" can-edit="{{canEdit}}"></common_del>-->
+    <view class="cover"></view>
 </view>
 
 <dist_modal visible="{{ visible }}" actions="{{ actions }}" bind:click="handleClick">
-    <view><input bindinput="tapInput" style="border: 1px solid #000;padding: 4px;width: 90%;margin: 0 auto;border-radius: 5px;" placeholder="请输入内容" value="{{item.text}}"/></view>
+    <view>
+        <view style="text-align:center;padding-top: 30rpx;padding-bottom: 10rpx;color: #000;font-size: 30rpx;"><text style="background: #eee">编辑文字内容:</text></view>
+        <!--<input type="textarea" bindinput="tapInput" style="border: 1px solid #000;padding: 4px;width: 90%;margin: 0 auto;border-radius: 5px;" placeholder="请输入内容" value="{{item.text}}"/>-->
+        <textarea bindinput="tapInput" placeholder="请输入内容" style="border: 1px solid #ddd;height:150rpx;padding: 4px;width: 80%;margin: 0 auto;border-radius: 2px;" value="{{item.text}}"></textarea>
+    </view>
 </dist_modal>

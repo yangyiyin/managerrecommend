@@ -21,6 +21,7 @@
 }
 .icon{
     width: 150rpx;
+    height:150rpx;
 }
 .main .icon{
     width: 110rpx;

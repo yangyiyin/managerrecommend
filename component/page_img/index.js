@@ -39,7 +39,7 @@ Component({
                 visible: false
             });
 
-            if (detail.index == 1) {//删除
+            if (detail.key == 'del') {//删除
                 this.triggerEvent('triggerevent', {event:'del_block'})
             } else {
                 //上传

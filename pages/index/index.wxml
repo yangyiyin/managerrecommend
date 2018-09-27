@@ -6,9 +6,9 @@
     <!--<view wx:if="{{sys_tips}}" class="sys-tips" bindtap="tap_sys_tips">{{sys_tips}}</view>-->
     <yxs_msg_bar item_num="{{sys_tips.length}}" time="5000" bindclose="close_tip">
         <view wx:for="{{sys_tips}}" wx:key="index" bindtap="go_webview" data-link="{{item.link}}">
-            <view style="display: inline-block;vertical-align: middle"><image style="width: 30rpx" mode="widthFix" src="http://paz3jxo1v.bkt.clouddn.com/topbar_icon_tips.png"></image></view>
+            <view style="display: inline-block;vertical-align: middle"><image style="width: 30rpx" mode="widthFix" src="http://qiniu-pub.yixsu.com/topbar_icon_tips.png"></image></view>
             {{item.title}}
-            <view style="display: inline-block" >查看详情</view>
+            <view wx:if="{{item.link}}" style="display: inline-block" >查看详情</view>
         </view>
     </yxs_msg_bar>
     <!--<swiper autoplay="true" indicator-dots="true" wx:if="{{show_list.a}}">-->
@@ -84,14 +84,14 @@
     <!--<include wx:if="{{show_list.b1}}" src="../common/tmplist_timelimit.wxml"/>-->
 
     <view style="height: 20rpx;background: #fff"></view>
-    <yxs_title_bar title="我使用过的模板" bindgoto="" more="{{false}}"></yxs_title_bar>
+    <yxs_title_bar title="我使用过的模板" bindgoto="goto_my_tmp" more="{{true}}"></yxs_title_bar>
     <scroll-view wx:if="{{my_tmplist.length}}" scroll-left="0"class="scroll-view_H" scroll-x="true" bindscroll="" style="width: 100%">
         <view bindtap="goto_tmp" data-id="{{item.id}}" wx:for="{{my_tmplist}}" wx:key="index" class="scroll-view-item_H" ><image style="width: 300rpx;height:200rpx" mode="aspectFill" src="{{item.img}}"></image></view>
     </scroll-view>
 
     <view style="width: 710rpx;background: #fff;padding: 20rpx;" wx:if="{{!my_tmplist.length}}">
-        <image style="width: 300rpx;margin:0 auto;display: block" mode="widthFix" src="http://paz3jxo1v.bkt.clouddn.com/blank.png"></image>
-        <view style="text-align: center;margin-top: 20rpx">还没有使用过的模板<view style="display: inline-block;color: #2782C1">(去选模板)</view></view>
+        <image style="width: 300rpx;margin:0 auto;display: block" mode="widthFix" src="http://qiniu-pub.yixsu.com/blank.png"></image>
+        <view style="text-align: center;margin-top: 20rpx">还没有使用过的模板<view bindtap="goto_tmp_shop" style="display: inline-block;color: #2782C1">(去选模板)</view></view>
     </view>
     <view style="height: 20rpx;"></view>
     <view style="height: 20rpx;background: #fff"></view>
@@ -103,12 +103,12 @@
             <view style="position: absolute;bottom: 30rpx;padding: 0 40rpx;color: #fff">{{item.tmp_data.desc}}</view>
         </view>
         <!--<view style="margin-bottom: 20rpx;position: relative">-->
-            <!--<image style="width: 710rpx" mode="widthFix" src="http://paz3jxo1v.bkt.clouddn.com/img2.jpg"></image>-->
-            <!--<image style="width: 80rpx;position: absolute;right: 0;top: 10rpx" mode="widthFix" src="http://paz3jxo1v.bkt.clouddn.com/lable_discount.png"></image>-->
+            <!--<image style="width: 710rpx" mode="widthFix" src="http://qiniu-pub.yixsu.com/img2.jpg"></image>-->
+            <!--<image style="width: 80rpx;position: absolute;right: 0;top: 10rpx" mode="widthFix" src="http://qiniu-pub.yixsu.com/lable_discount.png"></image>-->
             <!--<view style="position: absolute;bottom: 20rpx;padding: 0 40rpx;color: #fff">在设定的活动期限内,以更优惠的价格出售商品;仅支持到店支付</view>-->
         <!--</view>-->
 
-        <view wx:if="{{all_tmplist_has_more}}"> <image style="width: 710rpx;margin-bottom: 20rpx" mode="widthFix" src="http://paz3jxo1v.bkt.clouddn.com/btn_more.png"></image></view>
+        <view wx:if="{{all_tmplist_has_more}}" bindtap="goto_tmp_shop"> <image style="width: 710rpx;margin-bottom: 20rpx" mode="widthFix" src="http://qiniu-pub.yixsu.com/btn_more.png"></image></view>
     </view>
 
     <view style="position: fixed;bottom: 40rpx;left: 20rpx;">
@@ -117,10 +117,11 @@
 
     <yxs_modal visible="{{verify_code_show}}" success_btn="{{!verify_code_show_info}}" bindcallback_success="submit">
         <view hidden="{{verify_code_show_info}}" slot="content">
-            <yxs_input width="550" height="80" maxlength="20" title="验证凭证" placeholder="手机号码" bindchange="bindinputtel" error_info="{{inputtel_error}}"></yxs_input>
+            <yxs_input width="550" height="80" maxlength="20"  placeholder="手机号码" bindchange="bindinputtel" error_info="{{inputtel_error}}"></yxs_input>
             <view style="height:10rpx"></view>
             <yxs_input width="550" height="80" maxlength="20" placeholder="凭证码" bindchange="bindinputcode" error_info="{{inputcode_error}}"></yxs_input>
-
+            <view style="height:10rpx"></view>
+            <p style="font-size: 24rpx;color: #999;">验证凭证:具备线上报名功能的活动,均需验证客户报名凭证。可通过输入客户手机号和客户获得的凭证码验证,或直接扫描客户获得的凭证二维码进行验证。</p>
         </view>
         <view hidden="{{verify_code_show_info}}" slot="foot" style="text-align: right;margin-top: 50rpx">
             您也可以<view  bindtap="saoyisao" style="display: inline-block;color: #4C99CA">扫描二维码验证></view>
@@ -128,8 +129,8 @@
 
         <view hidden="{{!verify_code_show_info}}" slot="content">
             <view style="width: 550rpx;padding: 30rpx">
-                <view style="width: 300rpx;margin: 0 auto" hidden="{{!pick_data.success}}"><image style="width: 300rpx" mode="widthFix" src="http://paz3jxo1v.bkt.clouddn.com/pop_img1.png"></image></view>
-                <view style="width: 300rpx;margin: 0 auto" hidden="{{pick_data.success}}"><image style="width: 300rpx" mode="widthFix" src="http://paz3jxo1v.bkt.clouddn.com/pop_img1.png"></image></view>
+                <view style="width: 300rpx;margin: 0 auto" hidden="{{!pick_data.success}}"><image style="width: 300rpx" mode="widthFix" src="http://qiniu-pub.yixsu.com/pop_img1.png"></image></view>
+                <view style="width: 300rpx;margin: 0 auto" hidden="{{pick_data.success}}"><image style="width: 300rpx" mode="widthFix" src="http://qiniu-pub.yixsu.com/pop_img1.png"></image></view>
                 <view style="font-size: 45rpx;width: 500rpx;text-align: center">{{pick_data.message}}</view>
                 <view style="font-size: 20rpx;width: 500rpx;color: #999;text-align: center">请务必确认活动信息无误哦!</view>
                 <view style="width: 550rpx;border-top: 1px solid #eee;margin-top: 30rpx" hidden="{{!pick_data.data}}">
@@ -145,6 +146,6 @@
         </view>
 
     </yxs_modal>
-
+    <yxs_sys_news wx:if="{{sys_news}}" img="{{sys_news.img}}" bindgoto_link="go_webview" data-id="{{sys_news.id}}" data-link="{{sys_news.link}}"></yxs_sys_news>
 
 </view>

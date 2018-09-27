@@ -7,7 +7,7 @@ Page({
   data: {
     tmp_data: {},
     id:'',
-    page_status:1,//1预览,2制作,3完成制作
+    page_status:1,//1预览,2制作,3完成制作,9下一步设置参数
     page_url:'http://www.baidu.com',
     qrcode_link:'',
     show_qrcode:false,
@@ -174,7 +174,6 @@ Page({
     }.bind(this));
   },
   onShow: function() {
-    console.log(app.globalData.current_cut_img);
     this.setData({
       current_cut_img:app.globalData.current_cut_img
     })
@@ -212,6 +211,14 @@ Page({
     }.bind(this))
 
   },
+
+  complete_make_next: function(){
+
+    this.setData({
+      page_status:9
+    });
+  },
+
   share_make: function(extra_uid){
     if (this.data.qrcode_link) {
       this.setData({
@@ -328,7 +335,7 @@ Page({
     });
   },
   onShareAppMessage:function() {
-    var title = '神奇店长';
+    var title = '店长营销工具';
     common.request('get','statistics_point',{page_id:this.data.page_id, type:2}, function (res) {});
     return {
       title:title,

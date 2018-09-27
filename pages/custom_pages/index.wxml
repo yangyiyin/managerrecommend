@@ -1,13 +1,26 @@
 <!--index.wxml-->
 <view class="container">
-    <view class="main">
+    <!--<view class="main">-->
 
-        <view  wx:key="index" wx:for="{{pages}}" bindlongpress="del_page" bindtap="goto_page" data-id="{{item.id}}" data-page_id="{{item.page_id}}" data-index="{{index}}" class="mine-item">
-            <image class="ico" mode="aspectFit" src="{{item.page.img}}"></image>
-            <text>{{item.page.title}}</text>
-            <view style="font-size: 18rpx;position:absolute;right: 10rpx;bottom: 10rpx;color: #999;line-height: 18rpx">{{item.create_time}}</view>
+        <!--<view  wx:key="index" wx:for="{{pages}}" bindlongpress="del_page" bindtap="goto_page" data-id="{{item.id}}" data-page_id="{{item.page_id}}" data-index="{{index}}" class="mine-item">-->
+            <!--<image class="ico" mode="aspectFit" src="{{item.page.img}}"></image>-->
+            <!--<text>{{item.page.title}}</text>-->
+            <!--<view style="font-size: 18rpx;position:absolute;right: 10rpx;bottom: 10rpx;color: #999;line-height: 18rpx">{{item.create_time}}</view>-->
+        <!--</view>-->
+        <!--<view wx:if="{{!pages.length}}" class="empty_info">您还没有参与的活动~</view>-->
+    <!--</view>-->
+
+    <view wx:if="{{!pages.length}}" class="empty_info">您还没有参加的活动~</view>
+    <view wx:if="{{pages.length}}" class="item"  wx:key="index" wx:for="{{pages}}" bindtap="goto_page" data-id="{{item.id}}" data-index="{{index}}">
+        <view class="left">
+            <image class="img" mode="widthFix" src="{{item.img}}"></image>
         </view>
-        <view wx:if="{{!pages.length}}" class="empty_info">您还没有参与的活动~</view>
+
+        <view class="right">
+            <view style="font-size: 30rpx;">{{item.title}}</view>
+            <view class="min-info" style="margin-top: 40rpx;">{{item.start_time ? item.start_time : '-'}} ~ {{item.end_time ? item.end_time : '-'}}</view>
+
+        </view>
     </view>
 
 </view>

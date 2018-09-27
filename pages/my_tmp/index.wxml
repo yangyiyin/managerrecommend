@@ -26,8 +26,10 @@
     <view class="main">
 
         <view wx:key="index" wx:for="{{tmp_list}}" class="tmp_item" bindtap="goto_tmp_preview" data-id="{{item.id}}" data-index="{{index}}">
+
             <image style="width: 338rpx;height: 258rpx"  mode="scaleToFill" src="{{item.img}}"></image>
             <image style="width: 60rpx;height:20rpx;position: absolute;right: 0;top: 10rpx;"  mode="widthFix" src="{{item.icon}}"></image>
+
             <view class="desc">{{item.title}}</view>
             <view wx:if="{{item.active && !item.is_add}}" catchtap="add_tmp" data-id="{{item.id}}"  data-index="{{index}}" class="btn add">添加</view>
         </view>

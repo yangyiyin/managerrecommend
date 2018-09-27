@@ -1,7 +1,11 @@
 {
   "navigationBarBackgroundColor": "#ffffff",
   "navigationBarTextStyle": "black",
-  "navigationBarTitleText": "设置"
+  "navigationBarTitleText": "设置",
+  "usingComponents": {
+    "yxs_upload":"../../yixsu_component/yxs_upload/index"
+
+  }
 
 
 }
