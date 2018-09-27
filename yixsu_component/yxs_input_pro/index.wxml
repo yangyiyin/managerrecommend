@@ -1,0 +1,72 @@
+<view wx:if="{{ type === 'verify_code' }}">
+    <view wx:if="{{ title }}" class="input-title">{{ title }}</view>
+    <!--<textarea-->
+    <!--wx:if="{{ type === 'textarea' }}"-->
+    <!--auto-height-->
+    <!--disabled="{{ disabled }}"-->
+    <!--focus="{{ autofocus }}"-->
+    <!--value="{{ value }}"-->
+    <!--placeholder="{{ placeholder }}"-->
+    <!--maxlength="{{ maxlength }}"-->
+    <!--class="i-input-input i-cell-bd {{ right ? 'i-input-input-right' : '' }}"-->
+    <!--placeholder-class="i-input-placeholder"-->
+    <!--bindinput="handleInputChange"-->
+    <!--bindfocus="handleInputFocus"-->
+    <!--bindblur="handleInputBlur"-->
+    <!--&gt;</textarea>-->
+
+    <view  style="width: {{width}}rpx;height: {{height}}rpx;display:table-cell;vertical-align:middle;{{no_border ? '' : 'border: 1rpx solid #ddd;'}}"
+            class="input {{ error_info ? 'input-error' : '' }}">
+        <view wx:if="{{icon}}" style="width: {{width * 0.1}}rpx;height: {{height}}rpx;float: left;vertical-align:middle;line-height:{{height}}rpx;text-align: center;margin-right: 10rpx">
+            <image style="width: 60%;vertical-align:middle;" mode="widthFix" src="{{icon}}"></image>
+        </view>
+        <view wx:if="{{must}}" style="height: {{height}}rpx;float: left;line-height:{{height}}rpx;text-align: center;margin-right: 10rpx;color: red">*</view>
+        <input
+                type="{{ type }}"
+                disabled="{{ disabled }}"
+                focus="{{ autofocus }}"
+                value="{{ value }}"
+                placeholder="{{ placeholder }}"
+                maxlength="{{ maxlength }}"
+                class=""
+                placeholder-class="i-input-placeholder"
+                bindinput="handleInputChange"
+                bindfocus="handleInputFocus"
+                bindblur="handleInputBlur"
+                style="height: {{height}}rpx;float: left;display: inline-block;width: 200rpx;"
+        />
+        <view style="width: {{width * 0.5 - 10}}rpx;height: {{height}}rpx;display:table-cell;vertical-align:middle;">
+            <view class="send-code {{(can_send_code && !sending) ? '' : 'send-code-disable'}}" bindtap="sendcode">{{send_code_str}}</view>
+        </view>
+        <view style="clear: both"></view>
+
+    </view>
+    <view class="error-info" wx:if="{{ error_info }}">{{ error_info }}</view>
+</view>
+<view wx:else>
+    <view wx:if="{{ title }}" class="input-title">{{ title }}</view>
+    <view  style="width: {{width}}rpx;height: {{height}}rpx;display:table-cell;vertical-align:middle;{{no_border  ? '' : (error_info ? '' : 'border: 1rpx solid #ddd;')}}"
+           class="input {{ error_info ? 'input-error' : '' }}">
+
+        <view wx:if="{{icon}}" style="width: {{width * 0.1}}rpx;height: {{height}}rpx;float: left;vertical-align:middle;line-height:{{height}}rpx;text-align: center;margin-right: 10rpx">
+            <image style="width: 60%;vertical-align:middle;" mode="widthFix" src="{{icon}}"></image>
+        </view>
+        <view wx:if="{{must}}" style="height: {{height}}rpx;float: left;line-height:{{height}}rpx;text-align: center;margin-right: 10rpx;color: red">*</view>
+        <input
+                type="{{ type }}"
+                disabled="{{ disabled }}"
+                focus="{{ autofocus }}"
+                value="{{ value }}"
+                placeholder="{{ placeholder }}"
+                maxlength="{{ maxlength }}"
+                class=""
+                placeholder-class="i-input-placeholder"
+                bindinput="handleInputChange"
+                bindfocus="handleInputFocus"
+                bindblur="handleInputBlur"
+                style="width:{{width * 0.8 - 20}}rpx;height: {{height}}rpx;float: left;"
+        />
+        <view style="clear: both"></view>
+    </view>
+    <view class="error-info" wx:if="{{ error_info }}">{{ error_info }}</view>
+</view>

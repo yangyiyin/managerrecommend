@@ -53,7 +53,8 @@ module.exports = Behavior({
         page_sign_phone:'',
         page_sign_phone_code:'',
         callback:'',
-        phone_list:[]
+        phone_list:[],
+        isPoneAvailable:false,
     },
     attached: function(){
         if (this.data.item.can_del_block) {
@@ -131,7 +132,9 @@ module.exports = Behavior({
                 code:this.data.page_sign_phone_code,
 
             }
+            wx.showLoading();
             common.request('post','verify_code',data,function (res) {
+                wx.hideLoading();
                 this.setData({
                     phone_modal_visible: false
                 });
@@ -155,6 +158,9 @@ module.exports = Behavior({
 
         },
         tapInputPhone(event){
+            this.setData({
+                isPoneAvailable: common.isPoneAvailable(event.detail.value)
+            });
             this.data.page_sign_phone = event.detail.value;
         },
         tapInputCode(event){

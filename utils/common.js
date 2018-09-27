@@ -22,8 +22,8 @@ var request_callback = function (res, app) {
             app.login();
         } else {
             wx.showModal({
-                title: res.data.message ? res.data.message : '系统异常',
-                content: '',
+                title: '',
+                content: res.data.message ? res.data.message : '系统异常',
                 showCancel:false
 
             });
@@ -50,8 +50,8 @@ var check_login = function (res, app) {
             app.login();
         } else {
             wx.showModal({
-                title: res.data.message ? res.data.message : '系统异常',
-                content: '',
+                title: '',
+                content: res.data.message ? res.data.message : '系统异常',
                 showCancel:false
             });
         }
@@ -65,7 +65,7 @@ var check_session = function (app,is_not_direct) {
     }
     if(!app.globalData.user_session) {
         wx.showToast({
-            title: '登录超时',
+            title: '载入中...',
             duration:3000,
             icon:"loading"
         });
@@ -120,10 +120,36 @@ var show_toast = function (msg, icon) {
     });
 }
 
+var show_confirm = function(message){
+    return new Promise(function (resolve, reject) {
+        wx.showModal({
+            title: '',
+            content: message,
+            success: function (res) {
+                if (res.confirm) {
+                    resolve();
+                } else {
+                    reject();
+                }
+            }
+        })
+    });
+}
+
+function isPoneAvailable(str) {
+    var myreg=/^[1][1,2,3,4,5,6,7,8,9][0-9]{9}$/;
+    if (!myreg.test(str)) {
+        return false;
+    } else {
+        return true;
+    }
+}
 module.exports = {
     request_callback: request_callback,
     check_login:check_login,
     check_session:check_session,
     show_toast:show_toast,
-    request:request
+    show_confirm:show_confirm,
+    request:request,
+    isPoneAvailable:isPoneAvailable
 }

@@ -1,0 +1,34 @@
+.input{
+    border-radius: 5rpx;
+    padding: 0rpx 10rpx;
+}
+.input-title{
+    font-size: 30rpx;
+    margin-bottom: 10rpx;
+}
+
+.input-error{
+    border: 1rpx solid red;
+}
+
+.error-info{
+    color: red;
+    font-size: 24rpx;
+}
+
+.send-code{
+    padding: 10rpx 15rpx;
+    background: #38CA45;
+    display: inline-block;
+    color: #fff;
+    border-radius: 50rpx;
+    vertical-align: middle;
+    float: right;
+    font-size: 24rpx;
+}
+.send-code-disable {
+    background: #ccc;
+}
+.i-input-placeholder{
+    color: #999;
+}

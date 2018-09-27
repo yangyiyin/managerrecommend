@@ -47,7 +47,7 @@ Page({
   goto_tmp_page:function (event) {
     var id = event.currentTarget.dataset.id;
     wx.navigateTo({
-      url: '/pages/tmp_make/index?pageview=1&id='+id
+      url: '/pages/tmp_make/index?customerview=1&id='+id
     })
   },
   del_page:function(event){

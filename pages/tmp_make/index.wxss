@@ -117,3 +117,6 @@ swiper{
     left: 0;
 
 }
+.submit{
+    width: 700rpx;
+}

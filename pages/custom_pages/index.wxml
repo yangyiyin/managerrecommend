@@ -18,7 +18,10 @@
 
         <view class="right">
             <view style="font-size: 30rpx;">{{item.title}}</view>
-            <view class="min-info" style="margin-top: 40rpx;">{{item.start_time ? item.start_time : '-'}} ~ {{item.end_time ? item.end_time : '-'}}</view>
+            <view class="min-info" style="margin-top: 40rpx;">
+                <view>活动开始:{{item.start_time ? item.start_time : '-'}}</view>
+                <view>活动结束{{item.end_time ? item.end_time : '-'}}</view>
+            </view>
 
         </view>
     </view>

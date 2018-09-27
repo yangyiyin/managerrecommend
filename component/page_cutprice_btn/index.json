@@ -1,6 +1,7 @@
 {
     "component": true,
     "usingComponents": {
-        "dist_modal": "../../dist/modal/index"
+        "dist_modal": "../../dist/modal/index",
+        "yxs_input_pro": "../../yixsu_component/yxs_input_pro/index"
     }
 }

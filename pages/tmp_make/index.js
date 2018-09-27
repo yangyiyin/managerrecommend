@@ -7,7 +7,9 @@ Page({
   data: {
     tmp_data: {},
     id:'',
-    page_status:1,//1预览,2制作,3完成制作,9下一步设置参数
+    tmp_type:-1,
+    page_type:-1,
+    page_status:1,//1预览,2制作,3完成制作,9下一步设置参数,11,客户已报名页(第二页)
     page_url:'http://www.baidu.com',
     qrcode_link:'',
     show_qrcode:false,
@@ -54,7 +56,14 @@ Page({
     ],
     pick_code_visible:false,
     stock_none:false,
-    current_cut_img:''
+    set_img_key:'',
+    current_cut_img:'',
+    main_img:'',
+    auth_userinfo:true,
+    start_time:'',
+    end_time:'',
+    start_time_min:'',
+    end_time_min:''
 
   },
   onLoad: function (option) {
@@ -76,6 +85,7 @@ Page({
       extra_uid:option.extra_uid ? option.extra_uid : 0
     })
 
+
     // data.extra_uid = this.data.extra_uid;
 
     if (option.pageview || option.customerview) {
@@ -87,11 +97,37 @@ Page({
       if (option.customerview) {
         common.request('get','statistics_point',{page_id:this.data.page_id, type:1}, function (res) {});
         common.check_session(app, function(){
+          //获取用户授权权限
+          wx.getSetting({
+            success:function(res){
+              this.setData({
+                auth_userinfo:res.authSetting['scope.userInfo'] ? true : false
+              })
+            }.bind(this)
+          })
+          
+          this.get_page_info().then(function(){
+              //blocks:[{id:2,name:'砍价'},{id:1,name:'限时特惠'},{id:7,name:'预约报名'},{id:3,name:'集赞'},{id:4,name:'投票'},{id:5,name:'图文'}],
 
-          this.get_page_info();
+            if (this.data.page_type == 2 && this.data.is_sign_cutprice) {//砍价
+              this.setData({
+                page_status:11
+              })
+            } else if(this.page_type == 7 && this.data.is_sign) {
+              this.setData({
+                page_status:11
+              })
+            } else if(this.page_type == 3 && this.data.is_sign_praise) {
+              this.setData({
+                page_status:11
+              })
+            } else {
+
+            }
+
+          }.bind(this));
         }.bind(this));
       } else {
-
         this.get_page_info();
       }
 
@@ -105,9 +141,11 @@ Page({
     common.request('get','tmp_info',{id:this.data.id},function (res) {
       common.check_login(res);
       if (!res.data.success) {
-        this.setData({
-          page_status:4
-        })
+        if (res.data.error_code == 999) {
+          wx.redirectTo({
+            url: '/pages/vip/index'
+          })
+        }
         return;
       }
       var tmp_data = res.data.data.content;
@@ -117,6 +155,7 @@ Page({
 
       this.setData({
         tmp_data:tmp_data,
+        tmp_type:res.data.data.type,
         can_add_extra_img:tmp_data.can_add_extra_img,
         can_add_extra_text:tmp_data.can_add_extra_text
       });
@@ -124,59 +163,135 @@ Page({
     }.bind(this));
 
   },
-  get_page_info:function(){
-    var data = {
-      id:this.data.page_id,
-      extra_uid:this.data.extra_uid
-    }
-    common.request('get','page_info',data,function (res) {
-      var tmp_data = res.data.data.content;
+  /**
+   * 获取权限的时候
+   * @param e
+   */
+  onGotUserInfo: function(e) {
+    // console.log(e.detail.errMsg)
+    // console.log(e.detail.userInfo)
+    // console.log(e.detail.rawData);
+
+    var data = {};
+    data.wechat_user_info = e.detail.rawData;
+    //上传更新
+    common.request('post','info_modify',data, function (res) {
+
+      app.globalData.userInfo.wechat_user_info = e.detail.userInfo;
       this.setData({
-        page_url:res.data.data.page_url,
-        sign_list:res.data.data.sign_list,
-        cutprice_list:res.data.data.cutprice_list,
-        praise_list:res.data.data.praise_list,
-        vote_list:res.data.data.vote_list,
-        // fight_group_list:res.data.data.fight_group_list,
-        // quick_buy_list:res.data.data.quick_buy_list,
-        is_sign_cutprice:Boolean(res.data.data.is_sign_cutprice),
-        is_help_cutprice:Boolean(res.data.data.is_help_cutprice),
-        extra_uid:parseInt(res.data.data.extra_uid),
-        is_sign_praise:Boolean(res.data.data.is_sign_praise),
-        is_help_praise:Boolean(res.data.data.is_help_praise),
-        is_sign_fightgroup:Boolean(res.data.data.is_sign_fightgroup),
-        is_help_fightgroup:Boolean(res.data.data.is_help_fightgroup),
-        pick_code:res.data.data.pick_code,
-        stock_none:res.data.data.stock_none
-
-      });
-
-      wx.setNavigationBarTitle({
-        title: res.data.data.title
+        auth_userinfo:true
       })
+    }.bind(this))
 
-      if (tmp_data.time_limit_end) {
-        tmp_data.time_limit_left = (Date.parse(tmp_data.time_limit_end) - Date.parse(new Date())) / 1000;
+  },
+  bindDateStart:function(e){
+    this.setData({
+      start_time:e.detail.value
+    })
+  },
+  bindDateEnd:function(e){
+    this.setData({
+      end_time:e.detail.value
+    })
+  },
+  bindDateStartmin:function(e){
+    this.setData({
+      start_time_min:e.detail.value
+    })
+  },
+  bindDateEndmin:function(e){
+    this.setData({
+      end_time_min:e.detail.value
+    })
+  },
+  get_page_info:function(is_customer){
+    return new Promise(function (resolve, reject) {
+      var data = {
+        id:this.data.page_id,
+        extra_uid:this.data.extra_uid
       }
+      common.request('get','page_info',data,function (res) {
+        var tmp_data = res.data.data.content;
+        this.setData({
+          page_url:res.data.data.page_url,
+          page_type:res.data.data.type,
+          sign_list:res.data.data.sign_list,
+          cutprice_list:res.data.data.cutprice_list,
+          praise_list:res.data.data.praise_list,
+          vote_list:res.data.data.vote_list,
+          // fight_group_list:res.data.data.fight_group_list,
+          // quick_buy_list:res.data.data.quick_buy_list,
+          is_sign_cutprice:Boolean(res.data.data.is_sign_cutprice),
+          is_help_cutprice:Boolean(res.data.data.is_help_cutprice),
+          extra_uid:parseInt(res.data.data.extra_uid),
+          is_sign:Boolean(res.data.data.is_sign),
+          is_sign_praise:Boolean(res.data.data.is_sign_praise),
+          is_help_praise:Boolean(res.data.data.is_help_praise),
+          is_sign_fightgroup:Boolean(res.data.data.is_sign_fightgroup),
+          is_help_fightgroup:Boolean(res.data.data.is_help_fightgroup),
+          pick_code:res.data.data.pick_code,
+          stock_none:res.data.data.stock_none
 
-      this.setData({
-        tmp_data:tmp_data
-      });
-
-      if (this.data.customerview && this.data.stock_none) {
-        wx.showModal({
-          title: '提示',
-          content: '当前库存不足,无法报名活动',
-          showCancel:false
         });
-      }
 
+        //如果是用户页面,获取之后,立马切换页面
+        if (is_customer) {
+          if (this.data.page_type == 2 && this.data.is_sign_cutprice) {//砍价
+            this.setData({
+              page_status:11
+            })
+          } else if(this.page_type == 7 && this.data.is_sign) {
+            this.setData({
+              page_status:11
+            })
+          } else if(this.page_type == 3 && this.data.is_sign_praise) {
+            this.setData({
+              page_status:11
+            })
+          } else {
+
+          }
+        }
+
+        wx.setNavigationBarTitle({
+          title: res.data.data.title
+        })
+
+        if (tmp_data.time_limit_end) {
+          tmp_data.time_limit_left = (Date.parse(tmp_data.time_limit_end) - Date.parse(new Date())) / 1000;
+        }
+
+        this.setData({
+          tmp_data:tmp_data
+        });
+
+        if (this.data.customerview && this.data.stock_none) {
+          wx.showModal({
+            title: '提示',
+            content: '当前库存不足,无法报名活动',
+            showCancel:false
+          });
+        }
+        resolve();
+
+      }.bind(this));
     }.bind(this));
   },
   onShow: function() {
-    this.setData({
-      current_cut_img:app.globalData.current_cut_img
-    })
+
+    if (this.data.set_img_key) {
+      if (this.data.set_img_key == 'main_img') {
+        this.setData({
+          main_img:app.globalData.current_cut_img
+        })
+      }
+      this.data.set_img_key = '';
+    } else {
+      this.setData({
+        current_cut_img:app.globalData.current_cut_img
+      })
+    }
+
   },
   start_make:function() {
     this.setData({
@@ -184,39 +299,89 @@ Page({
     })
   },
   complete_make: function(){
+    var error_msg = [];
+    if (!this.data.main_img) {
+      error_msg.push('请输入上传主图');
+    }
     if (!this.data.page_title) {
+      error_msg.push('请输入页面标题');
+    }
+    if ((this.data.tmp_type == 2 ||this.data.tmp_type == 7) && !this.data.page_stock) {
+      error_msg.push('请输入页面标题');
+    }
+
+    if ((this.data.tmp_type == 2 ||this.data.tmp_type == 3 || this.data.tmp_type == 4 ||this.data.tmp_type == 7) && !this.data.start_time) {
+      error_msg.push('请选择活动开始日期');
+    }
+    if ((this.data.tmp_type == 2 ||this.data.tmp_type == 3 || this.data.tmp_type == 4 ||this.data.tmp_type == 7) && !this.data.end_time) {
+      error_msg.push('请选择活动结束日期');
+    }
+    if (error_msg.length) {
       wx.showToast({
-        title: '请输入页面标题',
+        title: error_msg[0],
         image:'../../resource/images/tip.png'
       });
       return;
     }
+    common.show_toast('上传主图中...');
+    //开始上传主图
+    wx.uploadFile({
+      url: config.urls.img_upload,
+      filePath: this.data.main_img,
+      name: 'img',
+      formData:{
+        'user_session':app.globalData.user_session
+      },
+      success: function(res){
+        wx.hideToast();
+        common.show_toast('提交活动数据中...');
+        res.data = JSON.parse(res.data);
+        //common.check_login(res, app);
+        this.setData({
+          main_img:res.data.data
+        });
 
-    this.setData({
-      page_status:3
+        // this.setData({
+        //   page_status:3
+        // });
+
+        var data = {};
+        data.tmp_data = this.data.tmp_data;
+        data.tmp_id = this.data.id;
+        data.page_title = this.data.page_title;
+        data.main_img = this.data.main_img;
+        data.page_stock = this.data.page_stock;
+        if (this.data.start_time) {
+          data.start_time = this.data.start_time_min ? this.data.start_time+' ' +this.data.start_time_min : this.data.start_time;
+        }
+        if (this.data.end_time) {
+          data.end_time = this.data.end_time_min ? this.data.start_time+' ' +this.data.end_time_min : this.data.end_time
+        }
+        common.request('post','page_submit',data, function (res) {
+          wx.hideToast();
+          common.request_callback(res);
+          this.setData({
+            page_url:res.data.data.url,
+            page_id:parseInt(res.data.data.page_id)
+          });
+          wx.redirectTo({
+            url: '/pages/share/index?page_id='+this.data.page_id+'&title='+this.data.page_title+'&img='+this.data.main_img
+          });
+        }.bind(this))
+
+      }.bind(this)
     });
-
-    var data = {};
-    data.tmp_data = this.data.tmp_data;
-    data.tmp_id = this.data.id;
-    data.page_title = this.data.page_title;
-    data.page_stock = this.data.page_stock;
-    common.request('post','page_submit',data, function (res) {
-      common.request_callback(res);
-      this.setData({
-        page_url:res.data.data.url,
-        page_id:parseInt(res.data.data.page_id)
-      })
-
-    }.bind(this))
 
   },
 
   complete_make_next: function(){
 
-    this.setData({
-      page_status:9
-    });
+    common.show_confirm('请确认信息无误,进入下一步后将无法回退修改').then(function(){
+      this.setData({
+        page_status:9
+      });
+    }.bind(this))
+
   },
 
   share_make: function(extra_uid){
@@ -334,16 +499,16 @@ Page({
       page_stock: e.detail.value
     });
   },
-  onShareAppMessage:function() {
-    var title = '店长营销工具';
-    common.request('get','statistics_point',{page_id:this.data.page_id, type:2}, function (res) {});
-    return {
-      title:title,
-      path:'pages/tmp_make/index?customerview=1&id='+this.data.page_id+'&extra_uid='+this.data.extra_uid,
-      imageUrl:''
-    }
-
-  },
+  // onShareAppMessage:function() {
+  //   var title = '店长营销工具';
+  //   common.request('get','statistics_point',{page_id:this.data.page_id, type:2}, function (res) {});
+  //   return {
+  //     title:title,
+  //     path:'pages/tmp_make/index?customerview=1&id='+this.data.page_id+'&extra_uid='+this.data.extra_uid,
+  //     imageUrl:''
+  //   }
+  //
+  // },
   onPullDownRefresh(){
     if (this.data.customerview) {
       this.get_page_info();
@@ -449,6 +614,28 @@ Page({
     });
 
 
-  }
+  },
 
+
+  change_main_img(){
+
+    this.setData({
+      set_img_key:'main_img'
+    })
+    var w = 500;
+    var h = 400;
+    wx.navigateTo({
+      url: '/pages/cutInside/cutInside?w='+w+'&h='+h
+    });
+  },
+  show_rule(){
+    this.setData({
+      rule_visible:true
+    })
+  },
+  close_rule(){
+    this.setData({
+      rule_visible:false
+    })
+  }
 })

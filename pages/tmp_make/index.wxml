@@ -1,76 +1,181 @@
 <!--index.wxml-->
+<block wx:if="{{!auth_userinfo}}">
+    <view style="position: relative">
+        <view class="btn" style="width: 500rpx;margin: 0 auto;margin-top: 30%;">允许授权获取头像和昵称</view>
+        <button bindgetuserinfo="onGotUserInfo" style="width: 500rpx;height: 100%;position: absolute;top:0;left: 125rpx;opacity: 0" open-type="getUserInfo"></button>
 
-<block wx:if="{{page_status == 9}}">
-    <image style="width: 30rpx;height: 30rpx;margin-right: 10rpx;vertical-align: middle;margin-top: -5rpx;" mode="widthFix" src="http://qiniu-pub.yixsu.com/pic%E5%8F%91%E5%B8%83@3x.png"></image>
+        <view style="width: 500rpx;text-align: center;font-size: 26rpx;color: #999;margin: 30rpx auto">
+            <text>请点击上方按钮,允许当前小程序获取您的头像和昵称,该信息将用于报名活动等操作时候的有效信息</text>
+        </view>
+
+    </view>
 
 </block>
 <block wx:else>
-    <view class="container" style="background-image: url({{tmp_data.bg.src}});background-size:100%;background-repeat: repeat-y;position: relative;min-height:{{tmp_data.height}}">
+    <block wx:if="{{page_status == 9}}">
+        <view class="container">
+            <image style="width: 300rpx;height: 300rpx;" mode="widthFix" src="http://qiniu-pub.yixsu.com/pic%E5%8F%91%E5%B8%83@3x.png"></image>
+            <text>还有一步马上就成功啦！</text>
 
-        <view wx:key="index" wx:for="{{tmp_data.page}}">
+            <view style="width: 700rpx;margin: 30rpx auto;background: #F6F6F6">
 
-            <page_img wx:if="{{item.type == 'img'}}" item="{{item}}" can-edit="{{page_status == '2' && item.is_available}}" currentcutimg="{{current_cut_img}}" data-index="{{index}}" bindchangeitem="change_tmp_data_page"  bindtriggerevent="triggerevent"></page_img>
-            <page_text wx:if="{{item.type == 'text'}}" item="{{item}}" can-edit="{{page_status == '2' && item.is_available}}" data-index="{{index}}" bindchangeitem="change_tmp_data_page"  bindtriggerevent="triggerevent"></page_text>
-            <page_sign wx:if="{{item.type == 'sign'}}" item="{{item}}" can-edit="{{page_status == '2' && item.is_available}}" page-id="{{page_id}}" customerview="{{customerview}}" data-index="{{index}}" bindtriggerevent="triggerevent" bindchangeitem="change_tmp_data_page"></page_sign>
-            <page_timelimit wx:if="{{item.type == 'timelimit'}}" item="{{item}}" left="{{tmp_data.time_limit_left}}" can-edit="{{page_status == '2' && item.is_available}}" data-index="{{index}}" bindchangetmpdata="change_tmp_data"></page_timelimit>
-            <page_cutprice_btn wx:if="{{item.type == 'cutprice_btn'}}" item="{{item}}" can-edit="{{page_status == '2' && item.is_available}}" page-id="{{page_id}}" is-sign-cutprice="{{is_sign_cutprice}}" is-help-cutprice="{{is_help_cutprice}}" extra-uid="{{extra_uid}}" customerview="{{customerview}}" data-index="{{index}}" bindtriggerevent="triggerevent"></page_cutprice_btn>
-            <page_cutprice_price wx:if="{{item.type == 'cutprice_price'}}" item="{{item}}" can-edit="{{page_status == '2' && item.is_available}}" data-index="{{index}}" bindchangeitem="change_tmp_data_page"></page_cutprice_price>
-            <page_praise wx:if="{{item.type == 'praise'}}" item="{{item}}" can-edit="{{page_status == '2' && item.is_available}}" page-id="{{page_id}}" is-sign-praise="{{is_sign_praise}}" is-help-praise="{{is_help_praise}}" extra-uid="{{extra_uid}}" customerview="{{customerview}}" data-index="{{index}}" bindtriggerevent="triggerevent"></page_praise>
-            <page_vote wx:if="{{item.type == 'vote'}}" item="{{item}}" can-edit="{{page_status == '2' && item.is_available}}" page-id="{{page_id}}" customerview="{{customerview}}" pageview="{{pageview}}" data-index="{{index}}" bindtriggerevent="triggerevent" bindchangeitem="change_tmp_data_page"></page_vote>
-            <!--<page_fight_group wx:if="{{item.type == 'fight_group'}}" item="{{item}}" can-edit="{{page_status == '2'}}" page-id="{{page_id}}" is-sign-fightgroup="{{is_sign_fightgroup}}" is-help-fightgroup="{{is_help_fightgroup}}" extra-uid="{{extra_uid}}" customerview="{{customerview}}" data-index="{{index}}" bindtriggerevent="triggerevent" bindchangeitem="change_tmp_data_page"></page_fight_group>-->
-            <!--<page_quick_buy wx:if="{{item.type == 'quick_buy'}}" item="{{item}}" can-edit="{{page_status == '2' && item.is_available}}" page-id="{{page_id}}" customerview="{{customerview}}" data-index="{{index}}" bindtriggerevent="triggerevent" bindchangeitem="change_tmp_data_page"></page_quick_buy>-->
+                <view style="margin-top: 10rpx;margin-bottom: 10rpx;margin-left: 30rpx;">
+                    <view style="width: 200rpx;display: inline-block">活动封面图:</view>
 
-        </view>
-        <view wx-if="{{can_add_extra_img && page_status == '2'}}" bindtap="add_extra_img" class="line-add-btn">添加图片槽</view>
-        <view wx-if="{{can_add_extra_text && page_status == '2'}}" bindtap="add_extra_text" class="line-add-btn">添加文字槽</view>
+                    <view bindtap="change_main_img" style="font-size: 80rpx;display:inline-block;vertical-align:middle;width: 250rpx;height: 200rpx;line-height: 200rpx;text-align: center;border: 1px dashed #000000;border-radius: 2rpx">
+                        <block wx:if="{{main_img}}"><image style="width: 250rpx;" src="{{main_img}}" mode="widthFix"></image></block>
+                        <block wx:if="{{!main_img}}">+</block>
+                    </view>
 
-        <include  wx:if="{{tmp_data.sign_list}}" src="../common/tmp_part/sign_list.wxml"/>
-        <!--<include  wx:if="{{tmp_data.cutprice_list}}" src="../common/tmp_part/cutprice_list.wxml"/>-->
-        <include  wx:if="{{tmp_data.praise_list}}" src="../common/tmp_part/praise_list.wxml"/>
-        <!--<include  wx:if="{{tmp_data.vote_list}}" src="../common/tmp_part/vote_list.wxml"/>-->
+                </view>
+                <view style="margin-top: 10rpx;margin-bottom: 10rpx;margin-left: 30rpx;">
+                    <view style="width: 200rpx;display: inline-block">活动标题:</view>
+                    <input style="display: inline-block;background:#fff;vertical-align:middle;border: 1px solid #ddd;padding: 4px;border-radius: 2px;margin-right: 20rpx;width: 400rpx;" bindinput="change_title"  maxlength="30" placeholder="请输入页面标题,30字以内"  />
+                </view>
+                <!--blocks:[{id:2,name:'砍价'},{id:1,name:'限时特惠'},{id:7,name:'预约报名'},{id:3,name:'集赞'},{id:4,name:'投票'},{id:5,name:'图文'}],-->
+                <view wx:if="{{tmp_type == '2' || tmp_type == '7'}}" style="margin-top: 10rpx;margin-bottom: 10rpx;margin-left: 30rpx;">
+                    <view style="width: 200rpx;display: inline-block">最大报名数:</view>
+                    <input style="display: inline-block;background:#fff;vertical-align:middle;border: 1px solid #ddd;padding: 4px;border-radius: 2px;margin-right: 20rpx;width: 400rpx;" bindinput="change_stock"  type="number" maxlength="9" placeholder="请输入最大报名数"  />
 
-        <view wx-if="{{pageview}}" class="action_btn" style="bottom: 120rpx;background: rgba(0,0,0,0.4)"  bindtap="goto_page_detail">查看活动情况</view>
-        <view wx-if="{{pageview}}" class="action_btn" style="bottom: 220rpx;background: rgba(0,0,0,0.4)"  bindtap="goto_action">查看活动页面</view>
-        <view wx-if="{{customerview && pick_code}}" class="action_btn" style="bottom: 320rpx;background: rgba(0,0,0,0.4)"  bindtap="show_pick_code">凭证码</view>
+                </view>
+                <block wx:if="{{tmp_type == '2' || tmp_type == '3' || tmp_type == '4' || tmp_type == '7'}}">
+                    <view style="margin-top: 10rpx;margin-bottom: 10rpx;margin-left: 30rpx;">
 
-        <!--<view wx-if="{{page_status == '1' && !preview}}" class="action_btn start_make" bindtap="start_make">开始制作</view>-->
-        <view wx-if="{{page_status == '1' && !preview}}" class="bottom_btn" bindtap="start_make">
-            <image style="width: 30rpx;height: 30rpx;margin-right: 10rpx;vertical-align: middle;margin-top: -5rpx;" mode="widthFix" src="http://qiniu-pub.yixsu.com/使用模板@2x.png"></image>
-            使用模板
-        </view>
+                        <view style="width: 200rpx;display: inline-block">活动开始时间:</view>
+                        <picker style="display: inline-block;background:#fff;vertical-align:middle;border: 1px solid #ddd;padding: 4px;border-radius: 2px;margin-right: 20rpx;width: 230rpx;height: 50rpx;" mode="date" value="{{start_time}}"  bindchange="bindDateStart">
+                            <view class="picker" style="width: 230rpx;height: 50rpx;" >
+                                {{start_time ? start_time : '选择日期'}}
+                            </view>
+                        </picker>
+                        <picker style="display: inline-block;background:#fff;vertical-align:middle;border: 1px solid #ddd;padding: 4px;border-radius: 2px;margin-right: 20rpx;width: 150rpx;height: 50rpx;" mode="time" value="{{start_time_min}}"  bindchange="bindDateStartmin">
+                            <view class="picker" style="width: 150rpx;height: 50rpx;" >
+                                {{start_time_min ? start_time_min : '选择时间'}}
+                            </view>
+                        </picker>
+                    </view>
+                    <view style="margin-top: 10rpx;margin-bottom: 10rpx;margin-left: 30rpx;">
 
-        <!--<input wx-if="{{page_status == '2' && tmp_data.has_stock}}" bindinput="change_stock" maxlength="9" placeholder="请输入库存数量" type="number" style="position: fixed;left: 10rpx;bottom: 150rpx;width:500rpx;padding:10rpx;border: 1px solid #0CD400;background:rgba(0,0,0,0.5);color: #0CD400;"/>-->
-        <!--<input wx-if="{{page_status == '2'}}" bindinput="change_title" maxlength="20" placeholder="请输入页面标题,20字以内" style="position: fixed;left: 10rpx;bottom: 10rpx;width:500rpx;padding:10rpx;border: 1px solid #0CD400;background:rgba(0,0,0,0.5);color: #0CD400;"/>-->
-        <!--<view wx-if="{{page_status == '2'}}" class="action_btn complete_make" bindtap="complete_make">完成制作</view>-->
+                        <view style="width: 200rpx;display: inline-block">活动结束时间:</view>
+                        <picker style="display: inline-block;background:#fff;vertical-align:middle;border: 1px solid #ddd;padding: 4px;border-radius: 2px;margin-right: 20rpx;width: 230rpx;height: 50rpx;" mode="date" value="{{end_time}}"  bindchange="bindDateEnd">
+                            <view class="picker" style="width: 230rpx;height: 50rpx;" >
+                                {{end_time ? end_time : '选择日期'}}
+                            </view>
+                        </picker>
+                        <picker style="display: inline-block;background:#fff;vertical-align:middle;border: 1px solid #ddd;padding: 4px;border-radius: 2px;margin-right: 20rpx;width: 150rpx;height: 50rpx;" mode="time" value="{{end_time_min}}"  bindchange="bindDateEndmin">
+                            <view class="picker" style="width: 150rpx;height: 50rpx;" >
+                                {{end_time_min ? end_time_min : '选择时间'}}
+                            </view>
+                        </picker>
+                    </view>
+                </block>
 
-
-        <view wx-if="{{page_status == '2'}}" class="bottom_btn" bindtap="complete_make_next">
-            <image style="width: 30rpx;height: 30rpx;margin-right: 10rpx;vertical-align: middle;margin-top: -5rpx;" mode="widthFix" src="http://qiniu-pub.yixsu.com/使用模板@2x.png"></image>
-            下一步(设置活动参数)
-        </view>
-
-
-
-        <view wx-if="{{page_status == '3' && !customerview}}" class="action_btn share_make" bindtap="share_make" style="">生成二维码分享</view>
-        <!--<view wx-if="{{page_status == '3' && !customerview}}" class="action_btn share_make" bindtap="share_make2">生成链接分享</view>-->
-        <view wx-if="{{show_qrcode}}" style="position:fixed;background: rgb(200,200,200);width: 100%;height: 100%;top:0;left: 0;">
-            <view style="width: 600rpx;margin: 200rpx auto;height: 400rpx;">
-                <image bindtap="preview_qrcode" style="width: 200rpx;margin: 20rpx 200rpx;height: 200rpx" mode="scaleToFill" src="{{qrcode_link}}"></image>
-                <view style="margin-bottom: 20rpx">
-                    <view style="font-weight: bold">分享好友方法:</view>
-                    点击上方二维码预览,在预览窗口长按图片,选择发送给朋友,可多选好友。或者<button style="display: inline-block;vertical-align: middle;font-size: 20rpx" open-type="share">直接点击</button></view>
-                <view style="clear: both"></view>
-                <view>
-                    <view style="font-weight: bold">分享朋友圈:</view>
-                    点击上方二维码预览,在预览窗口长按图片,选择保存图片,然后再到微信朋友圈手动发布,可自主配上文字说明。</view>
-                <view bindtap="close_show_qrcode" style="height: 100rpx;width: 100rpx;margin: 20rpx auto;text-align: center;line-height: 100rpx;font-size: 36rpx;background: #ffffff;border-radius: 100rpx;">x</view>
             </view>
 
-        </view>
-    </view>
-</block>
-<include  wx:if="{{rule_show==1 && page_status==1}}" src="../common/agreement/make_page.wxml"/>
+            <!--<view class="btn" style="width:700rpx;" bindtap="complete_make">发布活动</view>-->
+            <i-button i-class="submit" bind:click="complete_make" type="success" >发布活动</i-button>
 
-<dist_modal visible="{{ pick_code_visible }}" actions="{{ pick_code_actions }}" bind:click="close_pick_code">
-    <view>凭证码:{{pick_code}}</view>
-</dist_modal>
+
+        </view>
+
+    </block>
+    <!--客户已报名页面-->
+    <block wx:elif="{{page_status == 11}}">
+        <!--砍价-->
+        <block wx:if="{{page_type == 2}}">
+2
+        </block>
+        <!--预约报名-->
+        <block wx:elif="{{page_type == 7}}">
+7
+        </block>
+        <!--集赞-->
+        <block wx:elif="{{page_type == 3}}">
+3
+        </block>
+    </block>
+    <block wx:else>
+        <view class="container" style="background-image: url({{tmp_data.bg.src}});background-size:100%;background-repeat: repeat-y;position: relative;min-height:{{tmp_data.height}}">
+
+            <view wx:key="index" wx:for="{{tmp_data.page}}">
+
+                <page_img wx:if="{{item.type == 'img'}}" item="{{item}}" can-edit="{{page_status == '2' && item.is_available}}" currentcutimg="{{current_cut_img}}" data-index="{{index}}" bindchangeitem="change_tmp_data_page"  bindtriggerevent="triggerevent"></page_img>
+                <page_text wx:if="{{item.type == 'text'}}" item="{{item}}" can-edit="{{page_status == '2' && item.is_available}}" data-index="{{index}}" bindchangeitem="change_tmp_data_page"  bindtriggerevent="triggerevent"></page_text>
+                <page_sign wx:if="{{item.type == 'sign'}}" item="{{item}}" can-edit="{{page_status == '2' && item.is_available}}" page-id="{{page_id}}" customerview="{{customerview}}" data-index="{{index}}" bindtriggerevent="triggerevent" bindchangeitem="change_tmp_data_page"></page_sign>
+                <page_timelimit wx:if="{{item.type == 'timelimit'}}" item="{{item}}" left="{{tmp_data.time_limit_left}}" can-edit="{{page_status == '2' && item.is_available}}" data-index="{{index}}" bindchangetmpdata="change_tmp_data"></page_timelimit>
+                <page_cutprice_btn wx:if="{{item.type == 'cutprice_btn'}}" item="{{item}}" can-edit="{{page_status == '2' && item.is_available}}" page-id="{{page_id}}" is-sign-cutprice="{{is_sign_cutprice}}" is-help-cutprice="{{is_help_cutprice}}" extra-uid="{{extra_uid}}" customerview="{{customerview}}" data-index="{{index}}" bindtriggerevent="triggerevent"></page_cutprice_btn>
+                <page_cutprice_price wx:if="{{item.type == 'cutprice_price'}}" item="{{item}}" can-edit="{{page_status == '2' && item.is_available}}" data-index="{{index}}" bindchangeitem="change_tmp_data_page"></page_cutprice_price>
+                <page_praise wx:if="{{item.type == 'praise'}}" item="{{item}}" can-edit="{{page_status == '2' && item.is_available}}" page-id="{{page_id}}" is-sign-praise="{{is_sign_praise}}" is-help-praise="{{is_help_praise}}" extra-uid="{{extra_uid}}" customerview="{{customerview}}" data-index="{{index}}" bindtriggerevent="triggerevent"></page_praise>
+                <page_vote wx:if="{{item.type == 'vote'}}" item="{{item}}" can-edit="{{page_status == '2' && item.is_available}}" page-id="{{page_id}}" customerview="{{customerview}}" pageview="{{pageview}}" data-index="{{index}}" bindtriggerevent="triggerevent" bindchangeitem="change_tmp_data_page"></page_vote>
+                <!--<page_fight_group wx:if="{{item.type == 'fight_group'}}" item="{{item}}" can-edit="{{page_status == '2'}}" page-id="{{page_id}}" is-sign-fightgroup="{{is_sign_fightgroup}}" is-help-fightgroup="{{is_help_fightgroup}}" extra-uid="{{extra_uid}}" customerview="{{customerview}}" data-index="{{index}}" bindtriggerevent="triggerevent" bindchangeitem="change_tmp_data_page"></page_fight_group>-->
+                <!--<page_quick_buy wx:if="{{item.type == 'quick_buy'}}" item="{{item}}" can-edit="{{page_status == '2' && item.is_available}}" page-id="{{page_id}}" customerview="{{customerview}}" data-index="{{index}}" bindtriggerevent="triggerevent" bindchangeitem="change_tmp_data_page"></page_quick_buy>-->
+
+            </view>
+            <view wx-if="{{can_add_extra_img && page_status == '2'}}" bindtap="add_extra_img" class="line-add-btn">添加图片槽</view>
+            <view wx-if="{{can_add_extra_text && page_status == '2'}}" bindtap="add_extra_text" class="line-add-btn">添加文字槽</view>
+
+            <include  wx:if="{{tmp_data.sign_list}}" src="../common/tmp_part/sign_list.wxml"/>
+            <!--<include  wx:if="{{tmp_data.cutprice_list}}" src="../common/tmp_part/cutprice_list.wxml"/>-->
+            <include  wx:if="{{tmp_data.praise_list}}" src="../common/tmp_part/praise_list.wxml"/>
+            <!--<include  wx:if="{{tmp_data.vote_list}}" src="../common/tmp_part/vote_list.wxml"/>-->
+
+            <view wx-if="{{pageview}}" class="action_btn" style="bottom: 120rpx;background: rgba(0,0,0,0.4)"  bindtap="goto_page_detail">查看活动情况</view>
+            <view wx-if="{{pageview}}" class="action_btn" style="bottom: 220rpx;background: rgba(0,0,0,0.4)"  bindtap="goto_action">查看活动页面</view>
+            <view wx-if="{{customerview && pick_code}}" class="action_btn" style="bottom: 320rpx;background: rgba(0,0,0,0.4)"  bindtap="show_pick_code">凭证码</view>
+            <view wx-if="{{customerview}}" style="position: absolute;top:30rpx;right: -20rpx;width: 150rpx;height: 40rpx;line-height: 40rpx;background: rgba(0,0,0,0.5);color:#fff;font-size: 24rpx;text-align: center;border-radius: 20rpx;"  bindtap="show_rule">活动规则</view>
+
+            <!--<view wx-if="{{page_status == '1' && !preview}}" class="action_btn start_make" bindtap="start_make">开始制作</view>-->
+            <view wx-if="{{page_status == '1' && !preview}}" class="bottom_btn" bindtap="start_make">
+                <image style="width: 30rpx;height: 30rpx;margin-right: 10rpx;vertical-align: middle;margin-top: -5rpx;" mode="widthFix" src="http://qiniu-pub.yixsu.com/使用模板@2x.png"></image>
+                使用模板
+            </view>
+
+            <!--<input wx-if="{{page_status == '2' && tmp_data.has_stock}}" bindinput="change_stock" maxlength="9" placeholder="请输入库存数量" type="number" style="position: fixed;left: 10rpx;bottom: 150rpx;width:500rpx;padding:10rpx;border: 1px solid #0CD400;background:rgba(0,0,0,0.5);color: #0CD400;"/>-->
+            <!--<input wx-if="{{page_status == '2'}}" bindinput="change_title" maxlength="20" placeholder="请输入页面标题,20字以内" style="position: fixed;left: 10rpx;bottom: 10rpx;width:500rpx;padding:10rpx;border: 1px solid #0CD400;background:rgba(0,0,0,0.5);color: #0CD400;"/>-->
+            <!--<view wx-if="{{page_status == '2'}}" class="action_btn complete_make" bindtap="complete_make">完成制作</view>-->
+
+
+            <view wx-if="{{page_status == '2'}}" class="bottom_btn" bindtap="complete_make_next">
+                <image style="width: 30rpx;height: 30rpx;margin-right: 10rpx;vertical-align: middle;margin-top: -5rpx;" mode="widthFix" src="http://qiniu-pub.yixsu.com/使用模板@2x.png"></image>
+                下一步(设置活动参数)
+            </view>
+
+
+
+            <view wx-if="{{page_status == '3' && !customerview}}" class="action_btn share_make" bindtap="share_make" style="">生成二维码分享</view>
+            <!--<view wx-if="{{page_status == '3' && !customerview}}" class="action_btn share_make" bindtap="share_make2">生成链接分享</view>-->
+            <view wx-if="{{show_qrcode}}" style="position:fixed;background: rgb(200,200,200);width: 100%;height: 100%;top:0;left: 0;">
+                <view style="width: 600rpx;margin: 200rpx auto;height: 400rpx;">
+                    <image bindtap="preview_qrcode" style="width: 200rpx;margin: 20rpx 200rpx;height: 200rpx" mode="scaleToFill" src="{{qrcode_link}}"></image>
+                    <view style="margin-bottom: 20rpx">
+                        <view style="font-weight: bold">分享好友方法:</view>
+                        点击上方二维码预览,在预览窗口长按图片,选择发送给朋友,可多选好友。或者<button style="display: inline-block;vertical-align: middle;font-size: 20rpx" open-type="share">直接点击</button></view>
+                    <view style="clear: both"></view>
+                    <view>
+                        <view style="font-weight: bold">分享朋友圈:</view>
+                        点击上方二维码预览,在预览窗口长按图片,选择保存图片,然后再到微信朋友圈手动发布,可自主配上文字说明。</view>
+                    <view bindtap="close_show_qrcode" style="height: 100rpx;width: 100rpx;margin: 20rpx auto;text-align: center;line-height: 100rpx;font-size: 36rpx;background: #ffffff;border-radius: 100rpx;">x</view>
+                </view>
+
+            </view>
+        </view>
+    </block>
+    <include  wx:if="{{rule_show==1 && page_status==1}}" src="../common/agreement/make_page.wxml"/>
+
+    <dist_modal visible="{{ pick_code_visible }}" actions="{{ pick_code_actions }}" bind:click="close_pick_code">
+        <view>凭证码:{{pick_code}}</view>
+    </dist_modal>
+
+    <dist_modal visible="{{ rule_visible }}" actions="{{ [{name: '确认并关闭',color: '#333'}] }}" bind:click="close_rule">
+        <view style="width: 80%;margin: 0 auto">
+            <image style="width: 100%;height: 30rpx;" mode="widthFix" src="http://qiniu-pub.yixsu.com/title@3x.png"></image>
+            <view style="width: 100%;margin-top: 20rpx;">
+                <view style="color: red">该活动类型为集赞活动。</view>
+                <view  style="margin-top: 20rpx;margin-bottom: 5rpx;">活动规则:</view>
+                <text >商家选择集赞活动模板制作集赞活动，完成制作后分享活动给好友，好友报名参与活动。报名之后可以通过分享活动链接或活动二维码来邀请更多好友点赞。当被赞数量达到商家规定的对应的数量后，可以凭提货码到店消费。集赞数量和对应的优惠或者礼品由商家自行规定。活动时间截止或者商家库存不足时，活动结束。
+
+                    活动最终解释权归商家所有。
+                </text>
+            </view>
+        </view>
+    </dist_modal>
+</block>

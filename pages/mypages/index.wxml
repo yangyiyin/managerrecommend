@@ -18,7 +18,11 @@
 
         <view class="right">
             <view style="font-size: 30rpx;">{{item.title}}</view>
-            <view wx:if="{{item.start_time || item.end_time }}" class="min-info">{{item.start_time ? item.start_time : '-'}} ~ {{item.end_time ? item.end_time : '-'}}</view>
+            <view wx:if="{{item.start_time || item.end_time }}" class="min-info">
+                <view>活动开始:{{item.start_time ? item.start_time : '-'}}</view>
+                <view>活动结束{{item.end_time ? item.end_time : '-'}}</view>
+
+            </view>
             <view wx:if="{{!item.start_time && !item.end_time }}" class="min-info"></view>
             <view style="margin-top: 20rpx;">
                 <i-tag wx:if="{{item.active_status == '进行中'}}" type="border" color="red">{{item.active_status}}</i-tag>

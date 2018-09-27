@@ -13,7 +13,7 @@
             <view  wx:if="{{customerview}}" bindtap="custom_vote" data-vote_id="{{index2}}" style="margin:0 auto;width: 700rpx;text-align:center;padding: 20rpx 0;background: #0CD400;color: #fff;border-radius: 3rpx;">投票</view>
             <view class="cover"></view>
         </view>
-    <view  wx:if="{{canEdit}}" bindtap="add_vote_item" style="width: 710rpx;text-align:center;background: rgb(255,255,255);border:1px dashed #000;color: #000;height: 60rpx;box-shadow: 0rpx 2rpx 5px #999;line-height: 60rpx;margin: 20rpx auto">+增加投票项目</view>
+    <view  wx:if="{{canEdit}}" bindtap="add_vote_item" style="width: 710rpx;text-align:center;background: rgb(255,255,255);border:1px dashed #000;color: #000;height: 60rpx;box-shadow: 0rpx 2rpx 5px #999;line-height: 60rpx;margin: 20rpx auto;z-index: 99">+增加投票项目</view>
 
 
     <view style="clear: both"></view>

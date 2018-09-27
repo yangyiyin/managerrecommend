@@ -1,5 +1,6 @@
 {
   "pages":[
+    "pages/share/index",
     "pages/login/index",
     "pages/webview/index",
     "pages/mypages/index",
