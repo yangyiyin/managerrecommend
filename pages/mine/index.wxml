@@ -75,8 +75,8 @@
                 </view>
             </view>
 
-            <!--<view  wx:if="{{userInfo.type == 1}}" class="item" bindtap="become_manager">-->
-            <view  class="item" bindtap="become_manager">
+            <view  wx:if="{{userInfo.type == 1}}" class="item" bindtap="become_manager">
+            <!--<view  class="item" bindtap="become_manager">-->
                 <view class="logo">
                     <image class="img" mode="widthFix" src="http://qiniu-pub.yixsu.com/me_list_icon_help.png"></image>
                 </view>
