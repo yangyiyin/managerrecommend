@@ -36,7 +36,7 @@ App({
                 })
               } else if(res.data.data.type == '1') {//顾客
                 wx.reLaunch({
-                  url: '/pages/custom_pages/index'
+                  url: '/pages/mine/index'
                 })
               } else {
                 wx.reLaunch({

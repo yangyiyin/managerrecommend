@@ -49,7 +49,7 @@ Page({
       common.request_callback(res);
       if (res.data.success) {
         wx.reLaunch({
-           url: '/pages/custom_pages/index'
+           url: '/pages/mine/index'
           //url: '/pages/index/index'
         });
       } else {
@@ -123,6 +123,12 @@ Page({
       return;
     }
 
+    if (!this.data.inputaddress) {
+      this.setData({
+        inputaddress_error:'请输入地址'
+      })
+      return;
+    }
     // if (!data.address) {
     //   wx.showToast({
     //     title: '请输入店铺地址',

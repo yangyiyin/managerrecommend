@@ -1,13 +1,14 @@
 <!--<text class="{{status_class}}" bindtap="change_text" data-text="{{item.text}}" style="{{item.style}}" >{{item.text}}</text>-->
 <view bindtap="change_text" data-index="{{index}}" class="{{status_class}}" style="{{item.style}}">{{time_limit_left_desc}} <view class="cover"></view></view>
 <dist_modal visible="{{ visible }}" actions="{{ actions }}" bind:click="handleClick">
-    <view style="text-align:center;padding-top: 30rpx;padding-bottom: 10rpx;color: #000;font-size: 30rpx;"><text style="background: #eee">设置时长:</text></view>
+    <view style="margin: 30rpx 0">
+        <view style="text-align:center;padding-top: 30rpx;padding-bottom: 10rpx;color: #000;font-size: 30rpx;"><text style="background: #eee">设置时长:</text></view>
 
-    <view style="text-align: center">
-        <input bindinput="tapInput1" style="border-bottom: 1px solid #eee;width: 60rpx;margin: 0 auto;border-radius: 5rpx;display: inline-block;margin-right: 20rpx;margin-top: 20rpx;" />天
-        <input bindinput="tapInput2" style="border-bottom: 1px solid #eee;width: 60rpx;margin: 0 auto;border-radius: 5rpx;display: inline-block;margin-right: 20rpx;margin-top: 20rpx;" />时
-        <input bindinput="tapInput3" style="border-bottom: 1px solid #eee;width: 60rpx;margin: 0 auto;border-radius: 5rpx;display: inline-block;margin-right: 20rpx;margin-top: 20rpx;" />分
+        <view style="text-align: center">
+            <input bindinput="tapInput1" style="border-bottom: 1px solid #eee;width: 60rpx;margin: 0 auto;border-radius: 5rpx;display: inline-block;margin-right: 20rpx;margin-top: 20rpx;" />天
+            <input bindinput="tapInput2" style="border-bottom: 1px solid #eee;width: 60rpx;margin: 0 auto;border-radius: 5rpx;display: inline-block;margin-right: 20rpx;margin-top: 20rpx;" />时
+            <input bindinput="tapInput3" style="border-bottom: 1px solid #eee;width: 60rpx;margin: 0 auto;border-radius: 5rpx;display: inline-block;margin-right: 20rpx;margin-top: 20rpx;" />分
+        </view>
     </view>
-
 
 </dist_modal>

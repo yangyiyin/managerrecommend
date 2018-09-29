@@ -15,6 +15,12 @@ Page({
     },
     animation:null,
     menus:[],
+
+    inputtitle:'',
+    inputtel:'',
+    inputaddress:'',
+    inputcode:'',
+    isPoneAvailable:false
   },
   onLoad: function () {
     app.get_userinfo(true).then(function(){
@@ -128,5 +134,150 @@ Page({
         });
       }
     }.bind(this),1)
-  }
+  },
+  become_manager:function(){
+    this.setData({
+      become_manager_visible:true
+    })
+
+  },
+
+  bindinputtitle:function (e) {
+    this.setData({
+      inputtitle: e.detail.value
+    });
+    if (e.detail.value) {
+      this.setData({
+        inputtitle_error:''
+      })
+    }
+
+  },
+  bindinputtel:function (e) {
+    this.setData({
+      inputtel: e.detail.value,
+      isPoneAvailable: common.isPoneAvailable(e.detail.value)
+    });
+    if (e.detail.value) {
+      this.setData({
+        inputtel_error:''
+      })
+    }
+  },
+  bindinputcode:function (e) {
+    this.setData({
+      inputcode: e.detail.value
+    });
+    if (e.detail.value) {
+      this.setData({
+        inputcode_error:''
+      })
+    }
+  },
+  bindinputaddress:function (e) {
+    this.setData({
+      inputaddress: e.detail.value
+    });
+  },
+
+  do_become_manager:function(){
+    var data = {};
+    data.entity_title = this.data.inputtitle;
+    data.entity_tel = this.data.inputtel;
+    data.address = this.data.inputaddress;
+    if (!data.entity_title) {
+      this.setData({
+        inputtitle_error:'请输入店名'
+      })
+      return;
+    }
+
+    if (!data.entity_tel) {
+      this.setData({
+        inputtel_error:'请输入手机号'
+      })
+      return;
+    }
+
+    if (!this.data.inputcode) {
+      this.setData({
+        inputcode_error:'请输入验证码'
+      })
+      return;
+    }
+
+    if (!this.data.inputaddress) {
+      this.setData({
+        inputaddress_error:'请输入地址'
+      })
+      return;
+    }
+    // if (!data.address) {
+    //   wx.showToast({
+    //     title: '请输入店铺地址',
+    //     image:'../../resource/images/tip.png'
+    //   });
+    //   return;
+    // }
+    data.type = 2;
+
+    //验证
+    var data_code_vrify = {
+      phone:this.data.inputtel,
+      code:this.data.inputcode,
+
+    }
+    common.request('post','verify_code',data_code_vrify,function (res) {
+
+      if (res.data.success) {
+        common.request('post','info_modify',data, function (res) {
+          common.request_callback(res);
+          if (res.data.success) {
+            wx.showModal({
+              title: '恭喜你,成为店长!',
+              content: '',
+              showCancel:false
+            });
+            app.login();
+          } else {
+            wx.showModal({
+              title: res.data.message,
+              content: '',
+              showCancel:false
+            });
+          }
+
+        }.bind(this));
+      } else {
+        wx.showModal({
+          title: res.data.message,
+          content: '',
+          showCancel:false
+        });
+      }
+
+
+    }.bind(this));
+  },
+  send_code(){
+    var data = {
+      phone:this.data.inputtel
+
+    }
+    common.request('post','send_code',data,function (res) {
+
+      if (res.data.success) {
+
+      } else {
+        wx.showModal({
+          title: res.data.message,
+          content: '',
+          showCancel:false
+        });
+      }
+
+
+    }.bind(this));
+  },
+
 })

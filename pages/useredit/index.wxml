@@ -24,10 +24,12 @@
 
    <yxs_modal visible="{{display == 1}}" bindcallback_success="submit">
       <view slot="content">
-         <yxs_input width="500" height="80" maxlength="20" title="店铺名称:" bindchange="bindinputtitle" error_info="{{inputtitle_error}}"></yxs_input>
+         <yxs_input width="600" height="80" maxlength="20" title="店铺名称:" bindchange="bindinputtitle" error_info="{{inputtitle_error}}"></yxs_input>
          <view style="height:20rpx"></view>
-         <yxs_input width="500" height="80" maxlength="20" title="手机号:" bindchange="bindinputtel" error_info="{{inputtel_error}}"></yxs_input>
-         <yxs_input can_send_code="{{isPoneAvailable}}" type="verify_code" width="500" height="80" maxlength="20" bindchange="bindinputcode" bindsendcode="send_code" error_info="{{inputcode_error}}" placeholder="验证码"></yxs_input>
+         <yxs_input width="600" height="80" maxlength="20" title="手机号:" bindchange="bindinputtel" error_info="{{inputtel_error}}"></yxs_input>
+         <yxs_input can_send_code="{{isPoneAvailable}}" type="verify_code" width="600" height="80" maxlength="20" bindchange="bindinputcode" bindsendcode="send_code" error_info="{{inputcode_error}}" placeholder="验证码"></yxs_input>
+         <view style="height:20rpx"></view>
+         <yxs_input width="600" height="80" maxlength="20" title="店铺地址:" bindchange="bindinputaddress" error_info="{{inputaddress_error}}"></yxs_input>
 
       </view>
       <!--店铺名称: <input value="{{inputtitle}}" bindinput="bindinputtitle" style="border: 1px solid #999;color: #0CD400" placeholder="" cursor-spacing="10"/>-->

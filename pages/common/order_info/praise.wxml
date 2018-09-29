@@ -1,0 +1,77 @@
+<view class="container" style="background: linear-gradient(#E85264, #F15F47);">
+    <view style="width:700rpx;margin: 25rpx;background: #fff;border-radius: 5rpx;position: relative">
+
+       <view style="position: absolute;top:10rpx;right: 10rpx;" bindtap="show_rule_customer"><i-tag typ="border">活动规则></i-tag></view>
+
+
+        <view style="margin: 20rpx;">
+            <block wx:if="{{extra_uid}}">
+                <image style="float: left;width: 80rpx;height:80rpx;border-radius: 80rpx;margin-right:20rpx;vertical-align: middle" src="{{extra_user_info.avatar ? extra_user_info.avatar : (extra_user_info.wechar_user_info.avatarUrl ? extra_user_info.wechar_user_info.avatarUrl : 'http://qiniu-guanmei.yixsu.com/009c9299ef5826c01f91e5e0ec640732')}}" mode="widthFix"></image>
+                <view style="float: left">
+                    <view style="font-size: 24rpx;color: #999;">{{extra_user_info.user_name ? extra_user_info.user_name : extra_user_info.wechar_user_info.nickName}}</view>
+                    <view>快来帮我点赞吧!</view>
+                </view>
+            </block>
+            <block wx:else>
+                <image style="float: left;width: 80rpx;height:80rpx;border-radius: 80rpx;margin-right:20rpx;vertical-align: middle" src="{{userInfo.avatar ? userInfo.avatar : (userInfo.wechar_user_info.avatarUrl ? userInfo.wechar_user_info.avatarUrl : 'http://qiniu-guanmei.yixsu.com/009c9299ef5826c01f91e5e0ec640732')}}" mode="widthFix"></image>
+                <view style="float: left">
+                    <view style="font-size: 24rpx;color: #999;">{{userInfo.user_name ? userInfo.user_name : userInfo.wechar_user_info.nickName}}</view>
+                    <view>快来帮我点赞吧!</view>
+                </view>
+            </block>
+            <view style="clear: both"></view>
+        </view>
+
+        <view bindtap="goto_page_origin" style="margin: 20rpx;padding: 20rpx;background: #F5F4F5">
+            <view style="float: left;width: 180rpx;height:150rpx;overflow:hidden;margin-right:20rpx;vertical-align: middle">
+                <image class="img" src="{{page_info.img}}" mode="widthFix"></image>
+
+            </view>
+            <view style="float: left;width: 410rpx;">
+                <view style="margin-top: 10rpx;">{{page_info.title}}</view>
+                <view wx:if="{{page_info.end_time}}" style="font-size: 24rpx;color:#999;margin-top: 10rpx;">{{page_info.start_time}}~{{page_info.end_time}}</view>
+                <view wx:if="{{!page_info.end_time}}" style="font-size: 24rpx;color:#999;margin-top: 10rpx;">活动有效</view>
+            </view>
+            <view style="clear: both"></view>
+        </view>
+
+        <view style="margin: 30rpx 20rpx;text-align: center;font-size: 32rpx;">
+            当前共点赞数: <text style="color: red">{{page_info.praise_count}}</text>
+        </view>
+        <i-button wx:if="{{!extra_uid && is_sign_praise}}" type="warning" bind:click="share_make_by_uid">分享给好友，帮忙点赞</i-button>
+        <i-button wx:if="{{extra_uid && !is_help_praise}}" type="warning" bind:click="custom_praise_praise" >帮Ta点赞</i-button>
+        <i-button wx:if="{{extra_uid && is_help_praise}}" type="warning" disabled>已帮Ta点赞</i-button>
+        <i-button wx:if="{{extra_uid && !is_sign_praise}}" i-class="sign_cutprice_btn" type="info" bind:click="goto_page_origin">我也要参加</i-button>
+        <view style="margin: 20rpx;font-size: 24rpx;color: #999;text-align: center">
+            <text wx:if="{{page_info.end_time}}">活动时间：{{page_info.start_time}} ~ {{page_info.end_time}}</text>
+            <text wx:if="{{!page_info.end_time}}">活动时间：无</text>
+        </view>
+        <view style="margin: 20rpx;background: #FFF8EB;position: relative;padding: 40rpx 0;margin-top: 80rpx;min-height: 200rpx;">
+            <image style="position: absolute;top:-40rpx;left: 50%;margin-left: -200rpx;width: 400rpx;height: 100rpx;" src="http://qiniu-guanmei.yixsu.com/title@3x.png" mode="widthFix"></image>
+
+            <view wx:if="{{page_info.praise_help_list.length}}" wx:key="index" wx:for="{{page_info.praise_help_list}}" style="margin: 20rpx auto;width: 500rpx">
+                <image style="float: left;width: 80rpx;height:80rpx;border-radius: 80rpx;margin-right:20rpx;vertical-align: middle" src="{{item.avatar}}" mode="widthFix"></image>
+                <view style="float: left">
+                    <view style="font-size: 24rpx;color: #999;">{{item.user_name}}</view>
+                    <view><text>已点赞</text></view>
+                </view>
+                <view style="clear: both"></view>
+            </view>
+            <view wx:if="{{!page_info.praise_help_list.length}}" style="margin: 20rpx auto;width: 500rpx;text-align: center">
+                暂无信息
+            </view>
+
+        </view>
+
+
+
+    </view>
+</view>
+
+<dist_modal visible="{{ praise_tips_visible }}" actions="{{ [{name: '确认并关闭',color: '#333'}] }}" bind:click="close_praise_tips">
+    <view style="width: 100%;background: #F95347;color: #fff;padding: 10rpx 0;">
+        <view style="text-align: center;margin: 20rpx 0 ; color: #fff">
+            {{praise_tips}}
+        </view>
+    </view>
+</dist_modal>

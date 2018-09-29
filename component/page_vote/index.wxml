@@ -10,7 +10,7 @@
             <view style="position: absolute;top:0;left: 0;font-size: 24rpx;">{{index2+1}}号</view>
             <view style="position: absolute;top:0;right: 0;font-size: 24rpx;">{{item.sign}}票</view>
             <view  wx:if="{{!customerview}}" style="margin:0 auto;width: 710rpx;text-align:center;padding: 20rpx 0;background: #0CD400;color: #fff;border-radius: 3rpx;">投票</view>
-            <view  wx:if="{{customerview}}" bindtap="custom_vote" data-vote_id="{{index2}}" style="margin:0 auto;width: 700rpx;text-align:center;padding: 20rpx 0;background: #0CD400;color: #fff;border-radius: 3rpx;">投票</view>
+            <view  wx:if="{{customerview && !cannotsign}}" bindtap="custom_vote" data-vote_id="{{index2}}" style="margin:0 auto;width: 700rpx;text-align:center;padding: 20rpx 0;background: #0CD400;color: #fff;border-radius: 3rpx;">投票</view>
             <view class="cover"></view>
         </view>
     <view  wx:if="{{canEdit}}" bindtap="add_vote_item" style="width: 710rpx;text-align:center;background: rgb(255,255,255);border:1px dashed #000;color: #000;height: 60rpx;box-shadow: 0rpx 2rpx 5px #999;line-height: 60rpx;margin: 20rpx auto;z-index: 99">+增加投票项目</view>
@@ -48,7 +48,7 @@
     <!--<view style="padding: 4rpx;color: #000">文字描述:</view>-->
     <!--<textarea bindinput="tapInput" style="border: 1px solid #eee;padding: 4px;width: 250rpx;height:60rpx;border-radius: 2rpx;" placeholder="输入描述" value="{{current_item.desc}}"/>-->
 
-    <view>
+    <view style="margin: 30rpx 0">
         <view style="padding: 4rpx;width: 300rpx;margin:0 auto;padding-top: 30rpx;color: #000">设置图片:</view>
 
         <view bindtap="changeimg" style="font-size: 80rpx;width: 300rpx;height: 300rpx;margin:0 auto;line-height: 300rpx;text-align: center;border: 1px dashed #000000;border-radius: 2rpx">

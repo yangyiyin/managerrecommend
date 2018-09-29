@@ -241,7 +241,17 @@ Page({
           success: (res) => {
 
             if (res.result){
-              var result = JSON.parse(res.result);
+              try{
+                var result = JSON.parse(res.result);
+              } catch (e) {
+                wx.showModal({
+                  title: '该二维码内容不正确',
+                  content: '',
+                  showCancel:false
+                });
+                return;
+              }
+
               if (!result || !result.phone || !result.code) {
                 wx.showModal({
                   title: '该二维码内容不正确',

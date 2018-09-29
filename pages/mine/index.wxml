@@ -15,12 +15,12 @@
             </view>
 
             <view style="z-index: 2;position: relative" class="shop_name">{{userInfo.user_name ? userInfo.user_name : userInfo.wechat_user_info.nickName}}</view>
-            <view style="z-index: 2" class="set"  bindtap="goto_set">
+            <view  wx:if="{{userInfo.type == 2}}" style="z-index: 2" class="set"  bindtap="goto_set">
                 <image class="img" mode="widthFix" src="http://qiniu-pub.yixsu.com/me_btn_setting.png"></image>
             </view>
         </view>
 
-        <view class="vip" style="top:{{260 + (init.top) / 5}}rpx;z-index: 2">
+        <view  wx:if="{{userInfo.type == 2}}" class="vip" style="top:{{260 + (init.top) / 5}}rpx;z-index: 2">
             <view class="ke">
                 <view class="vip_card">
                     <image wx:if="{{userInfo.is_vip && !userInfo.is_past}}" style="width: 100%;position: absolute;top: 0;left: 0;z-index: 0" mode="widthFix" src="http://qiniu-pub.yixsu.com/me_card_vipbg1.png"></image>
@@ -41,11 +41,11 @@
 
     <view class="body" bindtouchmove="touchmove" bindtouchstart="touchstart" bindtouchend="touchend" style="top:{{init.top}}rpx;">
         <view class="content">
-            <view style="padding: 10rpx 0;" bindtap="goto_mypages">
+            <view wx:if="{{userInfo.type == 2}}" style="padding: 10rpx 0;" bindtap="goto_mypages">
                 <image class="img" mode="widthFix" src="http://qiniu-pub.yixsu.com/me_btn_imake.png"></image>
             </view>
 
-            <view class="item" bindtap="goto_tmpshop">
+            <view  wx:if="{{userInfo.type == 2}}" class="item" bindtap="goto_tmpshop">
                 <view class="logo">
                     <image class="img" mode="widthFix" src="http://qiniu-pub.yixsu.com/me_list_icon_template.png"></image>
                 </view>
@@ -65,7 +65,7 @@
                 </view>
             </view>
 
-            <view class="item" bindtap="goto_help">
+            <view  wx:if="{{userInfo.type == 2}}" class="item" bindtap="goto_help">
                 <view class="logo">
                     <image class="img" mode="widthFix" src="http://qiniu-pub.yixsu.com/me_list_icon_help.png"></image>
                 </view>
@@ -74,6 +74,18 @@
                     宝典在手,轻松动手
                 </view>
             </view>
+
+            <!--<view  wx:if="{{userInfo.type == 1}}" class="item" bindtap="become_manager">-->
+            <view  class="item" bindtap="become_manager">
+                <view class="logo">
+                    <image class="img" mode="widthFix" src="http://qiniu-pub.yixsu.com/me_list_icon_help.png"></image>
+                </view>
+                <view class="title">成为店长</view>
+                <view class="right_info">
+                    我是店长,申请成为店长
+                </view>
+            </view>
+
             <button class="item" open-type="contact" style="background: none;text-align: left;height: 120rpx;">
                 <view class="logo">
                     <image class="img" mode="widthFix" src="http://qiniu-pub.yixsu.com/me_list_icon_service.png"></image>
@@ -86,7 +98,7 @@
 
         </view>
     </view>
-    <view style="position: fixed;bottom: 40rpx;left: 20rpx;z-index: 99">
+    <view wx:if="{{userInfo.type == 2}}" style="position: fixed;bottom: 40rpx;left: 20rpx;z-index: 99">
         <yxs_round_menu items="{{menus}}" link="/pages/index/index" icon="http://qiniu-pub.yixsu.com/btn_backhome.png"></yxs_round_menu>
     </view>
     <!--<view class="main">-->
@@ -144,3 +156,14 @@
     <!--</view>-->
 
 </view>
+
+<yxs_modal visible="{{become_manager_visible}}" bindcallback_success="do_become_manager">
+    <view slot="content">
+        <yxs_input width="600" height="80" maxlength="20" title="店铺名称:" bindchange="bindinputtitle" error_info="{{inputtitle_error}}"></yxs_input>
+        <view style="height:20rpx"></view>
+        <yxs_input width="600" height="80" maxlength="20" title="手机号:" bindchange="bindinputtel" error_info="{{inputtel_error}}"></yxs_input>
+        <yxs_input can_send_code="{{isPoneAvailable}}" type="verify_code" width="600" height="80" maxlength="20" bindchange="bindinputcode" bindsendcode="send_code" error_info="{{inputcode_error}}" placeholder="验证码"></yxs_input>
+        <view style="height:20rpx"></view>
+        <yxs_input width="600" height="80" maxlength="20" title="店铺地址:" bindchange="bindinputaddress" error_info="{{inputaddress_error}}"></yxs_input>
+    </view>
+</yxs_modal>

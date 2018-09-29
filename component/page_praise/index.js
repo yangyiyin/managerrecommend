@@ -27,7 +27,7 @@ Component({
                 common.request_callback(res);
                 if (res.data.success) {
                     this.triggerEvent('triggerevent', {event:'get_page_info'});
-                    this.triggerEvent('triggerevent', {event:'show_pick_code'});
+                    // this.triggerEvent('triggerevent', {event:'show_pick_code'});
                     common.request('get','statistics_point',{page_id:this.data.pageId, type:3}, function (res) {});
                 }
             }.bind(this));

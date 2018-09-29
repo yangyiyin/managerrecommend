@@ -6,9 +6,18 @@ Page({
     page_id:'',
     extra_uid:'',
     qrcode:'',
+    from_publish:false
   },
   onLoad: function (option) {
     wx.hideShareMenu();
+
+    if (option.from_publish) {
+      this.setData({
+        from_publish : option.from_publish
+      })
+    }
+
+
     if (option.title) {
       this.setData({
         title : option.title

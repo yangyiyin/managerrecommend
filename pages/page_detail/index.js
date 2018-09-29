@@ -15,7 +15,8 @@ Page({
     p:1,
     can_edit:true,
     page_id:0,
-    focus:false
+    focus:false,
+    page_id:0
   },
   onLoad: function (option) {
     this.setData({
@@ -26,7 +27,7 @@ Page({
   },
   get_page_info(){
     var data = {id:this.data.page_id};
-    common.request('get','page_detail_info',data,function (res) {
+    common.request('get','page_info',data,function (res) {
       common.check_login(res);
       this.setData({
         sign_list:res.data.data.sign_list,
@@ -35,7 +36,7 @@ Page({
         vote_list:res.data.data.vote_list,
         fight_group_list:res.data.data.fight_group_list,
         quick_buy_list:res.data.data.quick_buy_list,
-        detail:res.data.data
+        page_info:res.data.data
       });
 
       wx.setNavigationBarTitle({
@@ -47,59 +48,65 @@ Page({
   onShow: function () {
     //console.log(1);
   },
-  focus_remark:function(event){
-    var type = event.currentTarget.dataset.type;
-    var index = event.currentTarget.dataset.index;
-    if (type == 'sign') {
-      this.data.sign_list[index].focus = true;
-      this.setData({
-        sign_list:this.data.sign_list
-      })
-    } else if (type == 'cutprice') {
-      this.data.cutprice_list[index].focus = true;
-      this.setData({
-        cutprice_list:this.data.cutprice_list
-      })
-    } else if (type == 'praise') {
-      this.data.praise_list[index].focus = true;
-      this.setData({
-        praise_list:this.data.praise_list
-      })
-    }
+  goto_page_origin:function () {
 
+    wx.navigateTo({
+      url: '/pages/tmp_make/index?origin=1&customerview=1&id='+this.data.page_id
+    })
   },
-  blur_remark:function(event){
-    var type = event.currentTarget.dataset.type;
-    var index = event.currentTarget.dataset.index;
-    if (type == 'sign') {
-      this.data.sign_list[index].focus = false;
-      this.setData({
-        sign_list:this.data.sign_list
-      })
-    } else if (type == 'cutprice') {
-      this.data.cutprice_list[index].focus = false;
-      this.setData({
-        cutprice_list:this.data.cutprice_list
-      })
-    } else if (type == 'praise') {
-      this.data.praise_list[index].focus = false;
-      this.setData({
-        praise_list:this.data.praise_list
-      })
-    }
-  },
-  remark:function(event){
-    var data = {
-      id:event.currentTarget.dataset.id,
-      type:event.currentTarget.dataset.type,
-      remark:event.detail.value
-    };
-    common.request('post','remark_sign',data,function (res) {
-      common.request_callback(res);
-      if (res.data.success) {
-        this.get_page_info();
-      }
-    }.bind(this));
-  }
+  // focus_remark:function(event){
+  //   var type = event.currentTarget.dataset.type;
+  //   var index = event.currentTarget.dataset.index;
+  //   if (type == 'sign') {
+  //     this.data.sign_list[index].focus = true;
+  //     this.setData({
+  //       sign_list:this.data.sign_list
+  //     })
+  //   } else if (type == 'cutprice') {
+  //     this.data.cutprice_list[index].focus = true;
+  //     this.setData({
+  //       cutprice_list:this.data.cutprice_list
+  //     })
+  //   } else if (type == 'praise') {
+  //     this.data.praise_list[index].focus = true;
+  //     this.setData({
+  //       praise_list:this.data.praise_list
+  //     })
+  //   }
+  //
+  // },
+  // blur_remark:function(event){
+  //   var type = event.currentTarget.dataset.type;
+  //   var index = event.currentTarget.dataset.index;
+  //   if (type == 'sign') {
+  //     this.data.sign_list[index].focus = false;
+  //     this.setData({
+  //       sign_list:this.data.sign_list
+  //     })
+  //   } else if (type == 'cutprice') {
+  //     this.data.cutprice_list[index].focus = false;
+  //     this.setData({
+  //       cutprice_list:this.data.cutprice_list
+  //     })
+  //   } else if (type == 'praise') {
+  //     this.data.praise_list[index].focus = false;
+  //     this.setData({
+  //       praise_list:this.data.praise_list
+  //     })
+  //   }
+  // },
+  // remark:function(event){
+  //   var data = {
+  //     id:event.currentTarget.dataset.id,
+  //     type:event.currentTarget.dataset.type,
+  //     remark:event.detail.value
+  //   };
+  //   common.request('post','remark_sign',data,function (res) {
+  //     common.request_callback(res);
+  //     if (res.data.success) {
+  //       this.get_page_info();
+  //     }
+  //   }.bind(this));
+  // }
 
 })

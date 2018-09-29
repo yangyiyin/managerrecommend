@@ -35,6 +35,10 @@ module.exports = Behavior({
         extraUid:{
             type: null,
             value: 0
+        },
+        cannotsign:{
+            type: null,
+            value: false
         }
     },
     data: {
@@ -72,6 +76,7 @@ module.exports = Behavior({
     },
     methods: {
         show_phone_modal(event) {
+            console.log(event);
             common.request('get','user_phones',{},function (res) {
 
                 if (res.data.success) {

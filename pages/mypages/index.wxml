@@ -27,6 +27,11 @@
             <view style="margin-top: 20rpx;">
                 <i-tag wx:if="{{item.active_status == '进行中'}}" type="border" color="red">{{item.active_status}}</i-tag>
                 <i-tag wx:if="{{item.active_status != '进行中'}}" type="border" color="#999">{{item.active_status}}</i-tag>
+
+                <view style="float: right" catchtap="share" data-item="{{item}}">
+                    <i-tag color="yellow">分享</i-tag>
+
+                </view>
             </view>
 
         </view>

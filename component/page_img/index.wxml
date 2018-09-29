@@ -7,7 +7,7 @@
 </view>
 
 <dist_modal visible="{{ !show_cut_img && visible }}" actions="{{ actions }}" bind:click="handleClick">
-    <view>
+    <view style="margin: 30rpx 0">
         <view style="text-align:center;padding-top: 30rpx;padding-bottom: 10rpx;color: #000;font-size: 30rpx;"><text style="background: #eee">设置图片:</text></view>
 
         <view bindtap="changeimg" style="font-size: 80rpx;width: 250rpx;height: {{250 * item.height/item.width}}rpx;margin:0 auto;margin-bottom:20rpx;line-height: 250rpx;text-align: center;border: 1px dashed #000000;border-radius: 5rpx">

@@ -24,6 +24,12 @@
             <input bindinput="change_address" style="width:400rpx;font-size:24rpx;display:inline-block;float:right;margin-right:20rpx;text-align: right;margin-top: 30rpx;margin-bottom: 30rpx" value="{{globalData.userInfo.address}}" maxlength="50" placeholder="最多输入50个字" />
 
          </view>
+         <view style="clear: both"></view>
+         <view class="mine-item-2" >
+            店铺电话(固定电话)
+            <input bindinput="change_open_tel" style="width:400rpx;font-size:24rpx;display:inline-block;float:right;margin-right:20rpx;text-align: right;margin-top: 30rpx;margin-bottom: 30rpx" value="{{globalData.userInfo.open_tel}}" maxlength="50" placeholder="最多输入50个字" />
+
+         </view>
       </view>
 
    </view>

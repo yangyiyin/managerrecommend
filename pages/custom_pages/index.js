@@ -72,5 +72,10 @@ Page({
         }
       }.bind(this)
     })
+  },
+  share(event){
+    wx.navigateTo({
+      url: '/pages/share/index?page_id='+event.currentTarget.dataset.item.id+'&title='+event.currentTarget.dataset.item.title+'&img='+event.currentTarget.dataset.item.img
+    });
   }
 })

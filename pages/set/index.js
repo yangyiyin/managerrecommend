@@ -14,22 +14,32 @@ Page({
 
   },
   onShow: function() {
+    app.globalData.userInfo.avatar = app.globalData.current_cut_img ? app.globalData.current_cut_img : app.globalData.userInfo.avatar;
     this.setData({
-      current_cut_img:app.globalData.current_cut_img
+      current_cut_img:app.globalData.current_cut_img,
+      globalData:app.globalData
+
     });
   },
   change_user_name(e) {
     this.data.is_change = true;
-    this.data.globalData.userInfo.user_name = e.detail.value
+    app.globalData.userInfo.user_name = e.detail.value
     this.setData({
-      globalData: this.data.globalData
+      globalData: app.globalData
     });
   },
   change_address(e) {
     this.data.is_change = true;
-    this.data.globalData.userInfo.address = e.detail.value
+    app.globalData.userInfo.address = e.detail.value
     this.setData({
-      globalData: this.data.globalData
+      globalData: app.globalData
+    });
+  },
+  change_open_tel(e) {
+    this.data.is_change = true;
+    app.globalData.userInfo.open_tel = e.detail.value
+    this.setData({
+      globalData: app.globalData
     });
   },
 
@@ -62,6 +72,7 @@ Page({
       app.globalData.userInfo.avatar = this.data.current_cut_img;
       app.globalData.userInfo.user_name = this.data.globalData.userInfo.user_name;
       app.globalData.userInfo.address = this.data.globalData.userInfo.address;
+      app.globalData.userInfo.open_tel = this.data.globalData.userInfo.open_tel;
       wx.uploadFile({
         url: config.urls.info_modify,
         filePath: this.data.current_cut_img,
@@ -69,7 +80,8 @@ Page({
         formData:{
           'user_session':app.globalData.user_session,
           'user_name': this.data.globalData.userInfo.user_name,
-          'address': this.data.globalData.userInfo.address
+          'address': this.data.globalData.userInfo.address,
+          'open_tel': this.data.globalData.userInfo.open_tel,
         },
         success: function(res){
           //var data = res.data
@@ -78,6 +90,7 @@ Page({
           common.request_callback(res);
           app.globalData.userInfo.user_name = this.data.globalData.userInfo.user_name;
           app.globalData.userInfo.address = this.data.globalData.userInfo.address;
+          app.globalData.userInfo.open_tel = this.data.globalData.userInfo.open_tel;
           app.globalData.userInfo.avatar = this.data.current_cut_img;
 
           app.globalData.current_cut_img = '';
@@ -86,14 +99,17 @@ Page({
     } else if (this.data.is_change) {
       app.globalData.userInfo.user_name = this.data.globalData.userInfo.user_name;
       app.globalData.userInfo.address = this.data.globalData.userInfo.address;
+      app.globalData.userInfo.open_tel = this.data.globalData.userInfo.open_tel;
       var data = {};
       data.user_name = this.data.globalData.userInfo.user_name;
       data.address = this.data.globalData.userInfo.address;
+      data.open_tel = this.data.globalData.userInfo.open_tel;
 
       common.request('post','info_modify',data, function (res) {
         common.request_callback(res);
         app.globalData.userInfo.user_name = data.user_name;
         app.globalData.userInfo.address = data.address;
+        app.globalData.userInfo.open_tel = data.open_tel;
 
       }.bind(this))
     }

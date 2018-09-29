@@ -1,5 +1,5 @@
-// var base_url = 'https://yixsu.com/public/index.php';
-var base_url = 'http://www.myweb.com/git-res/shop-y/index.php';
+var base_url = 'https://yixsu.com/public/index.php';
+// var base_url = 'http://www.myweb.com/git-res/shop-y/index.php';
 
 var urls = {
     page_submit:base_url+'/Apimanagerrecommend/laugh/page_submit.html',

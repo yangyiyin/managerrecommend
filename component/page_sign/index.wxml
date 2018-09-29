@@ -1,6 +1,12 @@
 
 <view wx:if="{{!customerview}}" style="{{item.style}}" >{{item.text}}</view>
-<view wx:if="{{customerview}}" bindtap="show_phone_modal" data-callback="custom_sign" style="{{item.style}}" >{{item.text}}</view>
+<view wx:if="{{customerview && !cannotsign}}" bindtap="show_phone_modal" data-callback="custom_sign" style="{{item.style}}" >
+    <!--<form bindsubmit="show_phone_modal" data-callback="custom_sign" report-submit="{{true}}">-->
+    <!--&lt;!&ndash;{{item.text}}&ndash;&gt;-->
+        <!--<button formType="submit" style="opacity: 0">Submit</button>-->
+    <!--</form>-->
+    {{item.text}}
+</view>
 
 <!--<dist_modal visible="{{ visible }}" actions="{{ actions }}" bind:click="handleClick">-->
     <!--<view><input bindinput="tapInput" style="border: 1px solid #000;padding: 4px;width: 90%;margin: 0 auto;border-radius: 5px;" placeholder="请输入内容"  value="{{item.text}}"/></view>-->

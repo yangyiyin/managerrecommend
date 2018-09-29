@@ -1,7 +1,7 @@
 {
   "pages":[
-    "pages/share/index",
     "pages/login/index",
+    "pages/share/index",
     "pages/webview/index",
     "pages/mypages/index",
     "pages/vip/index",

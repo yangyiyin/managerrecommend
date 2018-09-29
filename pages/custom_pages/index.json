@@ -4,6 +4,8 @@
   "navigationBarTitleText": "我参与的活动",
   "backgroundTextStyle":"dark",
   "backgroundColor":"#eeeeee",
-  "enablePullDownRefresh":true
-
+  "enablePullDownRefresh":true,
+  "usingComponents": {
+    "i-tag": "../../dist/tag/index"
+  }
 }

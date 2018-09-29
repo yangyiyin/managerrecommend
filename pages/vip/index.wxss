@@ -1,7 +1,8 @@
 
 .container {
   background: #fff;
-  display:block
+  display:block;
+  height: 100%;
 }
 
 .section{

@@ -56,6 +56,7 @@ Page({
     ],
     pick_code_visible:false,
     stock_none:false,
+    cannot_sign:false,
     set_img_key:'',
     current_cut_img:'',
     main_img:'',
@@ -63,10 +64,18 @@ Page({
     start_time:'',
     end_time:'',
     start_time_min:'',
-    end_time_min:''
+    end_time_min:'',
+    is_seller:false,
+    seller_info:null,
+    extra_user_info:null,
+    userInfo:app.globalData.userInfo,
+    page_info:null
 
   },
   onLoad: function (option) {
+    this.setData({
+      userInfo:app.globalData.userInfo,
+    })
     if (option.scene) {//扫二维码进来
       var scene = decodeURIComponent(option.scene);
       var scene_arr = scene.split('a');
@@ -95,6 +104,7 @@ Page({
       });
 
       if (option.customerview) {
+
         common.request('get','statistics_point',{page_id:this.data.page_id, type:1}, function (res) {});
         common.check_session(app, function(){
           //获取用户授权权限
@@ -108,16 +118,19 @@ Page({
           
           this.get_page_info().then(function(){
               //blocks:[{id:2,name:'砍价'},{id:1,name:'限时特惠'},{id:7,name:'预约报名'},{id:3,name:'集赞'},{id:4,name:'投票'},{id:5,name:'图文'}],
+            if (this.data.page_type == 2 || this.data.page_type == 3 || this.data.page_type == 7) {
+              this.seller_info_animation();
+            }
 
-            if (this.data.page_type == 2 && this.data.is_sign_cutprice) {//砍价
+            if (this.data.page_type == 2 && !option.origin && (this.data.is_sign_cutprice || this.data.extra_uid)) {//砍价
               this.setData({
                 page_status:11
               })
-            } else if(this.page_type == 7 && this.data.is_sign) {
+            } else if(this.data.page_type == 7 && !option.origin && this.data.is_sign) {
               this.setData({
                 page_status:11
               })
-            } else if(this.page_type == 3 && this.data.is_sign_praise) {
+            } else if(this.data.page_type == 3 && !option.origin && (this.data.is_sign_praise || this.data.extra_uid)) {
               this.setData({
                 page_status:11
               })
@@ -213,6 +226,7 @@ Page({
       common.request('get','page_info',data,function (res) {
         var tmp_data = res.data.data.content;
         this.setData({
+          page_info:res.data.data,
           page_url:res.data.data.page_url,
           page_type:res.data.data.type,
           sign_list:res.data.data.sign_list,
@@ -230,21 +244,25 @@ Page({
           is_sign_fightgroup:Boolean(res.data.data.is_sign_fightgroup),
           is_help_fightgroup:Boolean(res.data.data.is_help_fightgroup),
           pick_code:res.data.data.pick_code,
-          stock_none:res.data.data.stock_none
+          stock_none:res.data.data.stock_none,
+          cannot_sign:Boolean(res.data.data.cannot_sign),
+          is_seller:res.data.data.is_seller,
+          seller_info:res.data.data.seller_info,
+          extra_user_info:res.data.data.extra_user_info ? res.data.data.extra_user_info : null
 
         });
 
         //如果是用户页面,获取之后,立马切换页面
         if (is_customer) {
-          if (this.data.page_type == 2 && this.data.is_sign_cutprice) {//砍价
+          if (this.data.page_type == 2 && (this.data.is_sign_cutprice || this.data.extra_uid)) {//砍价
             this.setData({
               page_status:11
             })
-          } else if(this.page_type == 7 && this.data.is_sign) {
+          } else if(this.data.page_type == 7 && this.data.is_sign) {
             this.setData({
               page_status:11
             })
-          } else if(this.page_type == 3 && this.data.is_sign_praise) {
+          } else if(this.data.page_type == 3 && (this.data.is_sign_praise || this.data.extra_uid)) {
             this.setData({
               page_status:11
             })
@@ -272,6 +290,14 @@ Page({
             showCancel:false
           });
         }
+        if (this.data.customerview && this.data.cannot_sign) {
+          wx.showModal({
+            title: '提示',
+            content: '当前活动未开始或已结束,无法报名活动',
+            showCancel:false
+          });
+        }
+
         resolve();
 
       }.bind(this));
@@ -365,7 +391,7 @@ Page({
             page_id:parseInt(res.data.data.page_id)
           });
           wx.redirectTo({
-            url: '/pages/share/index?page_id='+this.data.page_id+'&title='+this.data.page_title+'&img='+this.data.main_img
+            url: '/pages/share/index?from_publish=1&page_id='+this.data.page_id+'&title='+this.data.page_title+'&img='+this.data.main_img
           });
         }.bind(this))
 
@@ -383,7 +409,13 @@ Page({
     }.bind(this))
 
   },
+  share_make_by_uid(){
 
+    wx.navigateTo({
+      url: '/pages/share/index?page_id='+this.data.page_id+'&extra_uid='+app.globalData.userInfo.id+'&title='+this.data.page_info.title+'&img='+this.data.page_info.img
+    });
+
+  },
   share_make: function(extra_uid){
     if (this.data.qrcode_link) {
       this.setData({
@@ -483,6 +515,13 @@ Page({
       url: '/pages/page_detail/index?id='+this.data.page_id
     })
   },
+  goto_page_origin:function () {
+
+    wx.navigateTo({
+      url: '/pages/tmp_make/index?origin=1&customerview=1&id='+this.data.page_id
+    })
+  },
+
   goto_action:function () {
 
     wx.navigateTo({
@@ -628,14 +667,100 @@ Page({
       url: '/pages/cutInside/cutInside?w='+w+'&h='+h
     });
   },
-  show_rule(){
+  show_rule_seller(){
     this.setData({
-      rule_visible:true
+      rule_seller_visible:true
     })
   },
-  close_rule(){
+  close_rule_seller(){
     this.setData({
-      rule_visible:false
+      rule_seller_visible:false
     })
-  }
+  },
+  show_rule_customer(){
+    this.setData({
+      rule_customer_visible:true
+    })
+  },
+  close_rule_customer(){
+    this.setData({
+      rule_customer_visible:false
+    })
+  },
+
+  show_seller_info(){
+    this.setData({
+      seller_info_visible:true
+    })
+  },
+  close_seller_info(){
+    this.setData({
+      seller_info_visible:false
+    })
+  },
+
+  seller_info_animation(){
+    if (this.data.seller_info_animation_ins) {
+      return;
+    }
+    var animation = wx.createAnimation({
+      duration: 1000,
+      timingFunction: "ease",
+      delay: 0
+    });
+    var scale = 1;
+    this.data.seller_info_animation_ins = setInterval(function () {
+      if (scale == 1) {
+        scale = 1.2;
+      } else {
+        scale = 1;
+      }
+      animation.scale(scale).step();
+      this.setData({
+        seller_info_animation:animation.export()
+      });
+    }.bind(this),2000)
+  },
+  custom_cutprice_cut:function(){
+    var data = {
+      id:this.data.page_id,
+      extra_uid:this.data.extra_uid
+    };
+    common.request('post','cutprice_cut',data,function (res) {
+      common.request_callback(res);
+      if (res.data.success) {
+        this.setData({
+          cut_price_tips_visible:true,
+          cut_price_tips:res.data.message
+        })
+        this.get_page_info();
+      }
+    }.bind(this));
+  },
+  close_cut_price_tips(){
+    this.setData({
+      cut_price_tips_visible:false
+    })
+  },
+  custom_praise_praise:function(){
+    var data = {
+      id:this.data.pageId,
+      extra_uid:this.data.extraUid
+    };
+    common.request('post','praise_praise',data,function (res) {
+      common.request_callback(res);
+      if (res.data.success) {
+        this.setData({
+          praise_tips_visible:true,
+          praise_tips:res.data.message
+        })
+        this.get_page_info();
+      }
+    }.bind(this));
+  },
+  close_praise_tips(){
+    this.setData({
+      praise_tips_visible:false
+    })
+  },
 })

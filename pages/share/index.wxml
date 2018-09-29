@@ -1,6 +1,6 @@
 <view class="container">
     <image style="width: 300rpx;height: 300rpx;" mode="widthFix" src="http://qiniu-pub.yixsu.com/pic%E6%8A%A5%E5%90%8D%E6%88%90%E5%8A%9F@3x.png"></image>
-    <text>活动创建成功，马上分享吧！</text>
+    <text wx:if="{{from_publish}}">活动创建成功，马上分享吧！</text>
 
     <view style="width: 700rpx;margin: 30rpx auto;background: #F6F6F6;text-align: center;position: relative">
         <view style="width: 90rpx;height: 30rpx;line-height:30rpx;text-align:center;font-size:24rpx;position: absolute;top:30rpx;left: 0;background: red;color: #fff;">方法一</view>

@@ -120,3 +120,6 @@ swiper{
 .submit{
     width: 700rpx;
 }
+.sign_cutprice_btn{
+    background: #FEC52D;
+}

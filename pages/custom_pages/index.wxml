@@ -13,16 +13,19 @@
     <view wx:if="{{!pages.length}}" class="empty_info">您还没有参加的活动~</view>
     <view wx:if="{{pages.length}}" class="item"  wx:key="index" wx:for="{{pages}}" bindtap="goto_page" data-id="{{item.id}}" data-index="{{index}}">
         <view class="left">
-            <image class="img" mode="widthFix" src="{{item.img}}"></image>
+            <image class="img" mode="widthFix" src="{{item.page.img}}"></image>
         </view>
 
         <view class="right">
-            <view style="font-size: 30rpx;">{{item.title}}</view>
+            <view style="font-size: 30rpx;">{{item.page.title}}</view>
             <view class="min-info" style="margin-top: 40rpx;">
-                <view>活动开始:{{item.start_time ? item.start_time : '-'}}</view>
-                <view>活动结束{{item.end_time ? item.end_time : '-'}}</view>
+                <view>活动开始:{{item.page.start_time ? item.page.start_time : '-'}}</view>
+                <view>活动结束{{item.page.end_time ? item.page.end_time : '-'}}</view>
             </view>
+            <view catchtap="share" data-item="{{item.page}}">
+                <i-tag color="yellow">分享</i-tag>
 
+            </view>
         </view>
     </view>
 

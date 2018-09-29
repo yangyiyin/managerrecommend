@@ -7,7 +7,7 @@
     <!--<view style="clear: both"></view>-->
 </view>
 
-<view wx:if="{{customerview}}" style="{{item.style}}" bindtap="show_phone_modal">
+<view wx:if="{{customerview && !cannotsign}}" style="{{item.style}}" bindtap="show_phone_modal">
 
 
     <!--<view  wx:if="{{!isSignPraise}}" bindtap="show_phone_modal" data-callback="custom_praise_sign" style="float: left;padding: 20rpx;background: #0CD400;color: #fff;border-radius: 5rpx;">报名活动</view>-->

@@ -5,7 +5,8 @@
   "backgroundTextStyle":"dark",
   "disableScroll":true,
   "usingComponents": {
-    "yxs_round_menu":"../../yixsu_component/yxs_round_menu/index"
-
+    "yxs_round_menu":"../../yixsu_component/yxs_round_menu/index",
+    "yxs_modal":"../../yixsu_component/yxs_modal/index",
+    "yxs_input":"../../yixsu_component/yxs_input/index"
   }
 }

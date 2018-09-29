@@ -6,7 +6,7 @@
     <view style="clear: both"></view>
 </view>
 
-<view wx:if="{{customerview}}" style="{{item.style}}"  data-callback="custom_cutprice_sign" bindtap="show_phone_modal">
+<view wx:if="{{customerview && !cannotsign}}" style="{{item.style}}"  data-callback="custom_cutprice_sign" bindtap="show_phone_modal">
 
     <!--<view wx:if="{{!isSignCutprice}}" bindtap="show_phone_modal" data-callback="custom_cutprice_sign" style="float: left;padding:20rpx;background: #0CD400;color: #fff;border-radius: 5rpx;">报名活动</view>-->
     <!--<view wx:if="{{isSignCutprice}}"  style="float: left;padding:20rpx;background: #999;color: #fff;border-radius: 5rpx;">已报名</view>-->

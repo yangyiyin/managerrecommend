@@ -18,6 +18,7 @@
     "page_quick_buy": "../../component/page_quick_buy/index",
     "dist_modal": "../../dist/modal/index",
     "i-input": "../../dist/input/index",
-    "i-button": "../../dist/button/index"
+    "i-button": "../../dist/button/index",
+    "i-tag": "../../dist/tag/index"
   }
 }
