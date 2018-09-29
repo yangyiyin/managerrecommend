@@ -90,7 +90,7 @@ Page({
   },
   goto_help(){
     wx.navigateTo({
-      url: '/pages/webview/index?link='+encodeURIComponent('http://api.yixsu.com/apps/managerrecommend/h5/help.php')
+      url: '/pages/webview/index?link='+encodeURIComponent('https://api.yixsu.com/apps/managerrecommend/h5/help.php')
     })
   },
   touchmove(e){
