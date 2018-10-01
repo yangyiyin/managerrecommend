@@ -102,20 +102,57 @@
     <block wx:else>
         <view class="container" style="background-image: url({{tmp_data.bg.src}});background-size:100%;background-repeat: repeat-y;position: relative;min-height:{{tmp_data.height}}">
 
-            <view wx:key="index" wx:for="{{tmp_data.page}}">
+            <!--<view wx:key="index" wx:for="{{tmp_data.page}}">-->
 
-                <page_img wx:if="{{item.type == 'img'}}" item="{{item}}" can-edit="{{page_status == '2' && item.is_available}}" currentcutimg="{{current_cut_img}}" data-index="{{index}}" bindchangeitem="change_tmp_data_page"  bindtriggerevent="triggerevent"></page_img>
-                <page_text wx:if="{{item.type == 'text'}}" item="{{item}}" can-edit="{{page_status == '2' && item.is_available}}" data-index="{{index}}" bindchangeitem="change_tmp_data_page"  bindtriggerevent="triggerevent"></page_text>
-                <page_sign wx:if="{{item.type == 'sign'}}" item="{{item}}" can-edit="{{page_status == '2' && item.is_available}}" page-id="{{page_id}}" customerview="{{customerview}}" cannotsign="{{cannot_sign}}" data-index="{{index}}" bindtriggerevent="triggerevent" bindchangeitem="change_tmp_data_page"></page_sign>
-                <page_timelimit wx:if="{{item.type == 'timelimit'}}" item="{{item}}" left="{{tmp_data.time_limit_left}}" can-edit="{{page_status == '2' && item.is_available}}" data-index="{{index}}" bindchangetmpdata="change_tmp_data"></page_timelimit>
-                <page_cutprice_btn cannotsign="{{cannot_sign}}" wx:if="{{item.type == 'cutprice_btn'}}" item="{{item}}" can-edit="{{page_status == '2' && item.is_available}}" page-id="{{page_id}}" is-sign-cutprice="{{is_sign_cutprice}}" is-help-cutprice="{{is_help_cutprice}}" extra-uid="{{extra_uid}}" customerview="{{customerview}}" data-index="{{index}}" bindtriggerevent="triggerevent"></page_cutprice_btn>
-                <page_cutprice_price wx:if="{{item.type == 'cutprice_price'}}" item="{{item}}" can-edit="{{page_status == '2' && item.is_available}}" data-index="{{index}}" bindchangeitem="change_tmp_data_page"></page_cutprice_price>
-                <page_praise cannotsign="{{cannot_sign}}" wx:if="{{item.type == 'praise'}}" item="{{item}}" can-edit="{{page_status == '2' && item.is_available}}" page-id="{{page_id}}" is-sign-praise="{{is_sign_praise}}" is-help-praise="{{is_help_praise}}" extra-uid="{{extra_uid}}" customerview="{{customerview}}" data-index="{{index}}" bindtriggerevent="triggerevent"></page_praise>
-                <page_vote cannotsign="{{cannot_sign}}" wx:if="{{item.type == 'vote'}}" item="{{item}}" can-edit="{{page_status == '2' && item.is_available}}" page-id="{{page_id}}" customerview="{{customerview}}" pageview="{{pageview}}" data-index="{{index}}" bindtriggerevent="triggerevent" bindchangeitem="change_tmp_data_page"></page_vote>
-                <!--<page_fight_group wx:if="{{item.type == 'fight_group'}}" item="{{item}}" can-edit="{{page_status == '2'}}" page-id="{{page_id}}" is-sign-fightgroup="{{is_sign_fightgroup}}" is-help-fightgroup="{{is_help_fightgroup}}" extra-uid="{{extra_uid}}" customerview="{{customerview}}" data-index="{{index}}" bindtriggerevent="triggerevent" bindchangeitem="change_tmp_data_page"></page_fight_group>-->
-                <!--<page_quick_buy wx:if="{{item.type == 'quick_buy'}}" item="{{item}}" can-edit="{{page_status == '2' && item.is_available}}" page-id="{{page_id}}" customerview="{{customerview}}" data-index="{{index}}" bindtriggerevent="triggerevent" bindchangeitem="change_tmp_data_page"></page_quick_buy>-->
+                <!--<page_img wx:if="{{item.type == 'img'}}" item="{{item}}" can-edit="{{page_status == '2' && item.is_available}}" currentcutimg="{{current_cut_img}}" data-index="{{index}}" bindchangeitem="change_tmp_data_page"  bindtriggerevent="triggerevent"></page_img>-->
+                <!--<page_text wx:if="{{item.type == 'text'}}" item="{{item}}" can-edit="{{page_status == '2' && item.is_available}}" data-index="{{index}}" bindchangeitem="change_tmp_data_page"  bindtriggerevent="triggerevent"></page_text>-->
+                <!--<page_sign wx:if="{{item.type == 'sign'}}" item="{{item}}" can-edit="{{page_status == '2' && item.is_available}}" page-id="{{page_id}}" customerview="{{customerview}}" cannotsign="{{cannot_sign}}" data-index="{{index}}" bindtriggerevent="triggerevent" bindchangeitem="change_tmp_data_page"></page_sign>-->
+                <!--<page_timelimit wx:if="{{item.type == 'timelimit'}}" item="{{item}}" left="{{tmp_data.time_limit_left}}" can-edit="{{page_status == '2' && item.is_available}}" data-index="{{index}}" bindchangetmpdata="change_tmp_data"></page_timelimit>-->
+                <!--<page_cutprice_btn cannotsign="{{cannot_sign}}" wx:if="{{item.type == 'cutprice_btn'}}" item="{{item}}" can-edit="{{page_status == '2' && item.is_available}}" page-id="{{page_id}}" is-sign-cutprice="{{is_sign_cutprice}}" is-help-cutprice="{{is_help_cutprice}}" extra-uid="{{extra_uid}}" customerview="{{customerview}}" data-index="{{index}}" bindtriggerevent="triggerevent"></page_cutprice_btn>-->
+                <!--<page_cutprice_price wx:if="{{item.type == 'cutprice_price'}}" item="{{item}}" can-edit="{{page_status == '2' && item.is_available}}" data-index="{{index}}" bindchangeitem="change_tmp_data_page"></page_cutprice_price>-->
+                <!--<page_praise cannotsign="{{cannot_sign}}" wx:if="{{item.type == 'praise'}}" item="{{item}}" can-edit="{{page_status == '2' && item.is_available}}" page-id="{{page_id}}" is-sign-praise="{{is_sign_praise}}" is-help-praise="{{is_help_praise}}" extra-uid="{{extra_uid}}" customerview="{{customerview}}" data-index="{{index}}" bindtriggerevent="triggerevent"></page_praise>-->
+                <!--<page_vote cannotsign="{{cannot_sign}}" wx:if="{{item.type == 'vote'}}" item="{{item}}" can-edit="{{page_status == '2' && item.is_available}}" page-id="{{page_id}}" customerview="{{customerview}}" pageview="{{pageview}}" data-index="{{index}}" bindtriggerevent="triggerevent" bindchangeitem="change_tmp_data_page"></page_vote>-->
+                <!--&lt;!&ndash;<page_fight_group wx:if="{{item.type == 'fight_group'}}" item="{{item}}" can-edit="{{page_status == '2'}}" page-id="{{page_id}}" is-sign-fightgroup="{{is_sign_fightgroup}}" is-help-fightgroup="{{is_help_fightgroup}}" extra-uid="{{extra_uid}}" customerview="{{customerview}}" data-index="{{index}}" bindtriggerevent="triggerevent" bindchangeitem="change_tmp_data_page"></page_fight_group>&ndash;&gt;-->
+                <!--&lt;!&ndash;<page_quick_buy wx:if="{{item.type == 'quick_buy'}}" item="{{item}}" can-edit="{{page_status == '2' && item.is_available}}" page-id="{{page_id}}" customerview="{{customerview}}" data-index="{{index}}" bindtriggerevent="triggerevent" bindchangeitem="change_tmp_data_page"></page_quick_buy>&ndash;&gt;-->
+
+            <!--</view>-->
+
+
+            <view wx:if="tmp_data.boxes" wx:key="index" wx:for="{{tmp_data.boxes}}" style="{{item.style}}">
+
+                <block wx:if="{{tmp_data.page}}" wx:key="index" wx:for-item="item2" wx:for="{{tmp_data.page}}" >
+                    <block wx:if="{{item2.belong_box.name == item.name}}">
+                        <page_img wx:if="{{item2.type == 'img'}}" item="{{item2}}" can-edit="{{page_status == '2' && item2.is_available}}" currentcutimg="{{current_cut_img}}" data-index="{{index}}" bindchangeitem="change_tmp_data_page"  bindtriggerevent="triggerevent"></page_img>
+                        <page_text wx:if="{{item2.type == 'text'}}" item="{{item2}}" can-edit="{{page_status == '2' && item2.is_available}}" data-index="{{index}}" bindchangeitem="change_tmp_data_page"  bindtriggerevent="triggerevent"></page_text>
+                        <page_sign wx:if="{{item2.type == 'sign'}}" item="{{item2}}" can-edit="{{page_status == '2' && item2.is_available}}" page-id="{{page_id}}" customerview="{{customerview}}" cannotsign="{{cannot_sign}}" data-index="{{index}}" bindtriggerevent="triggerevent" bindchangeitem="change_tmp_data_page"></page_sign>
+                        <page_timelimit wx:if="{{item2.type == 'timelimit'}}" item="{{item2}}" left="{{tmp_data.time_limit_left}}" can-edit="{{page_status == '2' && item2.is_available}}" data-index="{{index}}" bindchangetmpdata="change_tmp_data"></page_timelimit>
+                        <page_cutprice_btn cannotsign="{{cannot_sign}}" wx:if="{{item2.type == 'cutprice_btn'}}" item="{{item2}}" can-edit="{{page_status == '2' && item2.is_available}}" page-id="{{page_id}}" is-sign-cutprice="{{is_sign_cutprice}}" is-help-cutprice="{{is_help_cutprice}}" extra-uid="{{extra_uid}}" customerview="{{customerview}}" data-index="{{index}}" bindtriggerevent="triggerevent"></page_cutprice_btn>
+                        <page_cutprice_price wx:if="{{item2.type == 'cutprice_price'}}" item="{{item2}}" can-edit="{{page_status == '2' && item2.is_available}}" data-index="{{index}}" bindchangeitem="change_tmp_data_page"></page_cutprice_price>
+                        <page_praise cannotsign="{{cannot_sign}}" wx:if="{{item2.type == 'praise'}}" item="{{item2}}" can-edit="{{page_status == '2' && item2.is_available}}" page-id="{{page_id}}" is-sign-praise="{{is_sign_praise}}" is-help-praise="{{is_help_praise}}" extra-uid="{{extra_uid}}" customerview="{{customerview}}" data-index="{{index}}" bindtriggerevent="triggerevent"></page_praise>
+                        <page_vote cannotsign="{{cannot_sign}}" wx:if="{{item2.type == 'vote'}}" item="{{item2}}" can-edit="{{page_status == '2' && item2.is_available}}" page-id="{{page_id}}" customerview="{{customerview}}" pageview="{{pageview}}" data-index="{{index}}" bindtriggerevent="triggerevent" bindchangeitem="change_tmp_data_page"></page_vote>
+
+                    </block>
+                </block>
+
+                <view wx:if="{{item.children}}" style="{{item_child.style}}" wx:for-item="item_child" wx:key="index_child" wx:for="{{item.children}}" >
+                    <block wx:if="{{tmp_data.page}}" wx:key="index" wx:for-item="item3" wx:for="{{tmp_data.page}}" >
+                        <block wx:if="{{item3.belong_box.name == '--'+item_child.name}}">
+
+                            <page_img wx:if="{{item3.type == 'img'}}" item="{{item3}}" can-edit="{{page_status == '2' && item3.is_available}}" currentcutimg="{{current_cut_img}}" data-index="{{index}}" bindchangeitem="change_tmp_data_page"  bindtriggerevent="triggerevent"></page_img>
+                            <page_text wx:if="{{item3.type == 'text'}}" item="{{item3}}" can-edit="{{page_status == '2' && item3.is_available}}" data-index="{{index}}" bindchangeitem="change_tmp_data_page"  bindtriggerevent="triggerevent"></page_text>
+                            <page_sign wx:if="{{item3.type == 'sign'}}" item="{{item3}}" can-edit="{{page_status == '2' && item3.is_available}}" page-id="{{page_id}}" customerview="{{customerview}}" cannotsign="{{cannot_sign}}" data-index="{{index}}" bindtriggerevent="triggerevent" bindchangeitem="change_tmp_data_page"></page_sign>
+                            <page_timelimit wx:if="{{item3.type == 'timelimit'}}" item="{{item3}}" left="{{tmp_data.time_limit_left}}" can-edit="{{page_status == '2' && item3.is_available}}" data-index="{{index}}" bindchangetmpdata="change_tmp_data"></page_timelimit>
+                            <page_cutprice_btn cannotsign="{{cannot_sign}}" wx:if="{{item3.type == 'cutprice_btn'}}" item="{{item3}}" can-edit="{{page_status == '2' && item3.is_available}}" page-id="{{page_id}}" is-sign-cutprice="{{is_sign_cutprice}}" is-help-cutprice="{{is_help_cutprice}}" extra-uid="{{extra_uid}}" customerview="{{customerview}}" data-index="{{index}}" bindtriggerevent="triggerevent"></page_cutprice_btn>
+                            <page_cutprice_price wx:if="{{item3.type == 'cutprice_price'}}" item="{{item3}}" can-edit="{{page_status == '2' && item3.is_available}}" data-index="{{index}}" bindchangeitem="change_tmp_data_page"></page_cutprice_price>
+                            <page_praise cannotsign="{{cannot_sign}}" wx:if="{{item3.type == 'praise'}}" item="{{item3}}" can-edit="{{page_status == '2' && item3.is_available}}" page-id="{{page_id}}" is-sign-praise="{{is_sign_praise}}" is-help-praise="{{is_help_praise}}" extra-uid="{{extra_uid}}" customerview="{{customerview}}" data-index="{{index}}" bindtriggerevent="triggerevent"></page_praise>
+                            <page_vote cannotsign="{{cannot_sign}}" wx:if="{{item3.type == 'vote'}}" item="{{item3}}" can-edit="{{page_status == '2' && item3.is_available}}" page-id="{{page_id}}" customerview="{{customerview}}" pageview="{{pageview}}" data-index="{{index}}" bindtriggerevent="triggerevent" bindchangeitem="change_tmp_data_page"></page_vote>
+                        </block>
+                    </block>
+
+                </view>
 
             </view>
+
             <view wx-if="{{can_add_extra_img && page_status == '2'}}" bindtap="add_extra_img" class="line-add-btn">添加图片槽</view>
             <view wx-if="{{can_add_extra_text && page_status == '2'}}" bindtap="add_extra_text" class="line-add-btn">添加文字槽</view>
 
@@ -181,7 +218,7 @@
             <view style="margin: 5rpx auto;text-align: center;color: #eee">凭证码:</view>
             <view style="margin: 10rpx auto;text-align: center;font-size: 36rpx;color: #fff">{{pick_code}}</view>
             <view style="margin: 5rpx auto;text-align: center;color: #eee">凭证二维码:</view>
-            <image style="width: 150rpx;height: 100rpx;margin: 10rpx auto;display: block" src="http://api.yixsu.com/index.php/waibao/common/qrcode?text={{pick_code}}" mode="widthFix"></image>
+            <image style="width: 150rpx;height: 100rpx;margin: 10rpx auto;display: block" src='http://api.yixsu.com/index.php/waibao/common/qrcode?text={"phone":"{{page_info.pick_phone}}","code":"{{pick_code}}"}' mode="widthFix"></image>
 
         </view>
     </dist_modal>
@@ -191,7 +228,10 @@
             <image style="width: 100%;height: 30rpx;margin-top: 20rpx;" mode="widthFix" src="http://qiniu-pub.yixsu.com/title@3x.png"></image>
             <view style="width: 100%;margin-top: 20rpx;">
                 <block wx:if="{{page_type == 2}}">
+
                     <view style="color: red">该活动类型为砍价。</view>
+
+
                     <view  style="margin-top: 20rpx;margin-bottom: 5rpx;">活动规则:</view>
                     <text >商家选择砍价类模板制作砍价活动，完成制作后分享活动给好友，好友报名参与活动。报名之后可以通过分享活动链接或活动二维码来邀请好友砍价。每次砍价的价格在商家设置的平均砍价值上下浮动,砍价可直至商家设置的最低价。报名者可随时凭凭证码到店交易。活动时间截止或者商家库存不足时，活动结束。
 
@@ -239,6 +279,8 @@
             <view style="width: 100%;margin-top: 20rpx;">
                 <block wx:if="{{page_type == 2}}">
                     <view style="color: red">该活动类型为砍价。</view>
+                    <view style="color: rgb(100,20,100)">开始时间:{{page_info.start_time}}</view>
+                    <view style="color: rgb(100,20,100)">结束时间:{{page_info.end_time}}</view>
                     <text >您可报名参与此活动,报名之后可以通过分享活动链接或活动二维码来邀请好友砍价。报名者可随时凭凭证码到店交易。活动时间截止或者商家库存不足时，活动无法报名。
 
                         活动最终解释权归商家所有。
@@ -246,15 +288,18 @@
                 </block>
                 <block wx:elif="{{page_type == 3}}">
                     <view style="color: red">该活动类型为集赞。</view>
-                    <view  style="margin-top: 20rpx;margin-bottom: 5rpx;">活动规则:</view>
-                    <text >您可报名参与此活动。报名之后可以通过分享活动链接或活动二维码来邀请更多好友点赞。当被赞数量达到商家规定的对应的数量后，可以凭凭证码到店交易。集赞数量和对应的优惠或者礼品由商家自行规定。活动时间截止或者商家库存不足时，活动无法报名。
+                    <view style="color: rgb(100,20,100)">开始时间:{{page_info.start_time}}</view>
+                    <view style="color: rgb(100,20,100)">结束时间:{{page_info.end_time}}</view>
+                    <text>您可报名参与此活动。报名之后可以通过分享活动链接或活动二维码来邀请更多好友点赞。当被赞数量达到商家规定的对应的数量后，可以凭凭证码到店交易。集赞数量和对应的优惠或者礼品由商家自行规定。活动时间截止或者商家库存不足时，活动无法报名。
 
                         活动最终解释权归商家所有。
                     </text>
                 </block>
                 <block wx:elif="{{page_type == 4}}">
                     <view style="color: red">该活动类型为投票。</view>
-                    <view  style="margin-top: 20rpx;margin-bottom: 5rpx;">活动规则:</view>
+                    <view style="color: rgb(100,20,100)">开始时间:{{page_info.start_time}}</view>
+                    <view style="color: rgb(100,20,100)">结束时间:{{page_info.end_time}}</view>
+
                     <text >您可参与此投票活动。投票最多只能投一次。活动时间截止后活动结束。
 
                         活动最终解释权归商家所有。
@@ -262,7 +307,8 @@
                 </block>
                 <block wx:elif="{{page_type == 5}}">
                     <view style="color: red">该活动类型为图文。</view>
-                    <view  style="margin-top: 20rpx;margin-bottom: 5rpx;">活动规则:</view>
+                    <view style="color: rgb(100,20,100)">开始时间:{{page_info.start_time}}</view>
+                    <view style="color: rgb(100,20,100)">结束时间:{{page_info.end_time}}</view>
                     <text >当前图文介绍由商家提供。
 
                         活动最终解释权归商家所有。
@@ -270,7 +316,8 @@
                 </block>
                 <block wx:elif="{{page_type == 7}}">
                     <view style="color: red">该活动类型为预约报名。</view>
-                    <view  style="margin-top: 20rpx;margin-bottom: 5rpx;">活动规则:</view>
+                    <view style="color: rgb(100,20,100)">开始时间:{{page_info.start_time}}</view>
+                    <view style="color: rgb(100,20,100)">结束时间:{{page_info.end_time}}</view>
                     <text >您可参与此预约报名活动,报名者可凭凭证码到店消费。活动时间截止后活动无法报名。
 
                         活动最终解释权归商家所有。

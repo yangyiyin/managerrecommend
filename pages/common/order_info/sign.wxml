@@ -5,7 +5,7 @@
 
 
         <view style="margin: 20rpx;">
-            <image style="float: left;width: 80rpx;height:80rpx;border-radius: 80rpx;margin-right:20rpx;vertical-align: middle" src="{{userInfo.avatar ? userInfo.avatar : (userInfo.wechar_user_info.avatarUrl ? userInfo.wechar_user_info.avatarUrl : 'http://qiniu-guanmei.yixsu.com/009c9299ef5826c01f91e5e0ec640732')}}" mode="widthFix"></image>
+            <image style="float: left;width: 80rpx;height:80rpx;border-radius: 80rpx;margin-right:20rpx;vertical-align: middle" src="{{userInfo.avatar ? userInfo.avatar : (userInfo.wechar_user_info.avatarUrl ? userInfo.wechar_user_info.avatarUrl : 'http://qiniu-pub.yixsu.com/default.png')}}" mode="widthFix"></image>
             <view style="float: left">
                 <view style="font-size: 24rpx;color: #999;">{{userInfo.user_name ? userInfo.user_name : userInfo.wechar_user_info.nickName}}</view>
                 <view>我已报名该活动信息</view>
@@ -32,7 +32,7 @@
             <view style="width: 400rpx;margin: 5rpx auto;text-align: center;color: #999">凭证码:</view>
             <view style="width: 400rpx;margin: 20rpx auto;text-align: center;font-size: 36rpx;">{{pick_code}}</view>
             <view style="width: 400rpx;margin: 5rpx auto;text-align: center;color: #999">凭证二维码:</view>
-            <image style="width: 400rpx;height: 100rpx;margin: 20rpx auto;display: block" src="http://api.yixsu.com/index.php/waibao/common/qrcode?text={{pick_code}}" mode="widthFix"></image>
+            <image style="width: 400rpx;height: 100rpx;margin: 20rpx auto;display: block" src='http://api.yixsu.com/index.php/waibao/common/qrcode?text={"phone":"{{page_info.pick_phone}}","code":"{{pick_code}}"}' mode="widthFix"></image>
 
 
         </view>

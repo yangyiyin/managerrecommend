@@ -6,14 +6,14 @@
 
         <view style="margin: 20rpx;">
             <block wx:if="{{extra_uid}}">
-                <image style="float: left;width: 80rpx;height:80rpx;border-radius: 80rpx;margin-right:20rpx;vertical-align: middle" src="{{extra_user_info.avatar ? extra_user_info.avatar : (extra_user_info.wechar_user_info.avatarUrl ? extra_user_info.wechar_user_info.avatarUrl : 'http://qiniu-guanmei.yixsu.com/009c9299ef5826c01f91e5e0ec640732')}}" mode="widthFix"></image>
+                <image style="float: left;width: 80rpx;height:80rpx;border-radius: 80rpx;margin-right:20rpx;vertical-align: middle" src="{{extra_user_info.avatar ? extra_user_info.avatar : (extra_user_info.wechar_user_info.avatarUrl ? extra_user_info.wechar_user_info.avatarUrl : 'http://qiniu-pub.yixsu.com/default.png')}}" mode="widthFix"></image>
                 <view style="float: left">
                     <view style="font-size: 24rpx;color: #999;">{{extra_user_info.user_name ? extra_user_info.user_name : extra_user_info.wechar_user_info.nickName}}</view>
                     <view>居然还有更低价,快来帮我砍价吧。</view>
                 </view>
             </block>
             <block wx:else>
-                <image style="float: left;width: 80rpx;height:80rpx;border-radius: 80rpx;margin-right:20rpx;vertical-align: middle" src="{{userInfo.avatar ? userInfo.avatar : (userInfo.wechar_user_info.avatarUrl ? userInfo.wechar_user_info.avatarUrl : 'http://qiniu-guanmei.yixsu.com/009c9299ef5826c01f91e5e0ec640732')}}" mode="widthFix"></image>
+                <image style="float: left;width: 80rpx;height:80rpx;border-radius: 80rpx;margin-right:20rpx;vertical-align: middle" src="{{userInfo.avatar ? userInfo.avatar : (userInfo.wechar_user_info.avatarUrl ? userInfo.wechar_user_info.avatarUrl : 'http://qiniu-pub.yixsu.com/default.png')}}" mode="widthFix"></image>
                 <view style="float: left">
                     <view style="font-size: 24rpx;color: #999;">{{userInfo.user_name ? userInfo.user_name : userInfo.wechar_user_info.nickName}}</view>
                     <view>居然还有更低价,快来帮我砍价吧。</view>
@@ -50,7 +50,7 @@
             <image style="position: absolute;top:-40rpx;left: 50%;margin-left: -200rpx;width: 400rpx;height: 100rpx;" src="http://qiniu-guanmei.yixsu.com/title@3x.png" mode="widthFix"></image>
 
             <view wx:if="{{page_info.cut_help_list.length}}" wx:key="index" wx:for="{{page_info.cut_help_list}}" style="margin: 20rpx auto;width: 500rpx">
-                <image style="float: left;width: 80rpx;height:80rpx;border-radius: 80rpx;margin-right:20rpx;vertical-align: middle" src="{{item.avatar}}" mode="widthFix"></image>
+                <image style="float: left;width: 80rpx;height:80rpx;border-radius: 80rpx;margin-right:20rpx;vertical-align: middle" src="{{item.avatar ? item.avatar : 'http://qiniu-pub.yixsu.com/default.png'}}" mode="widthFix"></image>
                 <view style="float: left">
                     <view style="font-size: 24rpx;color: #999;">{{item.user_name}}</view>
                     <view><text>一不小心就帮忙砍掉</text><text style="color: red">{{item.cutprice}}</text>元</view>

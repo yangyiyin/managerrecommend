@@ -41,7 +41,7 @@ Page({
     this.share_make();
   },
   preview_qrcode:function (event) {
-    var img = event.currentTarget.dataset.qrcode
+    var img = event.currentTarget.dataset.img
     wx.previewImage({
       urls: [img] // 需要预览的图片http链接列表
     });

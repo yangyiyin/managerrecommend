@@ -29,11 +29,11 @@
 
                 <view style="margin: 20rpx;padding: 20rpx;">
                     <view style="color: #472CFF;margin: 20rpx 0">共有{{page_info.cutprice_list_count}}人报名</view>
-                    <view wx:if="{{page_info.cutprice_list.length}}" wx:key="index" wx:for="{{page_info.cutprice_list}}" style="margin: 20rpx 0;width: 500rpx">
-                        <image style="float: left;width: 80rpx;height:80rpx;border-radius: 80rpx;margin-right:20rpx;vertical-align: middle" src="{{item.avatar}}" mode="widthFix"></image>
+                    <view wx:if="{{page_info.cutprice_list.length}}" wx:key="index" wx:for="{{page_info.cutprice_list}}" style="margin: 20rpx 0;width: 600rpx">
+                        <image style="float: left;width: 80rpx;height:80rpx;border-radius: 80rpx;margin-right:20rpx;vertical-align: middle" src="{{item.avatar ? item.avatar : 'http://qiniu-pub.yixsu.com/default.png'}}" mode="widthFix"></image>
                         <view style="float: left">
-                            <view style="font-size: 24rpx;">{{item.user_name}}</view>
-                            <view  style="font-size: 24rpx;" >已报名。当前价格<text style="color: #999">{{item.price}}</text>元<text style="color: #999">{{item.create_time}}</text></view>
+                            <view style="font-size: 24rpx;">{{item.user_name}}<image wx:if="{{item.pick_status == 2}}" style="width: 30rpx;height: 30rpx;vertical-align:middle;margin-left: 20rpx;" mode="widthFix" src="http://qiniu-pub.yixsu.com/%E9%AA%8C%E8%AF%81.png"></image></view>
+                            <view  style="font-size: 24rpx;" >已报名。当前价格<text style="color: red">{{item.price}}</text>元。</view>
                         </view>
                         <view style="clear: both"></view>
                     </view>
@@ -44,11 +44,11 @@
 
                 <view style="margin: 20rpx;padding: 20rpx;">
                     <view style="color: #472CFF;margin: 20rpx 0">共有{{page_info.praise_list_count}}人报名</view>
-                    <view wx:if="{{page_info.praise_list.length}}" wx:key="index" wx:for="{{page_info.praise_list}}" style="margin: 20rpx 0;width: 500rpx">
-                        <image style="float: left;width: 80rpx;height:80rpx;border-radius: 80rpx;margin-right:20rpx;vertical-align: middle" src="{{item.avatar}}" mode="widthFix"></image>
+                    <view wx:if="{{page_info.praise_list.length}}" wx:key="index" wx:for="{{page_info.praise_list}}" style="margin: 20rpx 0;width: 600rpx">
+                        <image style="float: left;width: 80rpx;height:80rpx;border-radius: 80rpx;margin-right:20rpx;vertical-align: middle" src="{{item.avatar ? item.avatar : 'http://qiniu-pub.yixsu.com/default.png'}}" mode="widthFix"></image>
                         <view style="float: left">
-                            <view style="font-size: 24rpx;">{{item.user_name}}</view>
-                            <view  style="font-size: 24rpx;" >已报名。当前集赞数:<text style="color: #999">{{item.sum}}</text><text style="color: #999">{{item.create_time}}</text></view>
+                            <view style="font-size: 24rpx;">{{item.user_name}}<image wx:if="{{item.pick_status == 2}}" style="width: 30rpx;height: 30rpx;vertical-align:middle;margin-left: 20rpx;" mode="widthFix" src="http://qiniu-pub.yixsu.com/%E9%AA%8C%E8%AF%81.png"></image></view>
+                            <view  style="font-size: 24rpx;" >已报名。当前集赞数:<text style="color: #999">{{item.sum}}。</text></view>
                         </view>
                         <view style="clear: both"></view>
                     </view>
@@ -59,11 +59,11 @@
 
                 <view style="margin: 20rpx;padding: 20rpx;">
                     <view style="color: #472CFF;margin: 20rpx 0">共有{{page_info.sign_list_count}}人报名</view>
-                    <view wx:if="{{page_info.sign_list.length}}" wx:key="index" wx:for="{{page_info.sign_list}}" style="margin: 20rpx 0;width: 500rpx">
-                        <image style="float: left;width: 80rpx;height:80rpx;border-radius: 80rpx;margin-right:20rpx;vertical-align: middle" src="{{item.avatar}}" mode="widthFix"></image>
+                    <view wx:if="{{page_info.sign_list.length}}" wx:key="index" wx:for="{{page_info.sign_list}}" style="margin: 20rpx 0;width: 600rpx">
+                        <image style="float: left;width: 80rpx;height:80rpx;border-radius: 80rpx;margin-right:20rpx;vertical-align: middle" src="{{item.avatar ? item.avatar : 'http://qiniu-pub.yixsu.com/default.png'}}" mode="widthFix"></image>
                         <view style="float: left">
-                            <view style="font-size: 24rpx;">{{item.user_name}}</view>
-                            <view  style="font-size: 24rpx;" ><text>已报名</text><text style="color: #999">{{item.create_time}}</text></view>
+                            <view style="font-size: 24rpx;">{{item.user_name}}<image wx:if="{{item.pick_status == 2}}" style="width: 30rpx;height: 30rpx;vertical-align:middle;margin-left: 20rpx;" mode="widthFix" src="http://qiniu-pub.yixsu.com/%E9%AA%8C%E8%AF%81.png"></image></view>
+                            <view  style="font-size: 24rpx;" ><text>已报名。</text><text style="color: #999">{{item.create_time}}</text></view>
                         </view>
                         <view style="clear: both"></view>
                     </view>

@@ -23,9 +23,12 @@ Component({
                 id:this.data.pageId,
                 phone:this.data.page_sign_phone
             };
+            wx.showLoading();
             common.request('post','praise_sign',data,function (res) {
                 common.request_callback(res);
                 if (res.data.success) {
+                    wx.hideLoading();
+                    common.request_callback(res);
                     this.triggerEvent('triggerevent', {event:'get_page_info'});
                     // this.triggerEvent('triggerevent', {event:'show_pick_code'});
                     common.request('get','statistics_point',{page_id:this.data.pageId, type:3}, function (res) {});

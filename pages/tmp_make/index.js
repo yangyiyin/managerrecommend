@@ -73,6 +73,22 @@ Page({
 
   },
   onLoad: function (option) {
+    console.log(option);
+    if (option.q) {
+      var out_link = decodeURIComponent(option.q);
+      var params = out_link.split('?');
+      params = params[1].split('&');
+      console.log(option);
+      params.forEach(function(e){
+
+        var param = e.split('=');
+        if (param[0] == 'id') {
+          option.id = param[1];
+        }
+      })
+
+
+    }
     this.setData({
       userInfo:app.globalData.userInfo,
     })
@@ -169,6 +185,7 @@ Page({
       this.setData({
         tmp_data:tmp_data,
         tmp_type:res.data.data.type,
+        page_type:res.data.data.type,
         can_add_extra_img:tmp_data.can_add_extra_img,
         can_add_extra_text:tmp_data.can_add_extra_text
       });
@@ -472,7 +489,7 @@ Page({
       is_available:true,
       is_add_extra_img:true,
       can_del_block:true,
-      style:'width:750rpx;min-height:240rpx;height:auto'
+      style:'width:710rpx;min-height:240rpx;height:auto'
     }
     this.data.tmp_data.page.push(new_img);
     this.setData({
@@ -744,8 +761,8 @@ Page({
   },
   custom_praise_praise:function(){
     var data = {
-      id:this.data.pageId,
-      extra_uid:this.data.extraUid
+      id:this.data.page_id,
+      extra_uid:this.data.extra_uid
     };
     common.request('post','praise_praise',data,function (res) {
       common.request_callback(res);
