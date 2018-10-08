@@ -155,7 +155,7 @@
 
             <view wx-if="{{can_add_extra_img && page_status == '2'}}" bindtap="add_extra_img" class="line-add-btn">添加图片槽</view>
             <view wx-if="{{can_add_extra_text && page_status == '2'}}" bindtap="add_extra_text" class="line-add-btn">添加文字槽</view>
-
+            <view style="height:120rpx;"></view>
             <!--<include  wx:if="{{tmp_data.sign_list}}" src="../common/tmp_part/sign_list.wxml"/>-->
             <!--<include  wx:if="{{tmp_data.cutprice_list}}" src="../common/tmp_part/cutprice_list.wxml"/>-->
             <!--<include  wx:if="{{tmp_data.praise_list}}" src="../common/tmp_part/praise_list.wxml"/>-->

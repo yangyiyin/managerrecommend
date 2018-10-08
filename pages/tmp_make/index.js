@@ -489,9 +489,14 @@ Page({
       is_available:true,
       is_add_extra_img:true,
       can_del_block:true,
-      style:'width:710rpx;min-height:240rpx;height:auto'
+      style:'width:710rpx;min-height:240rpx;height:auto;margin:10rpx auto',
+      belong_box:{name:'boxx'}
     }
     this.data.tmp_data.page.push(new_img);
+    if (this.data.tmp_data.boxes[this.data.tmp_data.boxes.length-1].name != 'boxx') {
+      this.data.tmp_data.boxes.push({name:'boxx',style:'width:750rpx;position:relative'});
+    }
+
     this.setData({
       tmp_data:this.data.tmp_data
     });
@@ -509,11 +514,15 @@ Page({
       text:'添加文字',
       is_available:true,
       can_del_block:true,
-      style:'width:710rpx;min-height:200rpx;margin-top:10rpx;display:block;padding:20rpx',
+      style:'width:710rpx;min-height:200rpx;margin:10rpx auto;display:block;',
+      belong_box:{name:'boxx'},
       is_add_extra_text:true
 
     }
     this.data.tmp_data.page.push(new_text);
+    if (this.data.tmp_data.boxes[this.data.tmp_data.boxes.length-1].name != 'boxx') {
+      this.data.tmp_data.boxes.push({name: 'boxx', style: 'width:750rpx;position:relative'});
+    }
     this.setData({
       inputtext : '添加文字',
       tmp_data:this.data.tmp_data

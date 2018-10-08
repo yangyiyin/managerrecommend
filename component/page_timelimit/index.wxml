@@ -1,5 +1,29 @@
 <!--<text class="{{status_class}}" bindtap="change_text" data-text="{{item.text}}" style="{{item.style}}" >{{item.text}}</text>-->
-<view bindtap="change_text" data-index="{{index}}" class="{{status_class}}" style="{{item.style}}">{{time_limit_left_desc}} <view class="cover"></view></view>
+<view bindtap="change_text" data-index="{{index}}" class="{{status_class}}" style="{{item.style}}">
+    <block wx:if="{{time_limit_left_arr}}">
+        <view style="display: inline-block;background: #333;color: #fff;padding: 10rpx 5rpx;border-radius: 6rpx;min-width: 35rpx;text-align: center">
+            {{time_limit_left_arr.day}}
+        </view>
+        <view style="display: inline-block;margin-left: 10rpx;padding: 10rpx 5rpx;border-radius: 3rpx;">天</view>
+        <view style="display: inline-block;margin-left: 10rpx;background: #333;color: #fff;padding: 10rpx 5rpx;border-radius: 6rpx;min-width: 35rpx;text-align: center">
+            {{time_limit_left_arr.hour}}
+        </view>
+        <view style="display: inline-block;margin-left: 10rpx;padding: 10rpx 5rpx;border-radius: 3rpx;">时</view>
+        <view style="display: inline-block;margin-left: 10rpx;background: #333;color: #fff;padding: 10rpx 5rpx;border-radius: 6rpx;min-width: 35rpx;text-align: center">
+            {{time_limit_left_arr.min}}
+        </view>
+        <view style="display: inline-block;margin-left: 10rpx;padding: 10rpx 5rpx;border-radius: 3rpx;">分</view>
+        <view style="display: inline-block;margin-left: 10rpx;background: #333;color: #fff;padding: 10rpx 5rpx;border-radius: 6rpx;min-width: 35rpx;text-align: center">
+            {{time_limit_left_arr.sec}}
+        </view>
+        <view style="display: inline-block;margin-left: 10rpx;padding: 10rpx 5rpx;border-radius: 3rpx;">秒</view>
+    </block>
+    <block wx:else>
+        {{time_limit_left_desc}}
+    </block>
+
+
+    <view class="cover"></view></view>
 <dist_modal visible="{{ visible }}" actions="{{ actions }}" bind:click="handleClick">
     <view style="margin: 30rpx 0">
         <view style="text-align:center;padding-top: 30rpx;padding-bottom: 10rpx;color: #000;font-size: 30rpx;"><text style="background: #eee">设置时长:</text></view>

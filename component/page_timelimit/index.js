@@ -17,6 +17,7 @@ Component({
             }
         ],
         time_limit_left_desc:'',
+        time_limit_left_arr:null,
         time:{
             day:0,
             hour:0,
@@ -58,6 +59,7 @@ Component({
         timelimit: function(left) {
             var time_limit_left = parseInt(left);
             var time_limit_left_desc = '';
+            var time_limit_left_arr = null;
             if (time_limit_left > 0) {
                 if (this.Interval) {
                     clearInterval(this.Interval);
@@ -70,8 +72,10 @@ Component({
                     var min = parseInt ((time_limit_left - day * 3600 * 24 - hour * 3600) / 60);
                     var sec = parseInt (time_limit_left - day * 3600 * 24 - hour * 3600 - min * 60);
                     time_limit_left_desc = day + '天' + hour + '时' + min + '分' + sec + '秒';
+                    time_limit_left_arr = {day:day,hour:hour,min:min,sec:sec};
                     this.setData({
-                        time_limit_left_desc : time_limit_left_desc
+                        time_limit_left_desc : time_limit_left_desc,
+                        time_limit_left_arr : time_limit_left_arr,
                     });
 
                     if (time_limit_left <= 0) {
@@ -80,7 +84,8 @@ Component({
                 }.bind(this),1000);
             } else {
                 this.setData({
-                    time_limit_left_desc : '活动已结束'
+                    time_limit_left_desc : '活动已结束',
+                    time_limit_left_arr : null
                 });
             }
         }
