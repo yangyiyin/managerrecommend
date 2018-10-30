@@ -141,15 +141,18 @@ Page({
             if (this.data.page_type == 2 && !option.origin && (this.data.is_sign_cutprice || this.data.extra_uid)) {//砍价
               this.setData({
                 page_status:11
-              })
+              });
+              this.clear_unread(this.data.page_type);
             } else if(this.data.page_type == 7 && !option.origin && this.data.is_sign) {
               this.setData({
                 page_status:11
-              })
+              });
+
             } else if(this.data.page_type == 3 && !option.origin && (this.data.is_sign_praise || this.data.extra_uid)) {
               this.setData({
                 page_status:11
-              })
+              });
+              this.clear_unread(this.data.page_type);
             } else {
 
             }
@@ -192,6 +195,11 @@ Page({
      // console.log(tmp_data);
     }.bind(this));
 
+  },
+  clear_unread(type){
+    var data = {id:this.data.page_id,type:type};
+    common.request('post','clear_unread',data,function (res) {
+    }.bind(this));
   },
   /**
    * 获取权限的时候
@@ -274,7 +282,8 @@ Page({
           if (this.data.page_type == 2 && (this.data.is_sign_cutprice || this.data.extra_uid)) {//砍价
             this.setData({
               page_status:11
-            })
+            });
+            this.clear_unread(this.data.page_type);
           } else if(this.data.page_type == 7 && this.data.is_sign) {
             this.setData({
               page_status:11
@@ -282,7 +291,8 @@ Page({
           } else if(this.data.page_type == 3 && (this.data.is_sign_praise || this.data.extra_uid)) {
             this.setData({
               page_status:11
-            })
+            });
+            this.clear_unread(this.data.page_type);
           } else {
 
           }
@@ -398,7 +408,7 @@ Page({
           data.start_time = this.data.start_time_min ? this.data.start_time+' ' +this.data.start_time_min : this.data.start_time;
         }
         if (this.data.end_time) {
-          data.end_time = this.data.end_time_min ? this.data.start_time+' ' +this.data.end_time_min : this.data.end_time
+          data.end_time = this.data.end_time_min ? this.data.end_time+' ' +this.data.end_time_min : this.data.end_time
         }
         common.request('post','page_submit',data, function (res) {
           wx.hideToast();
@@ -489,7 +499,7 @@ Page({
       is_available:true,
       is_add_extra_img:true,
       can_del_block:true,
-      style:'width:710rpx;min-height:240rpx;height:auto;margin:10rpx auto',
+      style:'width:690rpx;min-height:240rpx;height:auto;margin:10rpx auto',
       belong_box:{name:'boxx'}
     }
     this.data.tmp_data.page.push(new_img);
@@ -514,7 +524,7 @@ Page({
       text:'添加文字',
       is_available:true,
       can_del_block:true,
-      style:'width:710rpx;min-height:200rpx;margin:10rpx auto;display:block;',
+      style:'width:690rpx;min-height:40rpx;margin:10rpx auto;display:block;',
       belong_box:{name:'boxx'},
       is_add_extra_text:true
 

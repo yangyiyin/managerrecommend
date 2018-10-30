@@ -1,0 +1,5 @@
+
+<view  style="{{item.style}}" bindtap="share">
+
+    <image style="width: 48rpx;height: 44rpx;" mode="aspectFill" src="http://qiniu-pub.yixsu.com/%E5%88%86%E4%BA%AB@3x2.png"></image>
+</view>

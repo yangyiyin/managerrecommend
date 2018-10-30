@@ -39,6 +39,7 @@ var urls = {
     verify_code:base_url+'/Apimanagerrecommend/laugh/verify_code.html',
     send_code:base_url+'/Apimanagerrecommend/laugh/send_code.html',
     pick_verify:base_url+'/Apimanagerrecommend/laugh/pick_verify.html',
+    clear_unread:base_url+'/Apimanagerrecommend/laugh/clear_unread.html',
     user_phones:base_url+'/Apimanagerrecommend/user/user_phones.html',
     get_price_list:base_url+'/Apimanagerrecommend/vip/get_vip_price.html',
     statistics_point:base_url+'/Apimanagerrecommend/laugh/statistics_point.html',

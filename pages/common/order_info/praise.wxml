@@ -47,7 +47,7 @@
             <text wx:if="{{!page_info.end_time}}">活动时间：无</text>
         </view>
         <view style="margin: 20rpx;background: #FFF8EB;position: relative;padding: 40rpx 0;margin-top: 80rpx;min-height: 200rpx;">
-            <!--<image style="position: absolute;top:-40rpx;left: 50%;margin-left: -200rpx;width: 400rpx;height: 100rpx;" src="http://qiniu-guanmei.yixsu.com/title@3x.png" mode="widthFix"></image>-->
+            <image style="position: absolute;top:-40rpx;left: 50%;margin-left: -200rpx;width: 400rpx;height: 100rpx;" src="http://qiniu-guanmei.yixsu.com/title@3x2.png" mode="widthFix"></image>
 
             <view wx:if="{{page_info.praise_help_list.length}}" wx:key="index" wx:for="{{page_info.praise_help_list}}" style="margin: 20rpx auto;width: 500rpx">
                 <image style="float: left;width: 80rpx;height:80rpx;border-radius: 80rpx;margin-right:20rpx;vertical-align: middle" src="{{item.avatar ? item.avatar : 'http://qiniu-pub.yixsu.com/default.png'}}" mode="widthFix"></image>

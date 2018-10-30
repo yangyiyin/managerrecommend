@@ -100,7 +100,7 @@
         <view bindtap="goto_tmp" data-id="{{item.id}}" wx:for="{{all_tmplist}}" wx:key="index" style="margin-bottom: 20rpx;position: relative">
             <image style="width: 710rpx" mode="widthFix" src="{{item.img}}"></image>
             <image style="width: 80rpx;position: absolute;right: 0;top: 10rpx" mode="widthFix" src="{{item.icon}}"></image>
-            <view style="position: absolute;bottom: 30rpx;padding: 0 40rpx;color: #fff">{{item.tmp_data.desc}}</view>
+            <view style="position: absolute;bottom: 30rpx;padding: 0 40rpx;color: #fff;background: rgba(0,0,0,0.3)">{{item.tmp_data.desc}}</view>
         </view>
         <!--<view style="margin-bottom: 20rpx;position: relative">-->
             <!--<image style="width: 710rpx" mode="widthFix" src="http://qiniu-pub.yixsu.com/img2.jpg"></image>-->

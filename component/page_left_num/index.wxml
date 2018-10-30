@@ -1,0 +1,4 @@
+
+<view  style="{{item.style}}" >
+    剩余<text style="color: red">{{left_num}}</text>份
+</view>

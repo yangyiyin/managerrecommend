@@ -23,6 +23,7 @@ Page({
       page_id:option.id
     });
     this.get_page_info();
+    this.clear_unread();
 
   },
   get_page_info(){
@@ -45,6 +46,12 @@ Page({
 
     }.bind(this));
   },
+  clear_unread(){
+    var data = {id:this.data.page_id,type:'page'};
+    common.request('post','clear_unread',data,function (res) {
+    }.bind(this));
+  },
+
   onShow: function () {
     //console.log(1);
   },

@@ -17,6 +17,10 @@ Component({
     methods: {
         change_text() {
             if (!this.data.canEdit) {
+                //打电话
+                wx.makePhoneCall({
+                    phoneNumber: this.data.item.text //仅为示例，并非真实的电话号码
+                })
                 return;
             }
 
@@ -26,21 +30,19 @@ Component({
         },
         handleClick ({ detail }) {
 
-            this.triggerEvent('changeitem', {item:this.data.item})
-
             this.setData({
                 visible: false
             });
+            // console.log(detail);
+            if (detail.key == 'del') {//删除
+                this.triggerEvent('triggerevent', {event:'del_block'})
+            } else {
+                this.triggerEvent('changeitem', {item:this.data.item})
+            }
+
         },
-        tapInput1(event){
-            this.data.item.cutprice_price = event.detail.value;
-        },
-        tapInput2(event){//设置底价
-            this.data.item.cutprice_min_price = event.detail.value;
-            this.data.item.cutprice_max_minus_price = this.data.item.cutprice_price - event.detail.value;
-        },
-        tapInput3(event){
-            this.data.item.cutprice_average_price = event.detail.value;
-        },
+        tapInput(event){
+            this.data.item.text = event.detail.value;
+        }
     }
 });

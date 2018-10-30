@@ -1,0 +1,4 @@
+
+<view  style="{{item.style}}" >
+    已有{{sell_num}}人报名
+</view>

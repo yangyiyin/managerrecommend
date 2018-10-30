@@ -11,7 +11,9 @@
     <!--</view>-->
 
     <view wx:if="{{!pages.length}}" class="empty_info">您还没有参加的活动~</view>
-    <view wx:if="{{pages.length}}" class="item"  wx:key="index" wx:for="{{pages}}" bindtap="goto_page" data-id="{{item.page.id}}" data-index="{{index}}">
+    <view wx:if="{{pages.length}}" class="item"  wx:key="index" wx:for="{{pages}}" bindtap="goto_page" data-id="{{item.page.id}}" data-index="{{index}}" style="position: relative">
+        <view wx:if="{{item.unread_count > 0}}" style="width: 15rpx;height:15rpx;background: red;border-radius: 30rpx;position: absolute;right: 30rpx;top:10rpx;"></view>
+
         <view class="left">
             <image class="img" mode="widthFix" src="{{item.page.img}}"></image>
         </view>

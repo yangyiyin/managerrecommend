@@ -83,7 +83,7 @@
         <!--砍价-->
         <block wx:if="{{page_type == 2}}">
             <include src="../common/order_info/cutprice.wxml"/>
-            <view animation="{{seller_info_animation}}"  wx-if="{{pick_code}}" style="position: fixed;bottom:100rpx;left: 10rpx;width: 100rpx;height: 100rpx;"  bindtap="show_pick_code">
+            <view animation="{{seller_info_animation}}"  wx:if="{{pick_code}}" style="position: fixed;bottom:100rpx;left: 10rpx;width: 100rpx;height: 100rpx;"  bindtap="show_pick_code">
                 <image class="img" mode="widthFix" src="http://qiniu-pub.yixsu.com/%E7%83%AD%E6%B0%94%E7%90%83@2x.png"></image>
             </view>
         </block>
@@ -94,7 +94,7 @@
         <!--集赞-->
         <block wx:elif="{{page_type == 3}}">
             <include src="../common/order_info/praise.wxml"/>
-            <view animation="{{seller_info_animation}}"  wx-if="{{pick_code}}" style="position: fixed;bottom:100rpx;left: 10rpx;width: 100rpx;height: 100rpx;"  bindtap="show_pick_code">
+            <view animation="{{seller_info_animation}}"  wx:if="{{pick_code}}" style="position: fixed;bottom:100rpx;left: 10rpx;width: 100rpx;height: 100rpx;"  bindtap="show_pick_code">
                 <image class="img" mode="widthFix" src="http://qiniu-pub.yixsu.com/%E7%83%AD%E6%B0%94%E7%90%83@2x.png"></image>
             </view>
         </block>
@@ -117,85 +117,101 @@
 
             <!--</view>-->
 
+                <view wx:if="tmp_data.boxes" wx:key="index" wx:for="{{tmp_data.boxes}}" style="{{item.style}}">
 
-            <view wx:if="tmp_data.boxes" wx:key="index" wx:for="{{tmp_data.boxes}}" style="{{item.style}}">
+                    <block wx:if="{{tmp_data.page}}" wx:key="index" wx:for-item="item2" wx:for="{{tmp_data.page}}" >
+                        <block wx:if="{{item2.belong_box.name == item.name}}">
+                            <page_img wx:if="{{item2.type == 'img'}}" item="{{item2}}" can-edit="{{page_status == '2' && item2.is_available}}" currentcutimg="{{current_cut_img}}" data-index="{{index}}" bindchangeitem="change_tmp_data_page"  bindtriggerevent="triggerevent"></page_img>
+                            <page_text wx:if="{{item2.type == 'text'}}" item="{{item2}}" can-edit="{{page_status == '2' && item2.is_available}}" data-index="{{index}}" bindchangeitem="change_tmp_data_page"  bindtriggerevent="triggerevent"></page_text>
+                            <page_sign wx:if="{{item2.type == 'sign'}}" item="{{item2}}" can-edit="{{page_status == '2' && item2.is_available}}" page-id="{{page_id}}" customerview="{{customerview}}" cannotsign="{{cannot_sign}}" data-index="{{index}}" bindtriggerevent="triggerevent" bindchangeitem="change_tmp_data_page"></page_sign>
+                            <page_timelimit wx:if="{{item2.type == 'timelimit'}}" item="{{item2}}" left="{{tmp_data.time_limit_left}}" can-edit="{{page_status == '2' && item2.is_available}}" data-index="{{index}}" bindchangetmpdata="change_tmp_data"></page_timelimit>
+                            <page_cutprice_btn cannotsign="{{cannot_sign}}" wx:if="{{item2.type == 'cutprice_btn'}}" item="{{item2}}" can-edit="{{page_status == '2' && item2.is_available}}" page-id="{{page_id}}" is-sign-cutprice="{{is_sign_cutprice}}" is-help-cutprice="{{is_help_cutprice}}" extra-uid="{{extra_uid}}" customerview="{{customerview}}" data-index="{{index}}" bindtriggerevent="triggerevent"></page_cutprice_btn>
+                            <page_cutprice_price wx:if="{{item2.type == 'cutprice_price'}}" item="{{item2}}" can-edit="{{page_status == '2' && item2.is_available}}" data-index="{{index}}" bindchangeitem="change_tmp_data_page"></page_cutprice_price>
+                            <page_praise cannotsign="{{cannot_sign}}" wx:if="{{item2.type == 'praise'}}" item="{{item2}}" can-edit="{{page_status == '2' && item2.is_available}}" page-id="{{page_id}}" is-sign-praise="{{is_sign_praise}}" is-help-praise="{{is_help_praise}}" extra-uid="{{extra_uid}}" customerview="{{customerview}}" data-index="{{index}}" bindtriggerevent="triggerevent"></page_praise>
+                            <page_vote cannotsign="{{cannot_sign}}" wx:if="{{item2.type == 'vote'}}" item="{{item2}}" can-edit="{{page_status == '2' && item2.is_available}}" page-id="{{page_id}}" customerview="{{customerview}}" pageview="{{pageview}}" data-index="{{index}}" bindtriggerevent="triggerevent" bindchangeitem="change_tmp_data_page"></page_vote>
+                            <page_sell_num cannotsign="{{cannot_sign}}" wx:if="{{item2.type == 'sell_num'}}" item="{{item2}}" sell_num="{{page_info?page_info.sell_num:0}}" can-edit="{{page_status == '2' && item2.is_available}}" page-id="{{page_id}}" customerview="{{customerview}}" pageview="{{pageview}}" data-index="{{index}}" bindtriggerevent="triggerevent" bindchangeitem="change_tmp_data_page"></page_sell_num>
+                            <page_left_num cannotsign="{{cannot_sign}}" wx:if="{{item2.type == 'left_num'}}" item="{{item2}}" left_num="{{page_info?page_info.stock-page_info.sell_num:0}}" can-edit="{{page_status == '2' && item2.is_available}}" page-id="{{page_id}}" customerview="{{customerview}}" pageview="{{pageview}}" data-index="{{index}}" bindtriggerevent="triggerevent" bindchangeitem="change_tmp_data_page"></page_left_num>
+                            <page_share cannotsign="{{cannot_sign}}" wx:if="{{item2.type == 'share'}}" item="{{item2}}" can-edit="{{page_status == '2' && item2.is_available}}" page-id="{{page_id}}" customerview="{{customerview}}" pageview="{{pageview}}" data-index="{{index}}" bindtriggerevent="triggerevent" bindchangeitem="change_tmp_data_page"></page_share>
+                            <page_tel wx:if="{{item2.type == 'tel'}}" item="{{item2}}" can-edit="{{page_status == '2' && item2.is_available}}" data-index="{{index}}" bindchangeitem="change_tmp_data_page"  bindtriggerevent="triggerevent"></page_tel>
 
-                <block wx:if="{{tmp_data.page}}" wx:key="index" wx:for-item="item2" wx:for="{{tmp_data.page}}" >
-                    <block wx:if="{{item2.belong_box.name == item.name}}">
-                        <page_img wx:if="{{item2.type == 'img'}}" item="{{item2}}" can-edit="{{page_status == '2' && item2.is_available}}" currentcutimg="{{current_cut_img}}" data-index="{{index}}" bindchangeitem="change_tmp_data_page"  bindtriggerevent="triggerevent"></page_img>
-                        <page_text wx:if="{{item2.type == 'text'}}" item="{{item2}}" can-edit="{{page_status == '2' && item2.is_available}}" data-index="{{index}}" bindchangeitem="change_tmp_data_page"  bindtriggerevent="triggerevent"></page_text>
-                        <page_sign wx:if="{{item2.type == 'sign'}}" item="{{item2}}" can-edit="{{page_status == '2' && item2.is_available}}" page-id="{{page_id}}" customerview="{{customerview}}" cannotsign="{{cannot_sign}}" data-index="{{index}}" bindtriggerevent="triggerevent" bindchangeitem="change_tmp_data_page"></page_sign>
-                        <page_timelimit wx:if="{{item2.type == 'timelimit'}}" item="{{item2}}" left="{{tmp_data.time_limit_left}}" can-edit="{{page_status == '2' && item2.is_available}}" data-index="{{index}}" bindchangetmpdata="change_tmp_data"></page_timelimit>
-                        <page_cutprice_btn cannotsign="{{cannot_sign}}" wx:if="{{item2.type == 'cutprice_btn'}}" item="{{item2}}" can-edit="{{page_status == '2' && item2.is_available}}" page-id="{{page_id}}" is-sign-cutprice="{{is_sign_cutprice}}" is-help-cutprice="{{is_help_cutprice}}" extra-uid="{{extra_uid}}" customerview="{{customerview}}" data-index="{{index}}" bindtriggerevent="triggerevent"></page_cutprice_btn>
-                        <page_cutprice_price wx:if="{{item2.type == 'cutprice_price'}}" item="{{item2}}" can-edit="{{page_status == '2' && item2.is_available}}" data-index="{{index}}" bindchangeitem="change_tmp_data_page"></page_cutprice_price>
-                        <page_praise cannotsign="{{cannot_sign}}" wx:if="{{item2.type == 'praise'}}" item="{{item2}}" can-edit="{{page_status == '2' && item2.is_available}}" page-id="{{page_id}}" is-sign-praise="{{is_sign_praise}}" is-help-praise="{{is_help_praise}}" extra-uid="{{extra_uid}}" customerview="{{customerview}}" data-index="{{index}}" bindtriggerevent="triggerevent"></page_praise>
-                        <page_vote cannotsign="{{cannot_sign}}" wx:if="{{item2.type == 'vote'}}" item="{{item2}}" can-edit="{{page_status == '2' && item2.is_available}}" page-id="{{page_id}}" customerview="{{customerview}}" pageview="{{pageview}}" data-index="{{index}}" bindtriggerevent="triggerevent" bindchangeitem="change_tmp_data_page"></page_vote>
-
-                    </block>
-                </block>
-
-                <view wx:if="{{item.children}}" style="{{item_child.style}}" wx:for-item="item_child" wx:key="index_child" wx:for="{{item.children}}" >
-                    <block wx:if="{{tmp_data.page}}" wx:key="index" wx:for-item="item3" wx:for="{{tmp_data.page}}" >
-                        <block wx:if="{{item3.belong_box.name == '--'+item_child.name}}">
-
-                            <page_img wx:if="{{item3.type == 'img'}}" item="{{item3}}" can-edit="{{page_status == '2' && item3.is_available}}" currentcutimg="{{current_cut_img}}" data-index="{{index}}" bindchangeitem="change_tmp_data_page"  bindtriggerevent="triggerevent"></page_img>
-                            <page_text wx:if="{{item3.type == 'text'}}" item="{{item3}}" can-edit="{{page_status == '2' && item3.is_available}}" data-index="{{index}}" bindchangeitem="change_tmp_data_page"  bindtriggerevent="triggerevent"></page_text>
-                            <page_sign wx:if="{{item3.type == 'sign'}}" item="{{item3}}" can-edit="{{page_status == '2' && item3.is_available}}" page-id="{{page_id}}" customerview="{{customerview}}" cannotsign="{{cannot_sign}}" data-index="{{index}}" bindtriggerevent="triggerevent" bindchangeitem="change_tmp_data_page"></page_sign>
-                            <page_timelimit wx:if="{{item3.type == 'timelimit'}}" item="{{item3}}" left="{{tmp_data.time_limit_left}}" can-edit="{{page_status == '2' && item3.is_available}}" data-index="{{index}}" bindchangetmpdata="change_tmp_data"></page_timelimit>
-                            <page_cutprice_btn cannotsign="{{cannot_sign}}" wx:if="{{item3.type == 'cutprice_btn'}}" item="{{item3}}" can-edit="{{page_status == '2' && item3.is_available}}" page-id="{{page_id}}" is-sign-cutprice="{{is_sign_cutprice}}" is-help-cutprice="{{is_help_cutprice}}" extra-uid="{{extra_uid}}" customerview="{{customerview}}" data-index="{{index}}" bindtriggerevent="triggerevent"></page_cutprice_btn>
-                            <page_cutprice_price wx:if="{{item3.type == 'cutprice_price'}}" item="{{item3}}" can-edit="{{page_status == '2' && item3.is_available}}" data-index="{{index}}" bindchangeitem="change_tmp_data_page"></page_cutprice_price>
-                            <page_praise cannotsign="{{cannot_sign}}" wx:if="{{item3.type == 'praise'}}" item="{{item3}}" can-edit="{{page_status == '2' && item3.is_available}}" page-id="{{page_id}}" is-sign-praise="{{is_sign_praise}}" is-help-praise="{{is_help_praise}}" extra-uid="{{extra_uid}}" customerview="{{customerview}}" data-index="{{index}}" bindtriggerevent="triggerevent"></page_praise>
-                            <page_vote cannotsign="{{cannot_sign}}" wx:if="{{item3.type == 'vote'}}" item="{{item3}}" can-edit="{{page_status == '2' && item3.is_available}}" page-id="{{page_id}}" customerview="{{customerview}}" pageview="{{pageview}}" data-index="{{index}}" bindtriggerevent="triggerevent" bindchangeitem="change_tmp_data_page"></page_vote>
                         </block>
                     </block>
 
+                    <view wx:if="{{item.children}}" style="{{item_child.style}}" wx:for-item="item_child" wx:key="index_child" wx:for="{{item.children}}" >
+                        <block wx:if="{{tmp_data.page}}" wx:key="index" wx:for-item="item3" wx:for="{{tmp_data.page}}" >
+                            <block wx:if="{{item3.belong_box.name == '--'+item_child.name}}">
+
+                                <page_img wx:if="{{item3.type == 'img'}}" item="{{item3}}" can-edit="{{page_status == '2' && item3.is_available}}" currentcutimg="{{current_cut_img}}" data-index="{{index}}" bindchangeitem="change_tmp_data_page"  bindtriggerevent="triggerevent"></page_img>
+                                <page_text wx:if="{{item3.type == 'text'}}" item="{{item3}}" can-edit="{{page_status == '2' && item3.is_available}}" data-index="{{index}}" bindchangeitem="change_tmp_data_page"  bindtriggerevent="triggerevent"></page_text>
+                                <page_sign wx:if="{{item3.type == 'sign'}}" item="{{item3}}" can-edit="{{page_status == '2' && item3.is_available}}" page-id="{{page_id}}" customerview="{{customerview}}" cannotsign="{{cannot_sign}}" data-index="{{index}}" bindtriggerevent="triggerevent" bindchangeitem="change_tmp_data_page"></page_sign>
+                                <page_timelimit wx:if="{{item3.type == 'timelimit'}}" item="{{item3}}" left="{{tmp_data.time_limit_left}}" can-edit="{{page_status == '2' && item3.is_available}}" data-index="{{index}}" bindchangetmpdata="change_tmp_data"></page_timelimit>
+                                <page_cutprice_btn cannotsign="{{cannot_sign}}" wx:if="{{item3.type == 'cutprice_btn'}}" item="{{item3}}" can-edit="{{page_status == '2' && item3.is_available}}" page-id="{{page_id}}" is-sign-cutprice="{{is_sign_cutprice}}" is-help-cutprice="{{is_help_cutprice}}" extra-uid="{{extra_uid}}" customerview="{{customerview}}" data-index="{{index}}" bindtriggerevent="triggerevent"></page_cutprice_btn>
+                                <page_cutprice_price wx:if="{{item3.type == 'cutprice_price'}}" item="{{item3}}" can-edit="{{page_status == '2' && item3.is_available}}" data-index="{{index}}" bindchangeitem="change_tmp_data_page"></page_cutprice_price>
+                                <page_praise cannotsign="{{cannot_sign}}" wx:if="{{item3.type == 'praise'}}" item="{{item3}}" can-edit="{{page_status == '2' && item3.is_available}}" page-id="{{page_id}}" is-sign-praise="{{is_sign_praise}}" is-help-praise="{{is_help_praise}}" extra-uid="{{extra_uid}}" customerview="{{customerview}}" data-index="{{index}}" bindtriggerevent="triggerevent"></page_praise>
+                                <page_vote cannotsign="{{cannot_sign}}" wx:if="{{item3.type == 'vote'}}" item="{{item3}}" can-edit="{{page_status == '2' && item3.is_available}}" page-id="{{page_id}}" customerview="{{customerview}}" pageview="{{pageview}}" data-index="{{index}}" bindtriggerevent="triggerevent" bindchangeitem="change_tmp_data_page"></page_vote>
+                                <page_sell_num cannotsign="{{cannot_sign}}" wx:if="{{item3.type == 'sell_num'}}" item="{{item3}}" sell_num="{{page_info?page_info.sell_num:0}}" can-edit="{{page_status == '2' && item3.is_available}}" page-id="{{page_id}}" customerview="{{customerview}}" pageview="{{pageview}}" data-index="{{index}}" bindtriggerevent="triggerevent" bindchangeitem="change_tmp_data_page"></page_sell_num>
+                                <page_left_num cannotsign="{{cannot_sign}}" wx:if="{{item3.type == 'left_num'}}" item="{{item3}}" left_num="{{page_info?page_info.left_num:0}}" can-edit="{{page_status == '2' && item3.is_available}}" page-id="{{page_id}}" customerview="{{customerview}}" pageview="{{pageview}}" data-index="{{index}}" bindtriggerevent="triggerevent" bindchangeitem="change_tmp_data_page"></page_left_num>
+                                <page_share cannotsign="{{cannot_sign}}" wx:if="{{item3.type == 'share'}}" item="{{item3}}" can-edit="{{page_status == '2' && item3.is_available}}" page-id="{{page_id}}" customerview="{{customerview}}" pageview="{{pageview}}" data-index="{{index}}" bindtriggerevent="triggerevent" bindchangeitem="change_tmp_data_page"></page_share>
+                                <page_tel wx:if="{{item3.type == 'tel'}}" item="{{item3}}" can-edit="{{page_status == '2' && item3.is_available}}" data-index="{{index}}" bindchangeitem="change_tmp_data_page"  bindtriggerevent="triggerevent"></page_tel>
+
+                            </block>
+                        </block>
+
+                    </view>
+
                 </view>
 
-            </view>
+                <view wx:if="{{can_add_extra_img && page_status == '2'}}" bindtap="add_extra_img" class="line-add-btn">添加图片槽</view>
+                <view wx:if="{{can_add_extra_text && page_status == '2'}}" bindtap="add_extra_text" class="line-add-btn">添加文字槽</view>
 
-            <view wx-if="{{can_add_extra_img && page_status == '2'}}" bindtap="add_extra_img" class="line-add-btn">添加图片槽</view>
-            <view wx-if="{{can_add_extra_text && page_status == '2'}}" bindtap="add_extra_text" class="line-add-btn">添加文字槽</view>
             <view style="height:120rpx;"></view>
             <!--<include  wx:if="{{tmp_data.sign_list}}" src="../common/tmp_part/sign_list.wxml"/>-->
             <!--<include  wx:if="{{tmp_data.cutprice_list}}" src="../common/tmp_part/cutprice_list.wxml"/>-->
             <!--<include  wx:if="{{tmp_data.praise_list}}" src="../common/tmp_part/praise_list.wxml"/>-->
             <!--<include  wx:if="{{tmp_data.vote_list}}" src="../common/tmp_part/vote_list.wxml"/>-->
 
-            <!--<view wx-if="{{pageview}}" class="action_btn" style="bottom: 120rpx;background: rgba(0,0,0,0.4)"  bindtap="goto_page_detail">查看活动情况</view>-->
-            <!--<view wx-if="{{pageview}}" class="action_btn" style="bottom: 220rpx;background: rgba(0,0,0,0.4)"  bindtap="goto_action">查看活动页面</view>-->
-            <!--<view wx-if="{{customerview && pick_code}}" class="action_btn" style="bottom: 320rpx;background: rgba(0,0,0,0.4)"  bindtap="show_pick_code">凭证码</view>-->
-            <view wx-if="{{!customerview}}" style="position: absolute;top:30rpx;right: -20rpx;width: 150rpx;height: 40rpx;line-height: 40rpx;background: rgba(0,0,0,0.5);color:#fff;font-size: 24rpx;text-align: center;border-radius: 20rpx;"  bindtap="show_rule_seller">活动规则</view>
-            <view wx-if="{{customerview}}" style="position: absolute;top:30rpx;right: -20rpx;width: 150rpx;height: 40rpx;line-height: 40rpx;background: rgba(0,0,0,0.5);color:#fff;font-size: 24rpx;text-align: center;border-radius: 20rpx;"  bindtap="show_rule_customer">活动规则</view>
+            <!--<view wx:if="{{pageview}}" class="action_btn" style="bottom: 120rpx;background: rgba(0,0,0,0.4)"  bindtap="goto_page_detail">查看活动情况</view>-->
+            <!--<view wx:if="{{pageview}}" class="action_btn" style="bottom: 220rpx;background: rgba(0,0,0,0.4)"  bindtap="goto_action">查看活动页面</view>-->
+            <!--<view wx:if="{{customerview && pick_code}}" class="action_btn" style="bottom: 320rpx;background: rgba(0,0,0,0.4)"  bindtap="show_pick_code">凭证码</view>-->
+            <view wx:if="{{!customerview}}" style="position: absolute;top:30rpx;right: -20rpx;width: 150rpx;height: 40rpx;line-height: 40rpx;background: rgba(0,0,0,0.5);color:#fff;font-size: 24rpx;text-align: center;border-radius: 20rpx;"  bindtap="show_rule_seller">活动规则</view>
+            <view wx:if="{{customerview}}" style="position: absolute;top:30rpx;right: -20rpx;width: 150rpx;height: 40rpx;line-height: 40rpx;background: rgba(0,0,0,0.5);color:#fff;font-size: 24rpx;text-align: center;border-radius: 20rpx;"  bindtap="show_rule_customer">活动规则</view>
 
-            <view wx-if="{{customerview && is_seller}}" style="position: absolute;top:90rpx;right: -30rpx;width: 230rpx;height: 60rpx;line-height: 60rpx;background:#623DFF;color:#fff;border:2rpx solid #fff;font-size: 26rpx;text-align: center;border-radius: 30rpx;"  bindtap="goto_page_detail">查看活动详情</view>
+            <view wx:if="{{customerview && is_seller}}" style="position: absolute;top:90rpx;right: -30rpx;width: 230rpx;height: 60rpx;line-height: 60rpx;background:#623DFF;color:#fff;border:2rpx solid #fff;font-size: 26rpx;text-align: center;border-radius: 30rpx;"  bindtap="goto_page_detail">
+
+                查看活动详情
+            </view>
+            <view wx:if="{{customerview && is_seller && page_info.unread_count > 0}}" style="width: 15rpx;height:15rpx;background: red;border-radius: 30rpx;position: absolute;top:95rpx;right: 5rpx;"></view>
 
 
 
-            <view animation="{{seller_info_animation}}"  wx-if="{{(page_type == 2 || page_type == 3 || page_type == 7) && customerview}}" style="position: fixed;bottom:0;left: -10rpx;width: 100rpx;height: 100rpx;"  bindtap="show_seller_info">
+            <view animation="{{seller_info_animation}}"  wx:if="{{(page_type == 2 || page_type == 3 || page_type == 7) && customerview}}" style="position: fixed;bottom:0;left: -10rpx;width: 100rpx;height: 100rpx;"  bindtap="show_seller_info">
                 <image class="img" mode="widthFix" src="http://qiniu-guanmei.yixsu.com/%E5%95%86%E5%AE%B6%E4%BF%A1%E6%81%AF@2x.png"></image>
             </view>
 
-            <!--<view wx-if="{{page_status == '1' && !preview}}" class="action_btn start_make" bindtap="start_make">开始制作</view>-->
-            <view wx-if="{{page_status == '1' && !preview}}" class="bottom_btn" bindtap="start_make">
-                <image style="width: 30rpx;height: 30rpx;margin-right: 10rpx;vertical-align: middle;margin-top: -5rpx;" mode="widthFix" src="http://qiniu-pub.yixsu.com/使用模板@2x.png"></image>
+            <!--<view wx:if="{{page_status == '1' && !preview}}" class="action_btn start_make" bindtap="start_make">开始制作</view>-->
+            <view wx:if="{{page_status == '1' && !preview}}" class="bottom_btn" bindtap="start_make">
+
+                <view style="margin-top: 50rpx;"><image style="width: 30rpx;height: 30rpx;margin-right: 10rpx;vertical-align: middle;margin-top: -5rpx;" mode="widthFix" src="http://qiniu-pub.yixsu.com/使用模板@2x.png"></image></view>
+
                 使用模板
             </view>
 
-            <!--<input wx-if="{{page_status == '2' && tmp_data.has_stock}}" bindinput="change_stock" maxlength="9" placeholder="请输入库存数量" type="number" style="position: fixed;left: 10rpx;bottom: 150rpx;width:500rpx;padding:10rpx;border: 1px solid #0CD400;background:rgba(0,0,0,0.5);color: #0CD400;"/>-->
-            <!--<input wx-if="{{page_status == '2'}}" bindinput="change_title" maxlength="20" placeholder="请输入页面标题,20字以内" style="position: fixed;left: 10rpx;bottom: 10rpx;width:500rpx;padding:10rpx;border: 1px solid #0CD400;background:rgba(0,0,0,0.5);color: #0CD400;"/>-->
-            <!--<view wx-if="{{page_status == '2'}}" class="action_btn complete_make" bindtap="complete_make">完成制作</view>-->
+            <!--<input wx:if="{{page_status == '2' && tmp_data.has_stock}}" bindinput="change_stock" maxlength="9" placeholder="请输入库存数量" type="number" style="position: fixed;left: 10rpx;bottom: 150rpx;width:500rpx;padding:10rpx;border: 1px solid #0CD400;background:rgba(0,0,0,0.5);color: #0CD400;"/>-->
+            <!--<input wx:if="{{page_status == '2'}}" bindinput="change_title" maxlength="20" placeholder="请输入页面标题,20字以内" style="position: fixed;left: 10rpx;bottom: 10rpx;width:500rpx;padding:10rpx;border: 1px solid #0CD400;background:rgba(0,0,0,0.5);color: #0CD400;"/>-->
+            <!--<view wx:if="{{page_status == '2'}}" class="action_btn complete_make" bindtap="complete_make">完成制作</view>-->
 
 
-            <view wx-if="{{page_status == '2'}}" class="bottom_btn" bindtap="complete_make_next">
-                <image style="width: 30rpx;height: 30rpx;margin-right: 10rpx;vertical-align: middle;margin-top: -5rpx;" mode="widthFix" src="http://qiniu-pub.yixsu.com/使用模板@2x.png"></image>
+            <view wx:if="{{page_status == '2'}}" class="bottom_btn" bindtap="complete_make_next">
+                <view style="margin-top: 50rpx;"><image style="width: 30rpx;height: 30rpx;margin-right: 10rpx;vertical-align: middle;margin-top: -5rpx;" mode="widthFix" src="http://qiniu-pub.yixsu.com/使用模板@2x.png"></image></view>
+
                 下一步(设置活动参数)
             </view>
 
 
 
-            <view wx-if="{{page_status == '3' && !customerview}}" class="action_btn share_make" bindtap="share_make" style="">生成二维码分享</view>
-            <!--<view wx-if="{{page_status == '3' && !customerview}}" class="action_btn share_make" bindtap="share_make2">生成链接分享</view>-->
-            <view wx-if="{{show_qrcode}}" style="position:fixed;background: rgb(200,200,200);width: 100%;height: 100%;top:0;left: 0;">
+            <view wx:if="{{page_status == '3' && !customerview}}" class="action_btn share_make" bindtap="share_make" style="">生成二维码分享</view>
+            <!--<view wx:if="{{page_status == '3' && !customerview}}" class="action_btn share_make" bindtap="share_make2">生成链接分享</view>-->
+            <view wx:if="{{show_qrcode}}" style="position:fixed;background: rgb(200,200,200);width: 100%;height: 100%;top:0;left: 0;">
                 <view style="width: 600rpx;margin: 200rpx auto;height: 400rpx;">
                     <image bindtap="preview_qrcode" style="width: 200rpx;margin: 20rpx 200rpx;height: 200rpx" mode="scaleToFill" src="{{qrcode_link}}"></image>
                     <view style="margin-bottom: 20rpx">
