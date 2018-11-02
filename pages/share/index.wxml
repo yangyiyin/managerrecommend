@@ -8,7 +8,7 @@
             <image style="width: 180rpx;height: 180rpx;" mode="widthFix" src="{{qrcode}}"></image>
 
         </view>
-        <view style="width: 600rpx;display: inline-block;margin: 20rpx;">点击上方二维码，长按保存到相册，去微信朋友圈分享该 二维码</view>
+        <view style="width: 600rpx;display: inline-block;margin: 20rpx;">点击上方二维码，长按保存到相册，可分享此二维码到朋友圈或者门店海报等地方</view>
 
     </view>
 

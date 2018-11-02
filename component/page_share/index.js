@@ -16,7 +16,7 @@ Component({
     },
     methods: {
         share(){
-            this.triggerEvent('triggerevent', {event:'share_make_by_uid'});
+            this.triggerEvent('triggerevent', {event:'share_make_by_page'});
         }
     }
 });

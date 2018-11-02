@@ -301,23 +301,24 @@ Page({
         wx.setNavigationBarTitle({
           title: res.data.data.title
         })
-
+        // console.log(tmp_data.time_limit_end );
         if (tmp_data.time_limit_end) {
-          tmp_data.time_limit_left = (Date.parse(tmp_data.time_limit_end) - Date.parse(new Date())) / 1000;
+          tmp_data.time_limit_left = (Date.parse(new Date(tmp_data.time_limit_end.replace(/-/g, '/'))) - Date.parse(new Date())) / 1000;
+          console.log(tmp_data.time_limit_left );
         }
 
         this.setData({
           tmp_data:tmp_data
         });
 
-        if (this.data.customerview && this.data.stock_none) {
+        if (this.data.customerview && this.data.stock_none && this.data.page_status != 11) {
           wx.showModal({
             title: '提示',
             content: '当前库存不足,无法报名活动',
             showCancel:false
           });
         }
-        if (this.data.customerview && this.data.cannot_sign) {
+        if (this.data.customerview && this.data.cannot_sign && this.data.page_status != 11) {
           wx.showModal({
             title: '提示',
             content: '当前活动未开始或已结束,无法报名活动',
@@ -440,6 +441,13 @@ Page({
 
     wx.navigateTo({
       url: '/pages/share/index?page_id='+this.data.page_id+'&extra_uid='+app.globalData.userInfo.id+'&title='+this.data.page_info.title+'&img='+this.data.page_info.img
+    });
+
+  },
+  share_make_by_page(){
+
+    wx.navigateTo({
+      url: '/pages/share/index?page_id='+this.data.page_id+'&title='+this.data.page_info.title+'&img='+this.data.page_info.img
     });
 
   },
